@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mimim\\source\\repos\\Dziennik\\Dziennik\\Dziennik.csproj": {}
+    "C:\\Users\\Michał\\Desktop\\Dziennik\\Dziennik\\Dziennik.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mimim\\source\\repos\\Dziennik\\Dziennik\\Dziennik.csproj": {
+    "C:\\Users\\Michał\\Desktop\\Dziennik\\Dziennik\\Dziennik.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mimim\\source\\repos\\Dziennik\\Dziennik\\Dziennik.csproj",
+        "projectUniqueName": "C:\\Users\\Michał\\Desktop\\Dziennik\\Dziennik\\Dziennik.csproj",
         "projectName": "Dziennik",
-        "projectPath": "C:\\Users\\mimim\\source\\repos\\Dziennik\\Dziennik\\Dziennik.csproj",
-        "packagesPath": "C:\\Users\\mimim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mimim\\source\\repos\\Dziennik\\Dziennik\\obj\\",
+        "projectPath": "C:\\Users\\Michał\\Desktop\\Dziennik\\Dziennik\\Dziennik.csproj",
+        "packagesPath": "C:\\Users\\Michał\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Michał\\Desktop\\Dziennik\\Dziennik\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\mimim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Michał\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -37,6 +40,16 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -55,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
