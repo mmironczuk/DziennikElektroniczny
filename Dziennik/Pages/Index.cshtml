@@ -1,10 +1,40 @@
 ﻿@page
 @model IndexModel
 @{
-    Layout = null;
     ViewData["Title"] = "Home page";
 }
 
-<div class="row col-sm-12">
-    <a asp-page="AddMark" asp-route-id=1 class="btn btn-primary btn-large">Dodaj</a>
-</div>
+<br />
+<br />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => Model.uczniowie_test[0].id)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => Model.uczniowie_test[0].name)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => Model.uczniowie_test[0].surname)
+            </th>
+            <th scope="col">Akcja</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model.uczniowie_test.ToList())
+        {
+            <tr>
+                <th scope="row">@Html.DisplayFor(m => p.id)</th>
+                <td>@Html.DisplayFor(m => p.name)</td>
+                <td>@Html.DisplayFor(m => p.surname)</td>
+                <td>
+                    <a asp-page="AddMark" asp-route-id=@p.id>Dodaj ocenę</a> |
+                    <a asp-page="Details" asp-route-id=@p.id>Szczegóły</a> |
+                    <a asp-page="Edit" asp-route-id=@p.id>Edytuj</a> |
+                    <a asp-page="Delete" asp-route-id=@p.id>Kasuj</a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
