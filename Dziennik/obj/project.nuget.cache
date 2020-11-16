@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "K7vSx8HoY9jShewvC45u063vkSEHqSWdoc6Juw6XWynEuO5karrZjWz2FLdIlpGhXnEyV61i4nuTwNpTS1YXXw==",
+  "dgSpecHash": "4Wfjx8H2DdLPJ4J7ISawLyKWJU026ZbpKRUE2QOsNIIYFY96dQszHSbCWB96jowjcjZbSInOgxMnlPElkcPvYA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Michał\\Desktop\\Dziennik\\Dziennik\\Dziennik.csproj",
+  "projectFilePath": "C:\\Users\\Michał\\Documents\\GitHub\\main-repo\\Dziennik\\Dziennik.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Michał\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Michał\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
