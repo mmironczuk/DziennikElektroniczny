@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Michał\\Desktop\\Dziennik\\Dziennik\\Dziennik.csproj": {}
+    "C:\\Users\\Michał\\Documents\\GitHub\\main-repo\\Dziennik\\Dziennik.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Michał\\Desktop\\Dziennik\\Dziennik\\Dziennik.csproj": {
+    "C:\\Users\\Michał\\Documents\\GitHub\\main-repo\\Dziennik\\Dziennik.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Michał\\Desktop\\Dziennik\\Dziennik\\Dziennik.csproj",
+        "projectUniqueName": "C:\\Users\\Michał\\Documents\\GitHub\\main-repo\\Dziennik\\Dziennik.csproj",
         "projectName": "Dziennik",
-        "projectPath": "C:\\Users\\Michał\\Desktop\\Dziennik\\Dziennik\\Dziennik.csproj",
+        "projectPath": "C:\\Users\\Michał\\Documents\\GitHub\\main-repo\\Dziennik\\Dziennik.csproj",
         "packagesPath": "C:\\Users\\Michał\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Michał\\Desktop\\Dziennik\\Dziennik\\obj\\",
+        "outputPath": "C:\\Users\\Michał\\Documents\\GitHub\\main-repo\\Dziennik\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

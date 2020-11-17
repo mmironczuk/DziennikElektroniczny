@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Dziennik.Models;
@@ -17,11 +18,10 @@ namespace Dziennik.Pages
         {
             _configuration = configuration;
         }
-        public void OnGet(int _iducznia, int _idprzedmiotu, int _idnauczyciela)
+        public void OnGet(int _iducznia)
         {
+            ocena = new Ocena();
             ocena.iducznia = _iducznia;
-            ocena.idprzedmiotu = _idprzedmiotu;
-            ocena.idnauczyciela = _idnauczyciela;
         }
         public IActionResult OnPost(Ocena ocena)
         {
@@ -33,14 +33,10 @@ namespace Dziennik.Pages
             SqlConnection con = new SqlConnection(DziennikDBcs);
             string sql = "INSERT INTO Ocena (idnauczyciela, idprzedmiotu, iducznia, wartosc, opis) VALUES (@IDNAUCZYCIELA, @IDPRZEDMIOTU, @IDUCZNIA, @WARTOSC, @OPIS)";
             SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.Parameters.AddWithValue("@IDNAUCZYCIELA", ocena.idnauczyciela);
-            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddWithValue("@IDNAUCZYCIELA", 1);
             cmd.Parameters.AddWithValue("@IDUCZNIA", ocena.iducznia);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.Parameters.AddWithValue("@IDPRZEDMIOTU", ocena.idprzedmiotu);
-            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddWithValue("@IDPRZEDMIOTU", 2);
             cmd.Parameters.AddWithValue("@WARTOSC", ocena.mark);
-            SqlCommand cmd = new SqlCommand(sql, con);
             cmd.Parameters.AddWithValue("@OPIS", ocena.opis);
             con.Open();
             cmd.ExecuteNonQuery();
