@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,8 @@ namespace Dziennik.Pages
             _configuration = configuration;
         }
         public int lastID;
+        public Ocena ocena;
+        public List<Ocena> marks;
         public void OnGet()
         {
             /*string DziennikDBcs = _configuration.GetConnectionString("DziennikDB");
@@ -43,6 +46,27 @@ namespace Dziennik.Pages
             uczniowie_test.Add(new Uczen { id = 1, name = "Konrad", surname = "Nowak" });
             uczniowie_test.Add(new Uczen { id = 2, name = "Grzegorz", surname = "Mickiewicz" });
             lastID = uczniowie_test.Count;
+            string DziennikDBcs = _configuration.GetConnectionString("DziennikDB");
+            SqlConnection con = new SqlConnection(DziennikDBcs);
+            foreach (Uczen u in uczniowie_test)
+            {
+                marks = new List<Ocena>();
+                string sql = "SELECT IDoceny, wartosc FROM Ocena WHERE IDucznia=@ID";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@ID", u.id);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    ocena = new Ocena();
+                    ocena.idoceny = Int32.Parse(reader["IDoceny"].ToString());
+                    ocena.mark = reader["wartosc"].ToString();
+                    marks.Add(ocena);
+                }
+                reader.Close();
+                u.oceny = marks;
+                con.Close();
+            }
         }
     }
 }

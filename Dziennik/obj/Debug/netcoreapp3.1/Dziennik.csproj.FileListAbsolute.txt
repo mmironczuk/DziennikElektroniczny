@@ -224,3 +224,4 @@ C:\Users\Michał\Documents\GitHub\main-repo\Dziennik\bin\Debug\netcoreapp3.1\run
 C:\Users\Michał\Documents\GitHub\main-repo\Dziennik\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Michał\Documents\GitHub\main-repo\Dziennik\obj\Debug\netcoreapp3.1\Dziennik.csproj.CoreCompileInputs.cache
 C:\Users\Michał\Documents\GitHub\main-repo\Dziennik\obj\Debug\netcoreapp3.1\Dziennik.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Michał\Documents\GitHub\main-repo\Dziennik\obj\Debug\netcoreapp3.1\Razor\Pages\EditMark.cshtml.g.cs

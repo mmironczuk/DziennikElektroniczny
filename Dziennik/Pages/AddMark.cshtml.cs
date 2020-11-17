@@ -12,16 +12,17 @@ namespace Dziennik.Pages
 {
     public class AddMarkModel : PageModel
     {
+        [BindProperty]
         public Ocena ocena { get; set; }
         public IConfiguration _configuration { get; }
         public AddMarkModel(IConfiguration configuration)
         {
             _configuration = configuration;
         }
-        public void OnGet(int _iducznia)
+        public void OnGet(int id)
         {
             ocena = new Ocena();
-            ocena.iducznia = _iducznia;
+            ocena.iducznia = id;
         }
         public IActionResult OnPost(Ocena ocena)
         {
@@ -31,7 +32,7 @@ namespace Dziennik.Pages
             }
             string DziennikDBcs = _configuration.GetConnectionString("DziennikDB");
             SqlConnection con = new SqlConnection(DziennikDBcs);
-            string sql = "INSERT INTO Ocena (idnauczyciela, idprzedmiotu, iducznia, wartosc, opis) VALUES (@IDNAUCZYCIELA, @IDPRZEDMIOTU, @IDUCZNIA, @WARTOSC, @OPIS)";
+            string sql = "INSERT INTO Ocena (idnauczyciela, idprzedmiotu, IDucznia, wartosc, opis) VALUES (@IDNAUCZYCIELA, @IDPRZEDMIOTU, @IDUCZNIA, @WARTOSC, @OPIS)";
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.Parameters.AddWithValue("@IDNAUCZYCIELA", 1);
             cmd.Parameters.AddWithValue("@IDUCZNIA", ocena.iducznia);

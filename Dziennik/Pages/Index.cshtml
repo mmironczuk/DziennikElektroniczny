@@ -1,5 +1,6 @@
 ﻿@page
 @model IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Home page";
 }
@@ -18,6 +19,9 @@
             <th scope="col">
                 @Html.DisplayNameFor(model => Model.uczniowie_test[0].surname)
             </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => Model.uczniowie_test[0].oceny)
+            </th>
             <th scope="col">Akcja</th>
         </tr>
     </thead>
@@ -29,10 +33,14 @@
                 <td>@Html.DisplayFor(m => p.name)</td>
                 <td>@Html.DisplayFor(m => p.surname)</td>
                 <td>
+
+                    @foreach (var u in p.oceny.ToList())
+                    {
+                        <a asp-page="./EditMark" asp-route-id="@u.idoceny" class="btn btn btn-primary">@Html.DisplayFor(m => u.mark)</a>
+                    }
+                </td>
+                <td>
                     <a asp-page="AddMark" asp-route-id=@p.id>Dodaj ocenę</a> |
-                    <a asp-page="Details" asp-route-id=@p.id>Szczegóły</a> |
-                    <a asp-page="Edit" asp-route-id=@p.id>Edytuj</a> |
-                    <a asp-page="Delete" asp-route-id=@p.id>Kasuj</a> |
                 </td>
             </tr>
         }
