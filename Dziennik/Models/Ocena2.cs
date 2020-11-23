@@ -8,11 +8,11 @@ namespace Dziennik.Models
 {
     public class Ocena2
     {
-        public int idoceny { get; set; }
-        public int iducznia { get; set; }
-        public int idprzedmiotu { get; set; }
-        public int idnauczyciela { get; set; }
-        public string mark { get; set; }
-        public string opis { get; set; }
+        public int Id_oceny { get; set; }
+        public int Id_ucznia { get; set; }
+        public int Id_przedmiotu { get; set; }
+        public int Id_nauczyciela { get; set; }
+        public string ocena { get; set; }
+        public string opis_oceny { get; set; }
     }
 }

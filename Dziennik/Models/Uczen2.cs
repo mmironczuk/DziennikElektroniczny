@@ -10,11 +10,11 @@ namespace Dziennik.Models
     public class Uczen2
     {
         [Display(Name="Id")]
-        public int id { get; set; }
+        public int Id_ucznia { get; set; }
         [Display(Name = "Imię")]
-        public string name { get; set; }
+        public string imie { get; set; }
         [Display(Name = "Nazwisko")]
-        public string surname { get; set; }
+        public string nazwisko { get; set; }
         [Display(Name ="Oceny")]
         public List<Ocena> oceny { get; set; }
     }

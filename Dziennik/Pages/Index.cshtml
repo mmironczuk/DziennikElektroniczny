@@ -11,13 +11,13 @@
     <thead>
         <tr>
             <th scope="col">
-                @Html.DisplayNameFor(model => Model.uczniowie_test[0].id)
+                @Html.DisplayNameFor(model => Model.uczniowie_test[0].Id_ucznia)
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => Model.uczniowie_test[0].name)
+                @Html.DisplayNameFor(model => Model.uczniowie_test[0].imie)
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => Model.uczniowie_test[0].surname)
+                @Html.DisplayNameFor(model => Model.uczniowie_test[0].nazwisko)
             </th>
             <th scope="col">
                 @Html.DisplayNameFor(model => Model.uczniowie_test[0].oceny)
@@ -29,18 +29,18 @@
         @foreach (var p in Model.uczniowie_test.ToList())
         {
             <tr>
-                <th scope="row">@Html.DisplayFor(m => p.id)</th>
-                <td>@Html.DisplayFor(m => p.name)</td>
-                <td>@Html.DisplayFor(m => p.surname)</td>
+                <th scope="row">@Html.DisplayFor(m => p.Id_ucznia)</th>
+                <td>@Html.DisplayFor(m => p.imie)</td>
+                <td>@Html.DisplayFor(m => p.nazwisko)</td>
                 <td>
 
                     @foreach (var u in p.oceny.ToList())
                     {
-                        <a asp-page="./EditMark" asp-route-id="@u.idoceny" class="btn btn btn-primary">@Html.DisplayFor(m => u.mark)</a>
+                        <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" class="btn btn btn-primary">@Html.DisplayFor(m => u.ocena)</a>
                     }
                 </td>
                 <td>
-                    <a asp-page="AddMark" asp-route-id=@p.id>Dodaj ocenę</a> |
+                    <a asp-page="AddMark" asp-route-id=@p.Id_ucznia>Dodaj ocenę</a> |
                 </td>
             </tr>
         }
