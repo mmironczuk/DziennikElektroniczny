@@ -14,5 +14,6 @@ namespace Dziennik.Models
         public virtual string pesel { get; set; }
         public virtual Klasa Klasa { get; set; }
         public virtual Konto Konto { get; set; }
+        public virtual IList<Ocena> Ocena { get; set; }
     }
 }

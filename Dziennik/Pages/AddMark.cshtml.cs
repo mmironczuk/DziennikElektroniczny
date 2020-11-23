@@ -13,7 +13,7 @@ namespace Dziennik.Pages
     public class AddMarkModel : PageModel
     {
         [BindProperty]
-        public Ocena ocena { get; set; }
+        public Ocena2 ocena { get; set; }
         public IConfiguration _configuration { get; }
         public AddMarkModel(IConfiguration configuration)
         {
@@ -21,11 +21,13 @@ namespace Dziennik.Pages
         }
         public void OnGet(int id)
         {
-            ocena = new Ocena();
-            ocena.iducznia = id;
+            ocena = new Ocena2();
+            ocena.Id_ucznia = id;
         }
-        public IActionResult OnPost(Ocena ocena)
+        public IActionResult OnPost(Ocena2 ocena)
         {
+            //-- Podzapytanie do bazy lokalnej --
+            /*
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -41,7 +43,7 @@ namespace Dziennik.Pages
             cmd.Parameters.AddWithValue("@OPIS", ocena.opis);
             con.Open();
             cmd.ExecuteNonQuery();
-            con.Close();
+            con.Close();*/
             return RedirectToPage("Index");
         }
     }

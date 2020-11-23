@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0618: Typ lub składowa jest przestarzała
+dotnet_diagnostic.CS0618.severity = none

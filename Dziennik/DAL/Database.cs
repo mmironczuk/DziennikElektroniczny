@@ -9,7 +9,7 @@ namespace Dziennik.DAL
 {
     public abstract class Database
     {
-        public abstract ObservableCollection<Test> GetTests();
-        public abstract ObservableCollection<Ocena> GetOceny();
+        //public abstract ObservableCollection<Test> GetTests();
+        public abstract IList<Uczen> GetUczniowie();
     }
 }

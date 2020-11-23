@@ -14,7 +14,7 @@ namespace Dziennik.Pages
     public class EditMarkModel : PageModel
     {
         [BindProperty]
-        public Ocena ocena { get; set; }
+        public Ocena2 ocena { get; set; }
         public IConfiguration _configuration { get; }
         public EditMarkModel(IConfiguration configuration)
         {
@@ -22,9 +22,10 @@ namespace Dziennik.Pages
         }
         public void OnGet(int id)
         {
-            ocena = new Ocena();
-            ocena.idoceny = id;
-            string DziennikDBcs = _configuration.GetConnectionString("DziennikDB");
+            ocena = new Ocena2();
+            ocena.Id_oceny = id;
+            // -- Podzapytanie do bazy lokalnej --
+            /*string DziennikDBcs = _configuration.GetConnectionString("DziennikDB");
             SqlConnection con = new SqlConnection(DziennikDBcs);
             string sql = "SELECT * FROM Ocena WHERE IDoceny=@ID";
             SqlCommand cmd = new SqlCommand(sql, con);
@@ -38,10 +39,12 @@ namespace Dziennik.Pages
                 ocena.opis = reader["opis"].ToString();
             }
             reader.Close();
-            con.Close();
+            con.Close();*/
         }
         public IActionResult OnPost(Ocena ocena, int id)
         {
+            //-- Podzapytania do bazy lokalnej --
+            /*
             if (id == 0)
             {
                 if (!ModelState.IsValid)
@@ -69,7 +72,7 @@ namespace Dziennik.Pages
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
-            }
+            }*/
             return RedirectToPage("Index");
         }
     }
