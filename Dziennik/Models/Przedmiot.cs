@@ -13,5 +13,12 @@ namespace Dziennik.Models
         public virtual IList<Nauczanie> Nauczanie { get; set; }
         public virtual IList<Ocena> Ocena { get; set; }
         public virtual IList<Wydarzenie> Wydarzenie { get; set; }
+        public Przedmiot()
+        {
+            Nauczanie = new List<Nauczanie>();
+            Ocena = new List<Ocena>();
+            Wydarzenie = new List<Wydarzenie>();
+
+        }
     }
 }

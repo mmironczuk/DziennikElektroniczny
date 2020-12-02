@@ -1,14 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1082
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dziennik", "Dziennik\Dziennik.csproj", "{A56DD02C-E84F-4089-9A97-CC687D9E2FC4}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9E3BE55E-F41C-417C-AFBF-C27107478796}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dziennik", "Dziennik\Dziennik.csproj", "{212334B3-DD75-488B-9832-9F6322130768}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A56DD02C-E84F-4089-9A97-CC687D9E2FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A56DD02C-E84F-4089-9A97-CC687D9E2FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A56DD02C-E84F-4089-9A97-CC687D9E2FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A56DD02C-E84F-4089-9A97-CC687D9E2FC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{212334B3-DD75-488B-9832-9F6322130768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{212334B3-DD75-488B-9832-9F6322130768}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{212334B3-DD75-488B-9832-9F6322130768}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{212334B3-DD75-488B-9832-9F6322130768}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6D42911B-FF48-46D7-86A8-0FDD32C61A4F}
+		SolutionGuid = {EE04F368-5F86-411D-BA3E-71E399E00F43}
 	EndGlobalSection
 EndGlobal
