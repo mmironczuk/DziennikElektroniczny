@@ -13,18 +13,18 @@ namespace TestApp2.Pages
 {
     public class IndexModel : PageModel
     {
-        public ObservableCollection<Uczen> uczniowie_test = new ObservableCollection<Uczen>();
+        public ObservableCollection<Uczen> uczniowie = new ObservableCollection<Uczen>();
         private MainDatabase mainDatabase = new MainDatabase();
-        public Ocena ocena;
         public IList<Ocena> marks;
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            uczniowie_test = mainDatabase.GetUczniowieAll();
-            foreach (Uczen u in uczniowie_test)
+            uczniowie= mainDatabase.GetUczniowieAll();
+            foreach (Uczen u in uczniowie)
             {
-                marks = mainDatabase.GetOceny(u.Id_ucznia);
+                marks = mainDatabase.GetOcenyUczen(u.Id_ucznia);
                 u.Ocena = marks;
             }
+            return RedirectToPage("/Login/UserLogin");
         }
     }
 }

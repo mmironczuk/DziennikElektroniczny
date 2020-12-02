@@ -30,8 +30,19 @@ namespace TestApp2
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-
+            services.AddAuthentication("CookieAuthentication")
+            .AddCookie("CookieAuthentication", config =>
+            {
+                config.Cookie.HttpOnly = true;
+                config.Cookie.SecurePolicy = CookieSecurePolicy.None;
+                config.Cookie.Name = "UserLoginCookie";
+                config.LoginPath = "/Login/UserLogin";
+                config.Cookie.SameSite = SameSiteMode.Strict;
+            });
+            /*services.AddRazorPages().AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizePage("/Index");
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);*/
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

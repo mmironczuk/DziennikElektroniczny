@@ -1,4 +1,5 @@
 ﻿using Dziennik.Models;
+using Microsoft.AspNetCore.Identity;
 using NHibernate;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,16 @@ namespace Dziennik.DAL
         }
         public override ObservableCollection<Konto> GetKontaAll()
         {
-            throw new NotImplementedException();
+            ObservableCollection<Konto> konta = new ObservableCollection<Konto>();
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    konta = new ObservableCollection<Konto>(session.QueryOver<Konto>().List());
+                    transaction.Commit();
+                }
+            }
+            return konta;
         }
         public override ObservableCollection<Lekcja> GetLekcjeAll()
         {
@@ -124,7 +134,7 @@ namespace Dziennik.DAL
             return uczniowie;
         }
 
-        public override IList<Ocena> GetOceny(int id)
+        public override IList<Ocena> GetOcenyUczen(int id)
         {
             IList<Ocena> oceny;
             using (var session = NHibernateHelper.OpenSession())
@@ -138,7 +148,21 @@ namespace Dziennik.DAL
             return oceny;
         }
 
-        public override IList<Wydarzenie> GetWydarzenia(int id)
+        public override IList<Ocena> GetOcenyPrzedmiot(int id)
+        {
+            IList<Ocena> oceny;
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    oceny = session.QueryOver<Ocena>().Where(d => d.Przedmiot.Id_przedmiotu == id).List();
+                    transaction.Commit();
+                }
+            }
+            return oceny;
+        }
+        // To Do
+        public override IList<Wydarzenie> GetWydarzeniaUczen(int id)
         {
             IList<Wydarzenie> wydarzenia;
             using (var session = NHibernateHelper.OpenSession())
@@ -146,6 +170,20 @@ namespace Dziennik.DAL
                 using (var transaction = session.BeginTransaction())
                 {
                     wydarzenia = session.QueryOver<Wydarzenie>().Where(d => d.Klasa.Id_klasy == id).List();
+                    transaction.Commit();
+                }
+            }
+            return wydarzenia;
+        }
+
+        public override IList<Wydarzenie> GetWydarzeniaNauczyciel(int id)
+        {
+            IList<Wydarzenie> wydarzenia;
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    wydarzenia = session.QueryOver<Wydarzenie>().Where(d => d.Nauczyciel.Id_nauczyciela == id).List();
                     transaction.Commit();
                 }
             }
@@ -210,6 +248,48 @@ namespace Dziennik.DAL
                 }
             }
             return przedmiot;
+        }
+        public override Konto GetKontoLogin(string login)
+        {
+            Konto konto = new Konto();
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    konto = session.QueryOver<Konto>().Where(d => d.login == login).SingleOrDefault();
+                    transaction.Commit();
+                }
+            }
+            return konto;
+        }
+
+        public override void UpdateKonto(Konto konto)
+        {
+            Konto account = new Konto();
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    account = konto;
+                    var passwordHasher = new PasswordHasher<string>();
+                    string haslo = passwordHasher.HashPassword(konto.login, konto.haslo).Substring(0,32);
+                    account.haslo = haslo;
+                    session.Save(account);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void UpdateUczen(Uczen uczen)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Save(uczen);
+                    transaction.Commit();
+                }
+            }
         }
     }
 }

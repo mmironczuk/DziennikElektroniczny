@@ -1,0 +1,76 @@
+﻿@page
+@model Dziennik.Pages.AdminPageModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    //Layout = "_Layout";
+    ViewBag.Title = "Panel administracyjny";
+}
+<br /><br />
+<div class="container">
+    <form class="form-horizontal" method="post">
+        <div class="form-group">
+            <label asp-for="konto.login" class="control-label col-sm2"></label>
+            <div class="col-sm-6">
+                <input asp-for="konto.login" class="form-control">
+                <span asp-validation-for="konto.login" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="konto.haslo" class="control-label col-sm2"></label>
+            <div class="col-sm-6">
+                <input asp-for="konto.haslo" class="form-control">
+                <span asp-validation-for="konto.haslo" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="konto.email" class="control-label col-sm2"></label>
+            <div class="col-sm-6">
+                <input asp-for="konto.email" class="form-control">
+                <span asp-validation-for="konto.email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="konto.typ_uzytkownika" class="control-label col-sm2"></label>
+            <div class="col-sm-6">
+                <select asp-for="konto.typ_uzytkownika" class="form-control">
+                    <option value="0">administrator</option>
+                    <option value="1">nauczyciel</option>
+                    <option value="2">uczeń</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm2">Imię</label>
+            <div class="col-sm-6">
+                <input asp-for="uczen.imie" class="form-control">
+                <span asp-validation-for="uczen.imie" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm2">Nazwisko</label>
+            <div class="col-sm-6">
+                <input asp-for="uczen.nazwisko" class="form-control">
+                <span asp-validation-for="uczen.nazwisko" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm2">Adres</label>
+            <div class="col-sm-6">
+                <input asp-for="uczen.adres" class="form-control">
+                <span asp-validation-for="uczen.adres" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm2">Pesel</label>
+            <div class="col-sm-6">
+                <input asp-for="uczen.pesel" class="form-control">
+                <span asp-validation-for="uczen.pesel" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn btn-primary">Zatwierdź</button>
+            </div>
+        </div>
+    </form>
+</div>
