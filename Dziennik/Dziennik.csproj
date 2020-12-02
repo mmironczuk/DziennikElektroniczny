@@ -44,4 +44,15 @@
     <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.100" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\images\icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\images\icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
 </Project>
