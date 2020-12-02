@@ -1,49 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using Dziennik.DAL;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Configuration;
 
 namespace Dziennik.Pages
 {
     public class AddMarkModel : PageModel
     {
-        [BindProperty]
-        public Ocena2 ocena { get; set; }
-        public IConfiguration _configuration { get; }
-        public AddMarkModel(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+        public Ocena mark { get; set; }
+        public Uczen uczen;
+        public Nauczyciel nauczyciel;
+        public Przedmiot przedmiot;
+        MainDatabase database = new MainDatabase();
         public void OnGet(int id)
         {
-            ocena = new Ocena2();
-            ocena.Id_ucznia = id;
+            uczen = database.GetUczen(id);
+            mark = new Ocena();
+            mark.Uczen = uczen;
         }
-        public IActionResult OnPost(Ocena2 ocena)
+        public IActionResult OnPost(Ocena mark)
         {
-            //-- Podzapytanie do bazy lokalnej --
-            /*
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-            string DziennikDBcs = _configuration.GetConnectionString("DziennikDB");
-            SqlConnection con = new SqlConnection(DziennikDBcs);
-            string sql = "INSERT INTO Ocena (idnauczyciela, idprzedmiotu, IDucznia, wartosc, opis) VALUES (@IDNAUCZYCIELA, @IDPRZEDMIOTU, @IDUCZNIA, @WARTOSC, @OPIS)";
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.Parameters.AddWithValue("@IDNAUCZYCIELA", 1);
-            cmd.Parameters.AddWithValue("@IDUCZNIA", ocena.iducznia);
-            cmd.Parameters.AddWithValue("@IDPRZEDMIOTU", 2);
-            cmd.Parameters.AddWithValue("@WARTOSC", ocena.mark);
-            cmd.Parameters.AddWithValue("@OPIS", ocena.opis);
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();*/
+            /*uczen = database.GetUczen(0);
+            nauczyciel = database.GetNauczyciel(0);
+            przedmiot = database.GetPrzedmiot(0);
+            uczen.Ocena.Add(mark);
+            nauczyciel.Ocena.Add(mark);*/
+            //przedmiot.Ocena.Add(mark);
+            database.DodajOcene(mark,0,0,0);
             return RedirectToPage("Index");
         }
     }

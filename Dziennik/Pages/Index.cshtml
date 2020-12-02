@@ -20,7 +20,7 @@
                 @Html.DisplayNameFor(model => Model.uczniowie_test[0].nazwisko)
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => Model.uczniowie_test[0].oceny)
+                @Html.DisplayNameFor(model => Model.uczniowie_test[0].Ocena)
             </th>
             <th scope="col">Akcja</th>
         </tr>
@@ -34,7 +34,7 @@
                 <td>@Html.DisplayFor(m => p.nazwisko)</td>
                 <td>
 
-                    @foreach (var u in p.oceny.ToList())
+                    @foreach (var u in p.Ocena.ToList())
                     {
                         <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" class="btn btn btn-primary">@Html.DisplayFor(m => u.ocena)</a>
                     }

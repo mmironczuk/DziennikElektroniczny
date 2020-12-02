@@ -12,5 +12,9 @@ namespace Dziennik.Models
         public virtual IList<Obecnosc> Obecnosc { get; set; }
         public virtual Nauczanie Nauczanie { get; set; }
         public virtual Klasa Klasa { get; set; }
+        public Lekcja()
+        {
+            Obecnosc = new List<Obecnosc>();
+        }
     }
 }

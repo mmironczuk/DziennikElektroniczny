@@ -17,7 +17,7 @@ namespace Dziennik.Mappings
             References(x => x.Uczen).Column("Id_ucznia").Cascade.All();
             References(x => x.Nauczyciel).Column("Id_nauczyciela").Cascade.All();
             References(x => x.Przedmiot).Column("Id_przedmiotu").Cascade.All();
-            Table("Przedmiot");
+            Table("Ocena");
         }
     }
 }

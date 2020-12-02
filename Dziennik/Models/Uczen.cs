@@ -15,5 +15,9 @@ namespace Dziennik.Models
         public virtual Klasa Klasa { get; set; }
         public virtual Konto Konto { get; set; }
         public virtual IList<Ocena> Ocena { get; set; }
+        public Uczen()
+        {
+            Ocena = new List<Ocena>();
+        }
     }
 }

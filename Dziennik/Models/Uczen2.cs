@@ -16,6 +16,6 @@ namespace Dziennik.Models
         [Display(Name = "Nazwisko")]
         public string nazwisko { get; set; }
         [Display(Name ="Oceny")]
-        public List<Ocena> oceny { get; set; }
+        public List<Ocena> Ocena { get; set; }
     }
 }
