@@ -23,8 +23,8 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/MainNauczyciel">
                             <i class="fa fa-home"></i>
                             Home
                             <span class="sr-only">(current)</span>
@@ -39,10 +39,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-users">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-list-ul">
+                                <span class="badge badge-primary">5</span>
                             </i>
-                            Klasy
+                            Dodaj obecność
                         </a>
                     </li>
                     <li class="nav-item">
@@ -63,6 +64,13 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ">
+                    @using System.Security.Claims;
+                    @{
+                        var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+                        var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
+                        var login = claim.Value;
+                    }
+                    <h5 class="p-4 text-light">Zalogowano jako <b>@login</b></h5>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
