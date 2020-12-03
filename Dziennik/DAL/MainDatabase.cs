@@ -343,6 +343,20 @@ namespace Dziennik.DAL
             return klasa;
         }
 
+        public override Wydarzenie GetWydarzenie(int id)
+        {
+            Wydarzenie wydarzenie = new Wydarzenie();
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    wydarzenie = session.QueryOver<Wydarzenie>().Where(d => d.Id_wydarzenia == id).SingleOrDefault();
+                    transaction.Commit();
+                }
+            }
+            return wydarzenie;
+        }
+
         public override void CreateKonto(Konto konto)
         {
             Konto account = new Konto();
@@ -423,6 +437,23 @@ namespace Dziennik.DAL
             }
         }
 
+        public override void UpdateWydarzenie(Wydarzenie wydarzenie)
+        {
+            Wydarzenie wyd=new Wydarzenie();
+            wyd = GetWydarzenie(wydarzenie.Id_wydarzenia);
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    wyd.nazwa = wydarzenie.nazwa;
+                    wyd.opis = wydarzenie.opis;
+                    wyd.data = wydarzenie.data;
+                    session.SaveOrUpdate(wyd);
+                    transaction.Commit();
+                }
+            }
+        }
+
         public override void DeleteOcena(int id)
         {
             using (var session = NHibernateHelper.OpenSession())
@@ -432,6 +463,20 @@ namespace Dziennik.DAL
                     Ocena mark = new Ocena();
                     mark = GetOcena(id);
                     session.Delete(mark);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void DeleteWydarzenie(int id)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    Wydarzenie wydarzenie = new Wydarzenie();
+                    wydarzenie = GetWydarzenie(id);
+                    session.Delete(wydarzenie);
                     transaction.Commit();
                 }
             }

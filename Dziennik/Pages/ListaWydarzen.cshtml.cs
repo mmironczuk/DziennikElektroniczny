@@ -52,29 +52,6 @@ namespace Dziennik.Pages
                     }
                 }
             }
-
-            /*for (int i = 0; i < 6; i++)
-            {
-                Wydarzenie rect = new Wydarzenie();
-                rect.nazwa = "Sprawdzianik";
-                rect.opis = "odbedzie sie sprawdzianik numer " + i;
-
-                Nauczyciel na = new Nauczyciel();
-                na.imie = "Alicja";
-                na.nazwisko = "Brycha";
-
-                rect.Nauczyciel = na;
-
-                //DateTime czas = new DateTime(DateTime.Now);
-                rect.data = DateTime.Now;
-
-                Przedmiot prze = new Przedmiot();
-                prze.nazwa = "Pszyrka";
-
-                rect.Przedmiot = prze;
-
-                wydarzenia.Add(rect);
-            }*/
         }
 
         public IActionResult OnPost()

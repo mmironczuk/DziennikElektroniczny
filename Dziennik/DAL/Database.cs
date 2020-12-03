@@ -34,12 +34,15 @@ namespace Dziennik.DAL
         public abstract Konto GetKontoLogin(string login);
         public abstract Ocena GetOcena(int id);
         public abstract Klasa GetKlasa(int id);
+        public abstract Wydarzenie GetWydarzenie(int id);
         public abstract void CreateKonto(Konto konto);
         public abstract void CreateUczen(Uczen uczen);
         public abstract void CreateNauczyciel(Nauczyciel nauczyciel);
         public abstract void CreateOcena(Ocena ocena);
         public abstract void CreateWydarzenie(Wydarzenie wydarzenie);
         public abstract void UpdateOcena(Ocena ocena);
+        public abstract void UpdateWydarzenie(Wydarzenie wydarzenie);
         public abstract void DeleteOcena(int id);
+        public abstract void DeleteWydarzenie(int id);
     }
 }
