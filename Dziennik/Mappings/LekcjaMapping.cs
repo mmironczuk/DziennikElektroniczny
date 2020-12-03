@@ -10,7 +10,7 @@ namespace Dziennik.Mappings
     {
         public LekcjaMapping()
         {
-            Id(x => x.Id_lekcji).GeneratedBy.Identity();
+            Id(x => x.Id_lekcji).GeneratedBy.Increment();
             Map(x => x.data).Nullable();
             References(x => x.Nauczanie).Column("Id_nauczania");
             References(x => x.Klasa).Column("Id_klasy");

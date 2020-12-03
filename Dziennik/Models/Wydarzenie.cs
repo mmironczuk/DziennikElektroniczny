@@ -14,5 +14,11 @@ namespace Dziennik.Models
         public virtual Klasa Klasa { get; set; }
         public virtual Nauczyciel Nauczyciel { get; set; }
         public virtual Przedmiot Przedmiot { get; set; }
+        public Wydarzenie()
+        {
+            Klasa = new Klasa();
+            Nauczyciel = new Nauczyciel();
+            Przedmiot = new Przedmiot();
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace Dziennik.Mappings
     {
         public NauczycielMapping()
         {
-            Id(x => x.Id_nauczyciela).GeneratedBy.Identity();
+            Id(x => x.Id_nauczyciela).GeneratedBy.Increment();
             Map(x => x.imie).Length(15).Nullable();
             Map(x => x.nazwisko).Length(30).Nullable();
             Map(x => x.adres).Length(50).Nullable();
@@ -18,7 +18,7 @@ namespace Dziennik.Mappings
             HasMany(x => x.Nauczanie);
             HasMany(x => x.Ocena);
             HasMany(x => x.Wydarzenie);
-            References(x => x.Konto).Column("Id_konta").Cascade.All();
+            References(x => x.Konto).Column("Id_konta");
             HasOne(x => x.Klasa);
             Table("Nauczyciel");
         }

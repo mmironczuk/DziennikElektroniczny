@@ -1,5 +1,5 @@
 ﻿@page
-@model IndexModel
+@model Dziennik.Pages.UsersListModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Home page";
@@ -11,25 +11,21 @@
     <thead>
         <tr>
             <th scope="col">
-                @Html.DisplayNameFor(model => Model.uczniowie_test[0].Id_ucznia)
+                @Html.DisplayNameFor(model => Model.uczniowie[0].imie)
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => Model.uczniowie_test[0].imie)
+                @Html.DisplayNameFor(model => Model.uczniowie[0].nazwisko)
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => Model.uczniowie_test[0].nazwisko)
-            </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => Model.uczniowie_test[0].Ocena)
+                @Html.DisplayNameFor(model => Model.uczniowie[0].Ocena)
             </th>
             <th scope="col">Akcja</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var p in Model.uczniowie_test.ToList())
+        @foreach (var p in Model.uczniowie.ToList())
         {
             <tr>
-                <th scope="row">@Html.DisplayFor(m => p.Id_ucznia)</th>
                 <td>@Html.DisplayFor(m => p.imie)</td>
                 <td>@Html.DisplayFor(m => p.nazwisko)</td>
                 <td>
@@ -40,7 +36,7 @@
                     }
                 </td>
                 <td>
-                    <a asp-page="AddMark" asp-route-id=@p.Id_ucznia>Dodaj ocenę</a>
+                    <a asp-page="AddMark" asp-route-id=@p.Id_ucznia>Dodaj ocenę</a> |
                 </td>
             </tr>
         }

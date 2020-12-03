@@ -18,6 +18,8 @@ namespace Dziennik.Models
         public Uczen()
         {
             Ocena = new List<Ocena>();
+            Klasa = new Klasa();
+            Konto = new Konto();
         }
     }
 }

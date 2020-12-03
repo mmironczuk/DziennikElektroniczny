@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Dziennik.DAL;
 using Dziennik.Models;
@@ -14,11 +15,19 @@ namespace Dziennik.Pages
     {
         public ObservableCollection<Przedmiot> przedmioty = new ObservableCollection<Przedmiot>();
         private MainDatabase mainDatabase = new MainDatabase();
-        public int id_ucznia = 0;
+        public int id_ucznia;
         public IList<Ocena> marks_all;
         public List<Ocena> marks;
         public void OnGet()
         {
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
+            var login = claim.Value;
+            Konto konto = new Konto();
+            konto = mainDatabase.GetKontoLogin(login);
+            Uczen uczen = new Uczen();
+            uczen = mainDatabase.GetUczenKonto(konto.Id_konta);
+            id_ucznia = uczen.Id_ucznia;
             przedmioty = mainDatabase.GetPrzedmiotyAll();
             foreach(Przedmiot p in przedmioty)
             {
