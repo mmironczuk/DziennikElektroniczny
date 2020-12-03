@@ -17,27 +17,29 @@ namespace Dziennik.Pages
         [BindProperty]
         public int uczen_id { get; set; }
         [BindProperty]
-        public int teacher_id { get; set; }
+        public int subject_id { get; set; }
         MainDatabase maindatabase = new MainDatabase();
-        public void OnGet(int id)
+        public void OnGet(int UczenId, int SubjectId)
         {
-            uczen_id = id;
+            uczen_id = UczenId;
+            subject_id = SubjectId;
+        }
+        public IActionResult OnPost(Ocena mark)
+        {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
             var login = claim.Value;
             Konto konto = new Konto();
             konto = maindatabase.GetKontoLogin(login);
-            teacher_id = maindatabase.GetNauczycielKonto(konto.Id_konta).Id_nauczyciela;
-        }
-        public IActionResult OnPost(Ocena mark)
-        {
+            Nauczyciel nauczyciel = maindatabase.GetNauczycielKonto(konto.Id_konta);
+            Uczen uczen = maindatabase.GetUczen(uczen_id);
             Ocena ocena = new Ocena();
             ocena = mark;
-            mark.Uczen = maindatabase.GetUczen(uczen_id);
-            mark.Nauczyciel = maindatabase.GetNauczyciel(teacher_id);
-            mark.Przedmiot = maindatabase.GetPrzedmiot(1);
+            mark.Uczen = uczen;
+            mark.Nauczyciel = nauczyciel;
+            mark.Przedmiot = maindatabase.GetPrzedmiot(subject_id);
             maindatabase.CreateOcena(ocena);
-            return RedirectToPage("/UsersList");
+            return RedirectToPage("/WyborKlasy");
         }
     }
 }

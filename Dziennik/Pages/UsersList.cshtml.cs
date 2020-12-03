@@ -15,9 +15,12 @@ namespace Dziennik.Pages
         public ObservableCollection<Uczen> uczniowie = new ObservableCollection<Uczen>();
         private MainDatabase mainDatabase = new MainDatabase();
         public IList<Ocena> marks;
-        public void OnGet()
+        [BindProperty]
+        public int subjectId { get; set; }
+        public void OnGet(int ClassId, int SubjectId)
         {
-            uczniowie = mainDatabase.GetUczniowieAll();
+            subjectId = SubjectId;
+            uczniowie = mainDatabase.GetUczniowieKlasa(ClassId);
             foreach (Uczen u in uczniowie)
             {
                 marks = mainDatabase.GetOcenyUczen(u.Id_ucznia);

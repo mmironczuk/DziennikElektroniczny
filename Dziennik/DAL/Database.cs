@@ -20,6 +20,7 @@ namespace Dziennik.DAL
         public abstract ObservableCollection<Uczen> GetUczniowieAll();
         public abstract ObservableCollection<Wydarzenie> GetWydarzeniaAll();
         public abstract ObservableCollection<Nauczanie> GetNauczaniaNauczyciel(int id);
+        public abstract ObservableCollection<Uczen> GetUczniowieKlasa(int id);
         public abstract IList<Lekcja> GetLekcjeNauczanie(int id);
         public abstract IList<Ocena> GetOcenyUczen(int id);
         public abstract IList<Ocena> GetOcenyPrzedmiot(int id);
