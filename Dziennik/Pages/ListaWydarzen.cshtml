@@ -13,31 +13,29 @@
 }
 
 <h1>ListaWydarzen</h1>
-@if (Model.typ_uzytkownika == 2)
+
+@foreach (var w in Model.wydarzenia.ToList())
 {
-    @foreach (var w in Model.wydarzenia.ToList())
+    @if (Model.typ_uzytkownika == 1)
     {
-        <div class="card" style="width: 100%; margin-bottom: 1rem; background-color: gold">
-            <div class="card-body">
-                <h5 class="card-title">@w.nazwa</h5>
-                <h6 class="card-subtitle mb-2 text-muted">@w.Przedmiot.nazwa, @w.data</h6>
-                <p class="card-text">@w.opis</p>
+        <a asp-page="/EditWydarzenie" asp-route-id="@w.Id_wydarzenia">
+            <div class="card" style="width: 100%; margin-bottom: 1rem; background-color: gold">
+                <div class="card-body">
+                    <h5 class="card-title">@w.nazwa</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@w.Przedmiot.nazwa, @w.data</h6>
+                    <p class="card-text">@w.opis</p>
+                </div>
             </div>
-        </div>
-    }
-}
-@if (Model.typ_uzytkownika == 1)
-{
-    @foreach (var w in Model.wydarzenia.ToList())
-    {
-        <a asp-page="/EditWydarzenia" asp-route-id="@w.Id_wydarzenia">
-        <div class="card" style="width: 100%; margin-bottom: 1rem; background-color: gold">
-            <div class="card-body">
-                <h5 class="card-title">@w.nazwa</h5>
-                <h6 class="card-subtitle mb-2 text-muted">@w.Przedmiot.nazwa, @w.data</h6>
-                <p class="card-text">@w.opis</p>
-            </div>
-        </div>
         </a>
+    }
+    else
+    {
+        <div class="card" style="width: 100%; margin-bottom: 1rem; background-color: gold">
+            <div class="card-body">
+                <h5 class="card-title">@w.nazwa</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@w.Przedmiot.nazwa, @w.data</h6>
+                <p class="card-text">@w.opis</p>
+            </div>
+        </div>
     }
 }
