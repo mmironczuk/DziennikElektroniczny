@@ -1,5 +1,5 @@
 ﻿@page
-@model Dziennik.Pages.AdminPageModel
+@model Dziennik.Pages.AddNauczycielModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     //Layout = "_Layout";
@@ -30,45 +30,35 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="hidden" asp-for="konto.typ_uzytkownika" />
+            <label asp-for="konto.typ_uzytkownika" class="control-label col-sm2"></label>
+            <input type="hidden" asp-for="konto.typ_uzytkownika"/>
         </div>
         <div class="form-group">
             <label class="control-label col-sm2">Imię</label>
             <div class="col-sm-6">
-                <input asp-for="uczen.imie" class="form-control">
-                <span asp-validation-for="uczen.imie" class="text-danger"></span>
+                <input asp-for="nauczyciel.imie" class="form-control">
+                <span asp-validation-for="nauczyciel.imie" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm2">Nazwisko</label>
             <div class="col-sm-6">
-                <input asp-for="uczen.nazwisko" class="form-control">
-                <span asp-validation-for="uczen.nazwisko" class="text-danger"></span>
+                <input asp-for="nauczyciel.nazwisko" class="form-control">
+                <span asp-validation-for="nauczyciel.nazwisko" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm2">Adres</label>
             <div class="col-sm-6">
-                <input asp-for="uczen.adres" class="form-control">
-                <span asp-validation-for="uczen.adres" class="text-danger"></span>
+                <input asp-for="nauczyciel.adres" class="form-control">
+                <span asp-validation-for="nauczyciel.adres" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm2">Pesel</label>
             <div class="col-sm-6">
-                <input asp-for="uczen.pesel" class="form-control">
-                <span asp-validation-for="uczen.pesel" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm2">Pesel</label>
-            <div class="col-sm-6">
-                <select asp-for="uczen.Klasa.Id_klasy" class="form-control">
-                    @foreach (var k in Model.klasy.ToList())
-                    {
-                        <option value="@k.Id_klasy">@k.nazwa</option>
-                    }
-                </select>
+                <input asp-for="nauczyciel.pesel" class="form-control">
+                <span asp-validation-for="nauczyciel.pesel" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">

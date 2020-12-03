@@ -1,0 +1,40 @@
+﻿@page
+@model Dziennik.Pages.WyborKlasyModel
+@{
+    ViewData["Title"] = "WyborKlasy";
+}
+<br />
+<br />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">
+                Przedmiot
+            </th>
+            <th scope="col">
+                Klasa
+            </th>
+            <th scope="col">
+                Wybór
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var n in Model.nauczania.ToList())
+        {
+            @foreach (var l in n.Lekcja.ToList())
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => n.Id_nauczania)</td>
+                    <td>
+
+
+                        @Html.DisplayFor(m => l.Klasa.nazwa)
+
+                    </td>
+                    <td><a asp-page="./UsersList" asp-route-id="@l.Klasa.Id_klasy" class="btn btn btn-primary">Wybór</a></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

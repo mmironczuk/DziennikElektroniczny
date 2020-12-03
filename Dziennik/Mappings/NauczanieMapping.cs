@@ -10,9 +10,9 @@ namespace Dziennik.Mappings
     {
         public NauczanieMapping()
         {
-            Id(x => x.Id_nauczania).GeneratedBy.Identity();
-            References(x => x.Nauczyciel).Column("Id_nauczyciela").Cascade.All();
-            References(x => x.Przedmiot).Column("Id_przedmiotu").Cascade.All();
+            Id(x => x.Id_nauczania).GeneratedBy.Increment();
+            References(x => x.Nauczyciel).Column("Id_nauczyciela");
+            References(x => x.Przedmiot).Column("Id_przedmiotu");
             HasMany(x => x.Lekcja);
             Table("Nauczanie");
         }

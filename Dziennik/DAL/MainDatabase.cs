@@ -134,6 +134,34 @@ namespace Dziennik.DAL
             return uczniowie;
         }
 
+        public override ObservableCollection<Nauczanie> GetNauczaniaNauczyciel(int id)
+        {
+            ObservableCollection<Nauczanie> nauczania = new ObservableCollection<Nauczanie>();
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    nauczania = new ObservableCollection<Nauczanie>(session.QueryOver<Nauczanie>().Where(d => d.Nauczyciel.Id_nauczyciela == id).List());
+                    transaction.Commit();
+                }
+            }
+            return nauczania;
+        }
+
+        public override IList<Lekcja> GetLekcjeNauczanie(int id)
+        {
+            IList<Lekcja> lekcje;
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    lekcje = session.QueryOver<Lekcja>().Where(d => (d.Nauczanie.Id_nauczania == id)).List();
+                    transaction.Commit();
+                }
+            }
+            return lekcje;
+        }
+
         public override IList<Ocena> GetOcenyUczen(int id)
         {
             IList<Ocena> oceny;
@@ -190,24 +218,6 @@ namespace Dziennik.DAL
             return wydarzenia;
         }
 
-        public override void DodajOcene(Ocena ocena, int u_id, int p_id, int n_id)
-        {
-            using (var session = NHibernateHelper.OpenSession())
-            {
-                using (var transaction = session.BeginTransaction())
-                {
-                    Uczen uczen = session.Get<Uczen>(u_id);
-                    uczen.Ocena.Add(ocena);
-                    Przedmiot przedmiot = session.Get<Przedmiot>(p_id);
-                    przedmiot.Ocena.Add(ocena);
-                    Nauczyciel nauczyciel = session.Get<Nauczyciel>(n_id);
-                    nauczyciel.Ocena.Add(ocena);
-                    session.Save(ocena);
-                    transaction.Commit();
-                }
-            }
-        }
-
         public override Uczen GetUczen(int id)
         {
             Uczen uczen = new Uczen();
@@ -215,7 +225,21 @@ namespace Dziennik.DAL
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    uczen = session.Get<Uczen>(id);
+                    uczen = session.QueryOver<Uczen>().Where(d => d.Id_ucznia == id).SingleOrDefault();
+                    transaction.Commit();
+                }
+            }
+            return uczen;
+        }
+
+        public override Uczen GetUczenKonto(int id)
+        {
+            Uczen uczen = new Uczen();
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    uczen = session.QueryOver<Uczen>().Where(d => d.Konto.Id_konta == id).SingleOrDefault();
                     transaction.Commit();
                 }
             }
@@ -229,7 +253,21 @@ namespace Dziennik.DAL
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    nauczyciel = session.Get<Nauczyciel>(id);
+                    nauczyciel = session.QueryOver<Nauczyciel>().Where(d => d.Id_nauczyciela == id).SingleOrDefault();
+                    transaction.Commit();
+                }
+            }
+            return nauczyciel;
+        }
+
+        public override Nauczyciel GetNauczycielKonto(int id)
+        {
+            Nauczyciel nauczyciel = new Nauczyciel();
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    nauczyciel = session.QueryOver<Nauczyciel>().Where(d => d.Konto.Id_konta == id).SingleOrDefault();
                     transaction.Commit();
                 }
             }
@@ -243,7 +281,7 @@ namespace Dziennik.DAL
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    przedmiot = session.Get<Przedmiot>(id);
+                    przedmiot = session.QueryOver<Przedmiot>().Where(d=>d.Id_przedmiotu==id).SingleOrDefault();
                     transaction.Commit();
                 }
             }
@@ -263,7 +301,21 @@ namespace Dziennik.DAL
             return konto;
         }
 
-        public override void UpdateKonto(Konto konto)
+        public override Ocena GetOcena(int id)
+        {
+            Ocena ocena = new Ocena();
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    ocena = session.QueryOver<Ocena>().Where(d => d.Id_oceny == id).SingleOrDefault();
+                    transaction.Commit();
+                }
+            }
+            return ocena;
+        }
+
+        public override void CreateKonto(Konto konto)
         {
             Konto account = new Konto();
             using (var session = NHibernateHelper.OpenSession())
@@ -280,13 +332,66 @@ namespace Dziennik.DAL
             }
         }
 
-        public override void UpdateUczen(Uczen uczen)
+        public override void CreateUczen(Uczen uczen)
         {
             using (var session = NHibernateHelper.OpenSession())
             {
                 using (var transaction = session.BeginTransaction())
                 {
                     session.Save(uczen);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void CreateNauczyciel(Nauczyciel nauczyciel)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Save(nauczyciel);
+                    transaction.Commit();
+                }
+            }
+        }
+        public override void CreateOcena(Ocena ocena)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Save(ocena);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void UpdateOcena(Ocena ocena)
+        {
+            Ocena mark = new Ocena();
+            mark = GetOcena(ocena.Id_oceny);
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    mark.ocena = ocena.ocena;
+                    mark.opis_oceny = ocena.opis_oceny;
+                    session.SaveOrUpdate(mark);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void DeleteOcena(int id)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    Ocena mark = new Ocena();
+                    mark = GetOcena(id);
+                    session.Delete(mark);
                     transaction.Commit();
                 }
             }

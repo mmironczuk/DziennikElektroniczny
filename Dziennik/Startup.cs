@@ -39,10 +39,6 @@ namespace TestApp2
                 config.LoginPath = "/Login/UserLogin";
                 config.Cookie.SameSite = SameSiteMode.Strict;
             });
-            /*services.AddRazorPages().AddRazorPagesOptions(options =>
-            {
-                options.Conventions.AuthorizePage("/Index");
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);*/
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -59,6 +55,7 @@ namespace TestApp2
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

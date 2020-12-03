@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Dziennik.DAL;
 using Dziennik.Models;
@@ -11,27 +12,32 @@ namespace Dziennik.Pages
 {
     public class AddMarkModel : PageModel
     {
+        [BindProperty]
         public Ocena mark { get; set; }
-        public Uczen uczen;
-        public Nauczyciel nauczyciel;
-        public Przedmiot przedmiot;
-        MainDatabase database = new MainDatabase();
+        [BindProperty]
+        public int uczen_id { get; set; }
+        [BindProperty]
+        public int teacher_id { get; set; }
+        MainDatabase maindatabase = new MainDatabase();
         public void OnGet(int id)
         {
-            uczen = database.GetUczen(id);
-            mark = new Ocena();
-            mark.Uczen = uczen;
+            uczen_id = id;
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
+            var login = claim.Value;
+            Konto konto = new Konto();
+            konto = maindatabase.GetKontoLogin(login);
+            teacher_id = maindatabase.GetNauczycielKonto(konto.Id_konta).Id_nauczyciela;
         }
         public IActionResult OnPost(Ocena mark)
         {
-            /*uczen = database.GetUczen(0);
-            nauczyciel = database.GetNauczyciel(0);
-            przedmiot = database.GetPrzedmiot(0);
-            uczen.Ocena.Add(mark);
-            nauczyciel.Ocena.Add(mark);*/
-            //przedmiot.Ocena.Add(mark);
-            database.DodajOcene(mark,0,0,0);
-            return RedirectToPage("Index");
+            Ocena ocena = new Ocena();
+            ocena = mark;
+            mark.Uczen = maindatabase.GetUczen(uczen_id);
+            mark.Nauczyciel = maindatabase.GetNauczyciel(teacher_id);
+            mark.Przedmiot = maindatabase.GetPrzedmiot(1);
+            maindatabase.CreateOcena(ocena);
+            return RedirectToPage("/UsersList");
         }
     }
 }

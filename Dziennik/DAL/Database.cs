@@ -19,16 +19,24 @@ namespace Dziennik.DAL
         public abstract ObservableCollection<Przedmiot> GetPrzedmiotyAll();
         public abstract ObservableCollection<Uczen> GetUczniowieAll();
         public abstract ObservableCollection<Wydarzenie> GetWydarzeniaAll();
+        public abstract ObservableCollection<Nauczanie> GetNauczaniaNauczyciel(int id);
+        public abstract IList<Lekcja> GetLekcjeNauczanie(int id);
         public abstract IList<Ocena> GetOcenyUczen(int id);
         public abstract IList<Ocena> GetOcenyPrzedmiot(int id);
         public abstract IList<Wydarzenie> GetWydarzeniaUczen(int id);
         public abstract IList<Wydarzenie> GetWydarzeniaNauczyciel(int id);
-        public abstract void DodajOcene(Ocena ocena, int u_id, int p_id, int n_id);
         public abstract Uczen GetUczen(int id);
+        public abstract Uczen GetUczenKonto(int id);
         public abstract Nauczyciel GetNauczyciel(int id);
+        public abstract Nauczyciel GetNauczycielKonto(int id);
         public abstract Przedmiot GetPrzedmiot(int id);
         public abstract Konto GetKontoLogin(string login);
-        public abstract void UpdateKonto(Konto konto);
-        public abstract void UpdateUczen(Uczen uczen);
+        public abstract Ocena GetOcena(int id);
+        public abstract void CreateKonto(Konto konto);
+        public abstract void CreateUczen(Uczen uczen);
+        public abstract void CreateNauczyciel(Nauczyciel nauczyciel);
+        public abstract void CreateOcena(Ocena ocena);
+        public abstract void UpdateOcena(Ocena ocena);
+        public abstract void DeleteOcena(int id);
     }
 }
