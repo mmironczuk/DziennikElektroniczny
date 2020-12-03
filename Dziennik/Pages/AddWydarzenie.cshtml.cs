@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Dziennik.DAL;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,37 +12,31 @@ namespace Dziennik.Pages
 {
     public class AddWydarzenieModel : PageModel
     {
-        public Wydarzenie wydarzenie;
-        public static DateTime datka = DateTime.Now;
-        public static List<Klasa> klasy;
-        public static List<Przedmiot> przedmioty;
-
-        public void OnGet(int idNauczyciela)
+        public MainDatabase mainDatabase = new MainDatabase();
+        [BindProperty]
+        public Wydarzenie wydarzenie { get; set; }
+        [BindProperty]
+        public int class_id { get; set; }
+        [BindProperty]
+        public int subject_id { get; set; }
+        public void OnGet(int ClassId, int SubjectId)
         {
-            wydarzenie = new Wydarzenie();
-
-            klasy = new List<Klasa>();
-            for (int i = 0; i < 5; i++)
-            {
-                var elo = new Klasa();
-                elo.nazwa = i.ToString();
-
-                klasy.Add(elo);
-            }
-
-            przedmioty = new List<Przedmiot>();
-            for (int i = 0; i < 5; i++)
-            {
-                var elo = new Przedmiot();
-                elo.nazwa = (i * 2).ToString();
-
-                przedmioty.Add(elo);
-            }
+            subject_id = SubjectId;
+            class_id = ClassId;
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(Wydarzenie wydarzenie)
         {
-            return null;
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
+            var login = claim.Value;
+            Konto konto = new Konto();
+            konto = mainDatabase.GetKontoLogin(login);
+            wydarzenie.Nauczyciel = mainDatabase.GetNauczycielKonto(konto.Id_konta);
+            wydarzenie.Klasa = mainDatabase.GetKlasa(class_id);
+            wydarzenie.Przedmiot = mainDatabase.GetPrzedmiot(subject_id);
+            mainDatabase.CreateWydarzenie(wydarzenie);
+            return RedirectToPage("./Wydarzenie");
         }
     }
 }

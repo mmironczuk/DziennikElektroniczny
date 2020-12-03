@@ -17,8 +17,11 @@ namespace Dziennik.Pages
         public int teacher_id { get; set; }
         public ObservableCollection<Nauczanie> nauczania { get; set; }
         public IList<Lekcja> lekcje;
-        public void OnGet()
+        [BindProperty]
+        public int type { get; set; }
+        public void OnGet(int TypeId)
         {
+            type = TypeId;
             nauczania = new ObservableCollection<Nauczanie>();
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);

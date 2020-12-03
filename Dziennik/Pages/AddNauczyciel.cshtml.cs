@@ -19,7 +19,7 @@ namespace Dziennik.Pages
         public void OnGet()
         {
             konto = new Konto();
-            konto.Id_konta = 1;
+            konto.typ_uzytkownika = 1;
         }
         public IActionResult OnPost(Konto konto)
         {

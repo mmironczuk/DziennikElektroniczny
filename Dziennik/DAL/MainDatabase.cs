@@ -329,6 +329,20 @@ namespace Dziennik.DAL
             return ocena;
         }
 
+        public override Klasa GetKlasa(int id)
+        {
+            Klasa klasa = new Klasa();
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    klasa = session.QueryOver<Klasa>().Where(d => d.Id_klasy == id).SingleOrDefault();
+                    transaction.Commit();
+                }
+            }
+            return klasa;
+        }
+
         public override void CreateKonto(Konto konto)
         {
             Konto account = new Konto();
@@ -376,6 +390,18 @@ namespace Dziennik.DAL
                 using (var transaction = session.BeginTransaction())
                 {
                     session.Save(ocena);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void CreateWydarzenie(Wydarzenie wydarzenie)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Save(wydarzenie);
                     transaction.Commit();
                 }
             }

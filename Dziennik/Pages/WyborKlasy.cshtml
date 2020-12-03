@@ -33,7 +33,12 @@
                         @Html.DisplayFor(m => l.Klasa.nazwa)
 
                     </td>
-                    <td><a asp-page="./UsersList" asp-route-ClassId="@l.Klasa.Id_klasy" asp-route-SubjectId="@n.Przedmiot.Id_przedmiotu" class="btn btn btn-primary">Wybór</a></td>
+                    <td>
+                        @if (Model.type == 2)
+                        {<a asp-page="./UsersList" asp-route-ClassId="@l.Klasa.Id_klasy" asp-route-SubjectId="@n.Przedmiot.Id_przedmiotu" class="btn btn btn-primary">Wybór</a>}
+                        @if (Model.type == 1)
+                        {<a asp-page="./AddWydarzenie" asp-route-ClassId="@l.Klasa.Id_klasy" asp-route-SubjectId="@n.Przedmiot.Id_przedmiotu" class="btn btn btn-primary">Wybór</a>}
+                    </td>
                 </tr>
             }
         }
