@@ -2,6 +2,13 @@
 @model Dziennik.Pages.ListaWydarzenModel
 @{
     ViewData["Title"] = "ListaWydarzen";
+    if(Dziennik.Pages.ListaWydarzenModel.typ_uzytkownika== 1)
+    {
+        Layout = "_LayoutNauczyciel";
+    } else if(Dziennik.Pages.ListaWydarzenModel.typ_uzytkownika == 2)
+    {
+        Layout = "_LayoutNauczyciel";
+    }
 }
 
 <h1>ListaWydarzen</h1>

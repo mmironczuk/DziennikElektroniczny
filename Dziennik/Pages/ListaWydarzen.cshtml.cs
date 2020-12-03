@@ -12,6 +12,8 @@ namespace Dziennik.Pages
     {
         public static List<Wydarzenie> wydarzenia;
 
+        public static int typ_uzytkownika;
+
         public void OnGet()
         {
             wydarzenia = new List<Wydarzenie>();
