@@ -13,9 +13,9 @@ namespace Dziennik.Mappings
             Id(x => x.Id_przedmiotu).GeneratedBy.Increment();
             Map(x => x.nazwa).Length(30).Nullable();
             Map(x => x.dziedzina).Length(30).Nullable();
-            HasMany(x => x.Wydarzenie);
-            HasMany(x => x.Nauczanie);
-            HasMany(x => x.Ocena);
+            HasMany(x => x.Wydarzenie).Not.LazyLoad();
+            HasMany(x => x.Nauczanie).Not.LazyLoad();
+            HasMany(x => x.Ocena).Not.LazyLoad();
             Table("Przedmiot");
         }
     }

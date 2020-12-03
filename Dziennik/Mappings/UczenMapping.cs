@@ -15,9 +15,9 @@ namespace Dziennik.Mappings
             Map(x => x.nazwisko).Length(30).Nullable();
             Map(x => x.adres).Length(50).Nullable();
             Map(x => x.pesel).Length(11).Nullable();
-            References(x => x.Klasa).Column("Id_klasy");
-            References(x => x.Konto).Column("Id_konta");
-            HasMany(x => x.Ocena);
+            References(x => x.Klasa).Column("Id_klasy").Not.LazyLoad();
+            References(x => x.Konto).Column("Id_konta").Not.LazyLoad();
+            HasMany(x => x.Ocena).Not.LazyLoad();
             Table("Uczen");
         }
     }

@@ -11,9 +11,9 @@ namespace Dziennik.Mappings
         public NauczanieMapping()
         {
             Id(x => x.Id_nauczania).GeneratedBy.Increment();
-            References(x => x.Nauczyciel).Column("Id_nauczyciela");
-            References(x => x.Przedmiot).Column("Id_przedmiotu");
-            HasMany(x => x.Lekcja);
+            References(x => x.Nauczyciel).Column("Id_nauczyciela").Not.LazyLoad();
+            References(x => x.Przedmiot).Column("Id_przedmiotu").Not.LazyLoad();
+            HasMany(x => x.Lekcja).Not.LazyLoad();
             Table("Nauczanie");
         }
     }

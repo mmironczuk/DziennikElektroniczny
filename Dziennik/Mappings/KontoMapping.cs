@@ -15,8 +15,8 @@ namespace Dziennik.Mappings
             Map(x => x.haslo).Length(32).Nullable();
             Map(x => x.email).Length(50).Nullable();
             Map(x => x.typ_uzytkownika).Nullable();
-            HasOne(x => x.Nauczyciel);
-            HasOne(x => x.Uczen);
+            HasOne(x => x.Nauczyciel).Not.LazyLoad();
+            HasOne(x => x.Uczen).Not.LazyLoad();
             Table("Konto");
         }
     }

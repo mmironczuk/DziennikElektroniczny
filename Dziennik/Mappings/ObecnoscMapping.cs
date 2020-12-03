@@ -12,8 +12,8 @@ namespace Dziennik.Mappings
         {
             Id(x => x.Id_obecnosci).GeneratedBy.Increment();
             Map(x => x.obecnosc).Nullable();
-            References(x => x.Lekcja).Column("Id_lekcji");
-            References(x => x.Uczen).Column("Id_ucznia");
+            References(x => x.Lekcja).Column("Id_lekcji").Not.LazyLoad();
+            References(x => x.Uczen).Column("Id_ucznia").Not.LazyLoad();
             Table("Obecnosc");
         }
     }
