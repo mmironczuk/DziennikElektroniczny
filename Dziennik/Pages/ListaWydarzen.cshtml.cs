@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Dziennik.DAL;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,15 +12,18 @@ namespace Dziennik.Pages
 {
     public class ListaWydarzenModel : PageModel
     {
-        public static List<Wydarzenie> wydarzenia;
+        public static ObservableCollection<Wydarzenie> wydarzenia;
 
         public static int typ_uzytkownika;
 
+        public MainDatabase db = new MainDatabase();
+
         public void OnGet()
         {
-            wydarzenia = new List<Wydarzenie>();
+            wydarzenia = db.GetWydarzeniaAll();
 
-            for (int i = 0; i < 6; i++)
+
+            /*for (int i = 0; i < 6; i++)
             {
                 Wydarzenie rect = new Wydarzenie();
                 rect.nazwa = "Sprawdzianik";
@@ -39,7 +44,7 @@ namespace Dziennik.Pages
                 rect.Przedmiot = prze;
 
                 wydarzenia.Add(rect);
-            }
+            }*/
         }
 
         public IActionResult OnPost()
