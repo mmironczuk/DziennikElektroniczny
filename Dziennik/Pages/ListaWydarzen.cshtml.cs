@@ -26,26 +26,29 @@ namespace Dziennik.Pages
             var login = claim.Value;
 
             typ_uzytkownika = db.GetKontoLogin(login).typ_uzytkownika;
-            wydarzenia = db.GetWydarzeniaAll();
+
+            wydarzenia = new ObservableCollection<Wydarzenie>();
+            ObservableCollection<Wydarzenie> wszystkie_wydarzenia = db.GetWydarzeniaAll();
+
             if (typ_uzytkownika == 2) {
                 Uczen uczen = db.GetUczenKonto(db.GetKontoLogin(login).Id_konta);
 
-                foreach (Wydarzenie w in wydarzenia)
+                foreach (Wydarzenie w in wszystkie_wydarzenia)
                 {
-                    if (w.Klasa.Id_klasy != uczen.Klasa.Id_klasy)
+                    if (w.Klasa.Id_klasy == uczen.Klasa.Id_klasy)
                     {
-                        wydarzenia.Remove(w);
+                        wydarzenia.Add(w);
                     }
                 }
             } else if (typ_uzytkownika == 1)
             {
                 Nauczyciel nauczyciel = db.GetNauczycielKonto(db.GetKontoLogin(login).Id_konta);
 
-                foreach (Wydarzenie w in wydarzenia)
+                foreach (Wydarzenie w in wszystkie_wydarzenia)
                 {
-                    if (w.Nauczyciel.Id_nauczyciela != nauczyciel.Id_nauczyciela)
+                    if (w.Nauczyciel.Id_nauczyciela == nauczyciel.Id_nauczyciela)
                     {
-                        wydarzenia.Remove(w);
+                        wydarzenia.Add(w);
                     }
                 }
             }
