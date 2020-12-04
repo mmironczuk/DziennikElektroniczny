@@ -8,37 +8,39 @@
 
 <br />
 <br />
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">
-                @Html.DisplayNameFor(model => Model.uczniowie[0].imie)
-            </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => Model.uczniowie[0].nazwisko)
-            </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => Model.uczniowie[0].Ocena)
-            </th>
-            <th scope="col">Akcja</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var p in Model.uczniowie.ToList())
-        {
+<div class="card">
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>@Html.DisplayFor(m => p.imie)</td>
-                <td>@Html.DisplayFor(m => p.nazwisko)</td>
-                <td>
-                    @foreach (var u in p.Ocena.ToList())
-                    {
-                        <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" class="btn btn btn-primary">@Html.DisplayFor(m => u.ocena)</a>
-                    }
-                </td>
-                <td>
-                    <a asp-page="AddMark" asp-route-UczenId="@p.Id_ucznia" asp-route-SubjectId="@Model.subjectId">Dodaj ocenę</a>
-                </td>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => Model.uczniowie[0].imie)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => Model.uczniowie[0].nazwisko)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => Model.uczniowie[0].Ocena)
+                </th>
+                <th scope="col">Akcja</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.uczniowie.ToList())
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => p.imie)</td>
+                    <td>@Html.DisplayFor(m => p.nazwisko)</td>
+                    <td>
+                        @foreach (var u in p.Ocena.ToList())
+                        {
+                            <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" class="btn btn btn-primary">@Html.DisplayFor(m => u.ocena)</a>
+                        }
+                    </td>
+                    <td>
+                        <a asp-page="AddMark" asp-route-UczenId="@p.Id_ucznia" asp-route-SubjectId="@Model.subjectId">Dodaj ocenę</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
