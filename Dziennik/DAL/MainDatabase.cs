@@ -169,7 +169,7 @@ namespace Dziennik.DAL
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    lekcje = session.QueryOver<Lekcja>().Where(d => (d.Nauczanie.Id_nauczania == id)).List();
+                    lekcje = session.QueryOver<Lekcja>().Where(d => (d.Nauczanie.Id_nauczania == id)&&(d.data == Convert.ToDateTime(null))).List();
                     transaction.Commit();
                 }
             }
@@ -357,6 +357,20 @@ namespace Dziennik.DAL
             return wydarzenie;
         }
 
+        public override Lekcja GetLekcja(int id)
+        {
+            Lekcja lekcja = new Lekcja();
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    lekcja = session.QueryOver<Lekcja>().Where(d => d.Id_lekcji == id).SingleOrDefault();
+                    transaction.Commit();
+                }
+            }
+            return lekcja;
+        }
+
         public override void CreateKonto(Konto konto)
         {
             Konto account = new Konto();
@@ -439,6 +453,30 @@ namespace Dziennik.DAL
                 using (var transaction = session.BeginTransaction())
                 {
                     session.Save(klasa);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void CreateObecnosc(Obecnosc obecnosc)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Save(obecnosc);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void CreateLekcja(Lekcja lekcja)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Save(lekcja);
                     transaction.Commit();
                 }
             }

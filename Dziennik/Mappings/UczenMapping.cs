@@ -18,6 +18,7 @@ namespace Dziennik.Mappings
             References(x => x.Klasa).Column("Id_klasy").Not.LazyLoad();
             References(x => x.Konto).Column("Id_konta").Not.LazyLoad();
             HasMany(x => x.Ocena).Not.LazyLoad();
+            HasMany(x => x.Obecnosc).Not.LazyLoad();
             Table("Uczen");
         }
     }
