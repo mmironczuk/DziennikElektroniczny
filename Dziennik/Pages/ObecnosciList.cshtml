@@ -1,0 +1,44 @@
+﻿@page
+@model Dziennik.Pages.ObecnosciListModel
+@{
+    Layout = "_LayoutUczen";
+    ViewData["Title"] = "ObecnosciList";
+}
+
+<br />
+<br />
+<div class="card">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">
+                    Przedmiot
+                </th>
+                <th scope="col">
+                    Nieobecności / spóźnienia
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.przedmioty.ToList())
+            {
+                <tr>
+                    <td>@p.nazwa</td>
+                    <td>
+                        @foreach (var o in Model.obecnosci.ToList())
+                        {
+                            if (o.Lekcja.Nauczanie.Przedmiot.Id_przedmiotu == p.Id_przedmiotu)
+                            {
+                                if (o.obecnosc == 1)
+                                {<span>&nbsp;<a asp-page="./DetailsObecnosc" asp-route-id="@o.Id_obecnosci" class="btn btn btn-primary">nb</a></span>}
+                                if (o.obecnosc == 2)
+                                {<span>&nbsp;<a asp-page="./DetailsObecnosc" asp-route-id="@o.Id_obecnosci" class="btn btn btn-primary">sp</a></span>}
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

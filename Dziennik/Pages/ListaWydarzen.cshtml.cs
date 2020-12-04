@@ -53,10 +53,5 @@ namespace Dziennik.Pages
                 }
             }
         }
-
-        public IActionResult OnPost()
-        {
-            return null;
-        }
     }
 }

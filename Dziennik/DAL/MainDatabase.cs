@@ -162,6 +162,48 @@ namespace Dziennik.DAL
             return uczniowie;
         }
 
+        public override ObservableCollection<Obecnosc> GetObecnosciLekcja(int id)
+        {
+            ObservableCollection<Obecnosc> obecnosci = new ObservableCollection<Obecnosc>();
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    obecnosci = new ObservableCollection<Obecnosc>(session.QueryOver<Obecnosc>().Where(d => d.Lekcja.Id_lekcji == id).List());
+                    transaction.Commit();
+                }
+            }
+            return obecnosci;
+        }
+
+        public override ObservableCollection<Obecnosc> GetObecnosciUczen(int id)
+        {
+            ObservableCollection<Obecnosc> obecnosci = new ObservableCollection<Obecnosc>();
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    obecnosci = new ObservableCollection<Obecnosc>(session.QueryOver<Obecnosc>().Where(d => d.Uczen.Id_ucznia == id).List());
+                    transaction.Commit();
+                }
+            }
+            return obecnosci;
+        }
+
+        public override ObservableCollection<Lekcja> GetLekcjeKlasa(int id)
+        {
+            ObservableCollection<Lekcja> lekcje = new ObservableCollection<Lekcja>();
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    lekcje = new ObservableCollection<Lekcja>(session.QueryOver<Lekcja>().Where(d => (d.Klasa.Id_klasy == id)&&(d.data!=Convert.ToDateTime(null))).List());
+                    transaction.Commit();
+                }
+            }
+            return lekcje;
+        }
+
         public override IList<Lekcja> GetLekcjeNauczanie(int id)
         {
             IList<Lekcja> lekcje;
@@ -369,6 +411,20 @@ namespace Dziennik.DAL
                 }
             }
             return lekcja;
+        }
+
+        public override Obecnosc GetObecnosc(int id)
+        {
+            Obecnosc obecnosc = new Obecnosc();
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    obecnosc = session.QueryOver<Obecnosc>().Where(d => d.Id_obecnosci == id).SingleOrDefault();
+                    transaction.Commit();
+                }
+            }
+            return obecnosc;
         }
 
         public override void CreateKonto(Konto konto)

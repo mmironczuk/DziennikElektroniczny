@@ -15,6 +15,8 @@ namespace Dziennik.Models
         public Lekcja()
         {
             Obecnosc = new List<Obecnosc>();
+            Klasa = new Klasa();
+            Nauczanie = new Nauczanie();
         }
     }
 }

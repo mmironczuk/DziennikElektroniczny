@@ -1,0 +1,39 @@
+﻿@page
+@model Dziennik.Pages.DetailsObecnoscModel
+@{
+    Layout = "_LayoutUczen";
+    ViewData["Title"] = "DetailsObecnosc";
+}
+<br />
+<br />
+<div class="container card d-flex justify-content-center bg-light">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8">
+            <h1 class="py-5">Dane oceny:</h1>
+            <table class="py-3">
+                <tr>
+                    <td><b>Rodzaj nieobecności:</b></td>
+                    @if (Model.obecnosc.obecnosc == 1)
+                    {
+                        <td>nieobecność</td>
+                    }
+                    @if (Model.obecnosc.obecnosc == 2)
+                    {
+                        <td>spóźnienie</td>
+                    }
+                </tr>
+                <tr>
+                    <td><b>Data:</b></td>
+                    <td>@Model.obecnosc.Lekcja.data</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <a asp-page="./ObecnosciList" class="btn btn btn-primary">Powrót</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
