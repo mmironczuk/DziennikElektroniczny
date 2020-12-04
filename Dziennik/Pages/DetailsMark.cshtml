@@ -1,0 +1,37 @@
+﻿@page
+@model Dziennik.Pages.DetailsMarkModel
+@{
+    ViewData["Title"] = "DetailsMark";
+}
+<br />
+<br />
+<div class="container card d-flex justify-content-center bg-light">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8">
+            <h1 class="py-5">Dane oceny:</h1>
+            <table class="py-3">
+                <tr>
+                    <td><b>Ocena:</b></td>
+                    <td>@Model.ocena.ocena</td>
+                </tr>
+                <tr>
+                    <td><b>Opis:</b></td>
+                    <td>@Model.ocena.opis_oceny</td>
+                </tr>
+                <tr>
+                    <td><b>Wystawiający:</b></td>
+                    <td>@Model.ocena.Nauczyciel.imie @Model.ocena.Nauczyciel.nazwisko</td>
+                </tr>
+                <tr>
+                    <td><b>Przedmiot:</b></td>
+                    <td>@Model.ocena.Przedmiot.nazwa</td>
+                </tr>
+                <tr>
+                    <a asp-page="./OcenyUczen" class="btn btn btn-primary">Powrót</a>
+                </tr>
+            </table>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>

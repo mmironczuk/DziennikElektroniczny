@@ -58,7 +58,7 @@
                     @{
                         if (srednia == 0 || ilosc == 0)
                         { <p>-</p> }
-                            else {<p>@(srednia/ilosc)</p>  }
+                            else {<p>@Math.Round((srednia/ilosc),2)</p>  }
                         }
                 </td>
             </tr>

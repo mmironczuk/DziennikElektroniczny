@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Dziennik.DAL;
@@ -21,7 +22,7 @@ namespace Dziennik.Pages
             konto = new Konto();
             konto.typ_uzytkownika = 1;
         }
-        public IActionResult OnPost(Konto konto)
+        public IActionResult OnPost(Konto konto, Nauczyciel nauczyciel)
         {
             mainDatabase.CreateKonto(konto);
             nauczyciel.Konto.Id_konta = konto.Id_konta;

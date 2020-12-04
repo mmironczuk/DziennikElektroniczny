@@ -421,6 +421,29 @@ namespace Dziennik.DAL
             }
         }
 
+        public override void CreatePrzedmiot(Przedmiot przedmiot)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Save(przedmiot);
+                    transaction.Commit();
+                }
+            }
+        }
+        public override void CreateKlasa(Klasa klasa)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Save(klasa);
+                    transaction.Commit();
+                }
+            }
+        }
+
         public override void UpdateOcena(Ocena ocena)
         {
             Ocena mark = new Ocena();
