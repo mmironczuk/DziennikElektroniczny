@@ -28,12 +28,7 @@
                 {
                     <tr>
                         <td>@Html.DisplayFor(m => n.Przedmiot.nazwa)</td>
-                        <td>
-
-
-                            @Html.DisplayFor(m => l.Klasa.nazwa)
-
-                        </td>
+                        <td>@Html.DisplayFor(m => l.Klasa.nazwa)</td>
                         <td>
                             @if (Model.type == 2)
                             {<a asp-page="./UsersList" asp-route-ClassId="@l.Klasa.Id_klasy" asp-route-SubjectId="@n.Przedmiot.Id_przedmiotu" class="btn btn btn-primary">Wybór</a>}
@@ -48,3 +43,6 @@
         </tbody>
     </table>
 </div>
+<style >
+    
+</style>
