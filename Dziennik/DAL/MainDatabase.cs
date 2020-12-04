@@ -162,6 +162,20 @@ namespace Dziennik.DAL
             return uczniowie;
         }
 
+        public override ObservableCollection<Obecnosc> GetObecnosciLekcja(int id)
+        {
+            ObservableCollection<Obecnosc> obecnosci = new ObservableCollection<Obecnosc>();
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    obecnosci = new ObservableCollection<Obecnosc>(session.QueryOver<Obecnosc>().Where(d => d.Lekcja.Id_lekcji == id).List());
+                    transaction.Commit();
+                }
+            }
+            return obecnosci;
+        }
+
         public override IList<Lekcja> GetLekcjeNauczanie(int id)
         {
             IList<Lekcja> lekcje;

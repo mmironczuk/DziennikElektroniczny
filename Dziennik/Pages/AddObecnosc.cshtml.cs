@@ -17,6 +17,8 @@ namespace Dziennik.Pages
         public ObservableCollection<Uczen> uczniowie { get; set; }
         [BindProperty]
         public int lekcja_id { get; set; }
+        [BindProperty]
+        public ObservableCollection<Obecnosc> obecnosci { get; set; }
         public void OnGet(int LekcjaId)
         {
             uczniowie = new ObservableCollection<Uczen>();
@@ -38,6 +40,7 @@ namespace Dziennik.Pages
                 lesson = lekcja;
             }
             lekcja_id = lesson.Id_lekcji;
+            obecnosci = mainDatabase.GetObecnosciLekcja(lekcja_id);
             /*Obecnosc obecnosc = new Obecnosc();
             foreach(Uczen u in uczniowie)
             {
