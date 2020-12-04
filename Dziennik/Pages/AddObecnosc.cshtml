@@ -6,41 +6,42 @@
 }
 <br />
 <br />
-<form class="form-horizontal" method="post">
-    <div class="form-group">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">
-                        Imię
-                    </th>
-                    <th scope="col">
-                        Nazwisko
-                    </th>
-                    <th scope="col">
-                        Obecność
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var p in Model.uczniowie.ToList())
-                {
+<div class="card">
+    <form class="form-horizontal" method="post">
+        <div class="form-group">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>@Html.DisplayFor(m => p.imie)</td>
-                        <td>@Html.DisplayFor(m => p.nazwisko)</td>
-                        <td>
-                            <a asp-page="ObecnoscHelper" asp-route-UczenId="@p.Id_ucznia" asp-route-LekcjaId="@Model.lekcja_id" asp-route-ob="1" >Nieobecny  |  </a>
-                            <a asp-page="ObecnoscHelper" asp-route-UczenId="@p.Id_ucznia" asp-route-LekcjaId="@Model.lekcja_id" asp-route-ob="2" >Spóźniony</a>
-                        </td>
+                        <th scope="col">
+                            Imię
+                        </th>
+                        <th scope="col">
+                            Nazwisko
+                        </th>
+                        <th scope="col">
+                            Obecność
+                        </th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn btn-primary">Zatwierdź</button>
+                </thead>
+                <tbody>
+                    @foreach (var p in Model.uczniowie.ToList())
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(m => p.imie)</td>
+                            <td>@Html.DisplayFor(m => p.nazwisko)</td>
+                            <td>
+                                <a asp-page="ObecnoscHelper" asp-route-UczenId="@p.Id_ucznia" asp-route-LekcjaId="@Model.lekcja_id" asp-route-ob="1">Nieobecny  |  </a>
+                                <a asp-page="ObecnoscHelper" asp-route-UczenId="@p.Id_ucznia" asp-route-LekcjaId="@Model.lekcja_id" asp-route-ob="2">Spóźniony</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
-    </div>
-</form>
-
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn btn-primary">Zatwierdź</button>
+            </div>
+        </div>
+    </form>
+</div>
