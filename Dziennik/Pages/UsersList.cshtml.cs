@@ -14,7 +14,8 @@ namespace Dziennik.Pages
     {
         public ObservableCollection<Uczen> uczniowie = new ObservableCollection<Uczen>();
         private MainDatabase mainDatabase = new MainDatabase();
-        public IList<Ocena> marks;
+        public List<Ocena> marks;
+        public IList<Ocena> marks2;
         [BindProperty]
         public int subjectId { get; set; }
         public void OnGet(int ClassId, int SubjectId)
@@ -23,7 +24,12 @@ namespace Dziennik.Pages
             uczniowie = mainDatabase.GetUczniowieKlasa(ClassId);
             foreach (Uczen u in uczniowie)
             {
-                marks = mainDatabase.GetOcenyUczen(u.Id_ucznia);
+                marks = new List<Ocena>();
+                marks2 = mainDatabase.GetOcenyUczen(u.Id_ucznia);
+                foreach(Ocena o in marks2)
+                {
+                    if (o.Przedmiot.Id_przedmiotu == subjectId) marks.Add(o);
+                }
                 u.Ocena = marks;
             }
         }

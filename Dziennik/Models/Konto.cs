@@ -15,10 +15,5 @@ namespace Dziennik.Models
         public virtual int typ_uzytkownika { get; set; }
         public virtual Nauczyciel Nauczyciel { get; set; }
         public virtual Uczen Uczen { get; set; }
-        /*public Konto()
-        {
-            Nauczyciel = new Nauczyciel();
-            Uczen = new Uczen();
-        }*/
     }
 }
