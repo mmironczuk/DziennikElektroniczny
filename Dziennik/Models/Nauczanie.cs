@@ -13,8 +13,8 @@ namespace Dziennik.Models
         public virtual Nauczyciel Nauczyciel { get; set; }
         public Nauczanie()
         {
-            //Przedmiot = new Przedmiot();
-            //Nauczyciel = new Nauczyciel();
+            Przedmiot = new Przedmiot();
+            Nauczyciel = new Nauczyciel();
             Lekcja = new List<Lekcja>();
         }
     }
