@@ -2,37 +2,47 @@
 @model Dziennik.Pages.Login.MyAccountModel
 @{
     ViewData["Title"] = "MyAccount";
+
+    if(Model.konto.typ_uzytkownika == 1)
+    {
+        Layout = "_LayoutNauczyciel";
+    }
+    else if(Model.konto.typ_uzytkownika == 2)
+    {
+        Layout = "_LayoutUczen";
+    }
 }
 <br />
 <br />
-<div class="container card d-flex justify-content-center bg-light">
-    <div class="row">
-        <div class="col"></div>
-        <div class="col-8">
-            <h1 class="py-5">Moje dane</h1>
-            <table class="py-3">
-                <tr>
-                    <td><b>Login:</b></td>
-                    <td>@Model.konto.login</td>
-                </tr>
-                <tr>
-                    <td><b>E-mail:</b></td>
-                    <td>@Model.konto.email</td>
-                </tr>
-                <tr>
-                    <td><b>Imię i nazwisko:</b></td>
-                    <td>@Model.imie @Model.nazwisko</td>
-                </tr>
-                <tr>
-                    <td><b>Adres:</b></td>
-                    <td>@Model.adres</td>
-                </tr>
-                <tr>
-                    <td><b>PESEL:</b></td>
-                    <td>@Model.pesel</td>
-                </tr>
-            </table>
-        </div>
-        <div class="col"></div>
+<div class="card" style="border-radius: 0; display: inline;">
+    <div>
+        <h1 class="py-5" style="text-align: center;">Moje dane</h1>
+        <table class="py-3" style="margin-bottom: 100px !important; width: 100% !important" >
+            <tr style="background-color: #333 !important;">
+                <td><b>Login:</b></td>
+                <td>@Model.konto.login</td>
+            </tr>
+            <tr>
+                <td><b>E-mail:</b></td>
+                <td>@Model.konto.email</td>
+            </tr>
+            <tr style="background-color: #333 !important;">
+                <td><b>Imię i nazwisko:</b></td>
+                <td>@Model.imie @Model.nazwisko</td>
+            </tr>
+            <tr>
+                <td><b>Adres:</b></td>
+                <td>@Model.adres</td>
+            </tr>
+            <tr style="background-color: #333 !important;">
+                <td><b>PESEL:</b></td>
+                <td>@Model.pesel</td>
+            </tr>
+        </table>
     </div>
 </div>
+<style>
+    .container{
+        max-width: 540px !important;
+    }
+</style>
