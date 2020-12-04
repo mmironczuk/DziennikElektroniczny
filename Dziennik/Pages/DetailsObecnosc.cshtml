@@ -6,34 +6,36 @@
 }
 <br />
 <br />
-<div class="container card d-flex justify-content-center bg-light">
-    <div class="row">
-        <div class="col"></div>
-        <div class="col-8">
-            <h1 class="py-5">Dane oceny:</h1>
-            <table class="py-3">
-                <tr>
-                    <td><b>Rodzaj nieobecności:</b></td>
-                    @if (Model.obecnosc.obecnosc == 1)
-                    {
-                        <td>nieobecność</td>
-                    }
-                    @if (Model.obecnosc.obecnosc == 2)
-                    {
-                        <td>spóźnienie</td>
-                    }
-                </tr>
-                <tr>
-                    <td><b>Data:</b></td>
-                    <td>@Model.obecnosc.Lekcja.data</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <a asp-page="./ObecnosciList" class="btn btn btn-primary">Powrót</a>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="col"></div>
+<div class="card" style="border-radius: 0;">
+    <h1 class="py-5" style="text-align: center;">Dane obecności:</h1>
+    <table class="py-3" style="margin-bottom: 50px !important; width: 100% !important">
+        <tr>
+            <td><b>Rodzaj nieobecności:</b></td>
+            @if (Model.obecnosc.obecnosc == 1)
+            {
+                <td>nieobecność</td>
+            }
+            @if (Model.obecnosc.obecnosc == 2)
+            {
+                <td>spóźnienie</td>
+            }
+        </tr>
+        <tr>
+            <td><b>Data:</b></td>
+            <td>@Model.obecnosc.Lekcja.data</td>
+        </tr>
+    </table>
+    <div style="margin-top: -40px; margin-bottom: 10px; text-align: center;">
+        <a asp-page="./ObecnosciList" class="btn btn btn-primary">Powrót</a>
     </div>
 </div>
+
+<style>
+    tr:nth-child(odd) {
+        background: #333 !important;
+    }
+
+    .container {
+        max-width: 400px !important;
+    }
+</style>

@@ -36,7 +36,7 @@ namespace Dziennik.Pages
             wydarzenie.Klasa = mainDatabase.GetKlasa(class_id);
             wydarzenie.Przedmiot = mainDatabase.GetPrzedmiot(subject_id);
             mainDatabase.CreateWydarzenie(wydarzenie);
-            return RedirectToPage("./Wydarzenie");
+            return RedirectToPage("./ListaWydarzen");
         }
     }
 }

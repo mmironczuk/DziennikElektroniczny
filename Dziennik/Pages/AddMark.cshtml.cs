@@ -33,13 +33,11 @@ namespace Dziennik.Pages
             konto = maindatabase.GetKontoLogin(login);
             Nauczyciel nauczyciel = maindatabase.GetNauczycielKonto(konto.Id_konta);
             Uczen uczen = maindatabase.GetUczen(uczen_id);
-            Ocena ocena = new Ocena();
-            ocena = mark;
-            mark.Uczen = uczen;
+            mark.Uczen.Id_ucznia = uczen_id;
             mark.Nauczyciel = nauczyciel;
-            mark.Przedmiot = maindatabase.GetPrzedmiot(subject_id);
-            maindatabase.CreateOcena(ocena);
-            return RedirectToPage("/WyborKlasy");
+            mark.Przedmiot.Id_przedmiotu = subject_id;
+            maindatabase.CreateOcena(mark);
+            return RedirectToPage("/UsersList", new { ClassId = uczen.Klasa.Id_klasy, SubjectId = subject_id });
         }
     }
 }

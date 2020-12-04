@@ -6,35 +6,37 @@
 }
 <br />
 <br />
-<div class="container card d-flex justify-content-center bg-light">
-    <div class="row">
-        <div class="col"></div>
-        <div class="col-8">
-            <h1 class="py-5">Dane oceny:</h1>
-            <table class="py-3">
-                <tr>
-                    <td><b>Ocena:</b></td>
-                    <td>@Model.ocena.ocena</td>
-                </tr>
-                <tr>
-                    <td><b>Opis:</b></td>
-                    <td>@Model.ocena.opis_oceny</td>
-                </tr>
-                <tr>
-                    <td><b>Wystawiający:</b></td>
-                    <td>@Model.ocena.Nauczyciel.imie @Model.ocena.Nauczyciel.nazwisko</td>
-                </tr>
-                <tr>
-                    <td><b>Przedmiot:</b></td>
-                    <td>@Model.ocena.Przedmiot.nazwa</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <a asp-page="./OcenyUczen" class="btn btn btn-primary">Powrót</a>
-                    </td>
-                </tr>
-            </table>
+<div class="card" style="border-radius: 0;">
+    <h1 class="py-5" style="text-align: center;">Dane oceny:</h1>
+    <table class="py-3" style="margin-bottom: 50px !important; width: 100% !important">
+        <tr>
+            <td><b>Ocena:</b></td>
+            <td>@Model.ocena.ocena</td>
+        </tr>
+        <tr>
+            <td><b>Opis:</b></td>
+            <td>@Model.ocena.opis_oceny</td>
+        </tr>
+        <tr>
+            <td><b>Wystawiający:</b></td>
+            <td>@Model.ocena.Nauczyciel.imie @Model.ocena.Nauczyciel.nazwisko</td>
+        </tr>
+        <tr>
+            <td><b>Przedmiot:</b></td>
+            <td>@Model.ocena.Przedmiot.nazwa</td>
+        </tr>
+    </table>
+        <div style="margin-top: -40px; margin-bottom: 10px; text-align: center;">
+            <a asp-page="./OcenyUczen" class="btn btn btn-primary">Powrót</a>
         </div>
-        <div class="col"></div>
-    </div>
 </div>
+
+<style>
+    tr:nth-child(odd){
+        background: #333 !important;
+    }
+
+    .container {
+        max-width: 400px !important;
+    }
+</style>
