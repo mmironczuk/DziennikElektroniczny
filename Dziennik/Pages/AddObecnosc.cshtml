@@ -26,14 +26,37 @@
                 <tbody>
                     @foreach (var p in Model.uczniowie.ToList())
                     {
-                        <tr>
-                            <td>@Html.DisplayFor(m => p.imie)</td>
-                            <td>@Html.DisplayFor(m => p.nazwisko)</td>
-                            <td>
-                                <a asp-page="ObecnoscHelper" asp-route-UczenId="@p.Id_ucznia" asp-route-LekcjaId="@Model.lekcja_id" asp-route-ob="1">Nieobecny  |  </a>
-                                <a asp-page="ObecnoscHelper" asp-route-UczenId="@p.Id_ucznia" asp-route-LekcjaId="@Model.lekcja_id" asp-route-ob="2">Spóźniony</a>
-                            </td>
-                        </tr>
+                        int type = 3;
+                    <tr>
+                        <td>@Html.DisplayFor(m => p.imie)</td>
+                        <td>@Html.DisplayFor(m => p.nazwisko)</td>
+                        @foreach (var o in Model.obecnosci.ToList())
+                        {
+                            @if ((o.Uczen.Id_ucznia == p.Id_ucznia) && o.obecnosc == 1)
+                            {
+                                type = 1;
+                            }
+                            else if ((o.Uczen.Id_ucznia == p.Id_ucznia) && o.obecnosc == 2)
+                            {
+                                type = 2;
+                            }
+                        }
+                        @if (type == 1)
+                        {
+                            <td>nieobecny</td>
+                        }
+                        else if (type == 2)
+                        {
+                            <td>spóźniony</td>
+                        }
+                        else
+                        {
+                        <td>
+                            <a asp-page="ObecnoscHelper" asp-route-UczenId="@p.Id_ucznia" asp-route-LekcjaId="@Model.lekcja_id" asp-route-ob="1">Nieobecny  |  </a>
+                            <a asp-page="ObecnoscHelper" asp-route-UczenId="@p.Id_ucznia" asp-route-LekcjaId="@Model.lekcja_id" asp-route-ob="2">Spóźniony</a>
+                        </td>
+                        }
+                    </tr>
                     }
                 </tbody>
             </table>

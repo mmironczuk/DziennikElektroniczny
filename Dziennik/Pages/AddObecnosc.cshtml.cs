@@ -17,18 +17,21 @@ namespace Dziennik.Pages
         public ObservableCollection<Uczen> uczniowie { get; set; }
         [BindProperty]
         public int lekcja_id { get; set; }
+        [BindProperty]
+        public ObservableCollection<Obecnosc> obecnosci { get; set; }
         public void OnGet(int LekcjaId)
         {
             uczniowie = new ObservableCollection<Uczen>();
             lekcja_id = LekcjaId;
             DateTime date = DateTime.Now;
             Lekcja lekcja = mainDatabase.GetLekcja(LekcjaId);
-            uczniowie = mainDatabase.GetUczniowieKlasa(lekcja.Id_lekcji);
-            Lekcja lesson = new Lekcja();
+            uczniowie = mainDatabase.GetUczniowieKlasa(lekcja.Klasa.Id_klasy);
+            Lekcja lesson;
             if (lekcja.data == Convert.ToDateTime(null))
             {
-                lesson.Nauczanie = lekcja.Nauczanie;
-                lesson.Klasa = lekcja.Klasa;
+                lesson = new Lekcja();
+                lesson.Nauczanie.Id_nauczania = lekcja.Nauczanie.Id_nauczania;
+                lesson.Klasa.Id_klasy = lekcja.Klasa.Id_klasy;
                 lesson.data = date;
                 mainDatabase.CreateLekcja(lesson);
             }
@@ -37,6 +40,7 @@ namespace Dziennik.Pages
                 lesson = lekcja;
             }
             lekcja_id = lesson.Id_lekcji;
+            obecnosci = mainDatabase.GetObecnosciLekcja(lekcja_id);
             /*Obecnosc obecnosc = new Obecnosc();
             foreach(Uczen u in uczniowie)
             {
