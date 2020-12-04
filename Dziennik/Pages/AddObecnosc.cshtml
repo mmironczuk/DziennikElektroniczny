@@ -2,7 +2,39 @@
 @model Dziennik.Pages.AddObecnoscModel
 @{
     ViewData["Title"] = "AddObecnosc";
+    Layout = "_LayoutNauczyciel";
 }
-
-<h2>AddObecnosc</h2>
+<br />
+<br />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">
+                Imię
+            </th>
+            <th scope="col">
+                Nazwisko
+            </th>
+            <th scope="col">
+                Obecność
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model.uczniowie.ToList())
+        {
+            <tr>
+                <td>@Html.DisplayFor(m => p.imie)</td>
+                <td>@Html.DisplayFor(m => p.nazwisko)</td>
+                <td>
+                    <select>
+                        <option>obecny</option>
+                        <option>nieobecny</option>
+                        <option>spóźniony</option>
+                    </select>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 

@@ -15,10 +15,16 @@ namespace Dziennik.Pages
         public MainDatabase mainDatabase = new MainDatabase();
         public ObservableCollection<Uczen> uczniowie = new ObservableCollection<Uczen>();
         [BindProperty]
-        public int naucz_id { get; set; }
-        public void OnGet(int NauczId, int ClassId)
+        public int lekcja_id { get; set; }
+        public void OnGet(int LekcjaId, int ClassId)
         {
             uczniowie = mainDatabase.GetUczniowieKlasa(ClassId);
+            lekcja_id = LekcjaId;
+        }
+
+        public IActionResult OnPost()
+        {
+            return RedirectToPage("./MainNauczyciel");
         }
     }
 }
