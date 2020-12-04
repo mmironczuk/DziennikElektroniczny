@@ -23,12 +23,13 @@ namespace Dziennik.Pages
             lekcja_id = LekcjaId;
             DateTime date = DateTime.Now;
             Lekcja lekcja = mainDatabase.GetLekcja(LekcjaId);
-            uczniowie = mainDatabase.GetUczniowieKlasa(lekcja.Id_lekcji);
-            Lekcja lesson = new Lekcja();
+            uczniowie = mainDatabase.GetUczniowieKlasa(lekcja.Klasa.Id_klasy);
+            Lekcja lesson;
             if (lekcja.data == Convert.ToDateTime(null))
             {
-                lesson.Nauczanie = lekcja.Nauczanie;
-                lesson.Klasa = lekcja.Klasa;
+                lesson = new Lekcja();
+                lesson.Nauczanie.Id_nauczania = lekcja.Nauczanie.Id_nauczania;
+                lesson.Klasa.Id_klasy = lekcja.Klasa.Id_klasy;
                 lesson.data = date;
                 mainDatabase.CreateLekcja(lesson);
             }
