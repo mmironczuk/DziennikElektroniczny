@@ -39,7 +39,7 @@ namespace Dziennik.Pages
             mark.Nauczyciel = nauczyciel;
             mark.Przedmiot = maindatabase.GetPrzedmiot(subject_id);
             maindatabase.CreateOcena(ocena);
-            return RedirectToPage("/WyborKlasy");
+            return RedirectToPage("/MainNauczyciel");
         }
     }
 }
