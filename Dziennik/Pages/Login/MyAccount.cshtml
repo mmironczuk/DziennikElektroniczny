@@ -3,10 +3,36 @@
 @{
     ViewData["Title"] = "MyAccount";
 }
-<h2>MyAccount</h2>
-<h3>@Model.konto.login</h3>
-<h3>@Model.konto.email</h3>
-<h3>@Model.imie</h3>
-<h3>@Model.nazwisko</h3>
-<h3>@Model.adres</h3>
-<h3>@Model.pesel</h3>
+<br />
+<br />
+<div class="container card d-flex justify-content-center bg-light">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8">
+            <h1 class="py-5">Moje dane</h1>
+            <table class="py-3">
+                <tr>
+                    <td><b>Login:</b></td>
+                    <td>@Model.konto.login</td>
+                </tr>
+                <tr>
+                    <td><b>E-mail:</b></td>
+                    <td>@Model.konto.email</td>
+                </tr>
+                <tr>
+                    <td><b>Imię i nazwisko:</b></td>
+                    <td>@Model.imie @Model.nazwisko</td>
+                </tr>
+                <tr>
+                    <td><b>Adres:</b></td>
+                    <td>@Model.adres</td>
+                </tr>
+                <tr>
+                    <td><b>PESEL:</b></td>
+                    <td>@Model.pesel</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
