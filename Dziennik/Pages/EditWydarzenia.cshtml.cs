@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dziennik.DAL;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,23 +11,22 @@ namespace Dziennik.Pages
 {
     public class EditWydarzeniaModel : PageModel
     {
-        public Wydarzenie wydarzenie;
-        public static Wydarzenie wydarzenieToShow;
-        public static List<Przedmiot> przedmioty;
-        public static List<Klasa> klasy;
+        [BindProperty]
+        public Wydarzenie wydarzenie { get; set; }
+        public MainDatabase mainDatabase = new MainDatabase();
 
-        public void OnGet(int idWydarzenia)
+        public void OnGet(int id)
         {
-            klasy = new List<Klasa>();
-            przedmioty = new List<Przedmiot>();
             wydarzenie = new Wydarzenie();
-            wydarzenieToShow = new Wydarzenie();
+            wydarzenie.Id_wydarzenia = id;
+            wydarzenie = mainDatabase.GetWydarzenie(id);
+        }
 
-            wydarzenieToShow = wydarzenie;
-
-            wydarzenieToShow.nazwa = "abc";
-            wydarzenieToShow.opis = "opis";
-            wydarzenieToShow.data = DateTime.Now;
+        public IActionResult OnPost(int id)
+        {
+            if (id == 1) mainDatabase.UpdateWydarzenie(wydarzenie);
+            else if (id == 2) mainDatabase.DeleteWydarzenie(wydarzenie.Id_wydarzenia);
+            return RedirectToPage("/ListaWydarzen");
         }
     }
 }

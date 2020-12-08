@@ -1,0 +1,36 @@
+﻿@page
+@model Dziennik.Pages.AddKlasaModel
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "AddKlasa";
+}
+<br /><br />
+<div class="container card d-flex justify-content-center bg-light">
+    <center><h2 class="py-5">Dodawanie klasy</h2></center>
+    <form class="form-horizontal" method="post">
+        <div class="form-group">
+            <label class="control-label col-sm2">Nazwa:</label>
+            <div class="col-sm-6">
+                <input asp-for="klasa.nazwa" class="form-control">
+                <span asp-validation-for="klasa.nazwa" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm2">Wychowawca:</label>
+            <div class="col-sm-6">
+                <select asp-for="klasa.Nauczyciel.Id_nauczyciela">
+                    @foreach(var n in Model.nauczyciele.ToList())
+                    {
+                        <option value="@n.Id_nauczyciela">@n.imie @n.nazwisko</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn btn-primary">Zatwierdź</button>
+            </div>
+        </div>
+    </form>
+</div>
+

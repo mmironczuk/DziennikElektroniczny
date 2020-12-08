@@ -6,12 +6,17 @@
     <title>@ViewData["Title"] - Dziennik</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-	<link rel="shortcut icon" type="image/ico" href="~/images/icon.ico" />
+    <link rel="shortcut icon" type="image/ico" href="~/images/icon.ico" />
     <link rel="stylesheet" href="~/css/topbar.css" />
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <link rel="stylesheet" href="~/css/Ladne.css" />
+    <style>
+        body {
+            background-image: url("~/images/bcg.jpg")
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -23,7 +28,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="/">
                             <i class="fa fa-home"></i>
                             Home
@@ -39,7 +44,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/OcenyUczen">
                             <i class="fa fa-check-square">
                                 <span class="badge badge-danger">11</span>
                             </i>
@@ -47,7 +52,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/WyborKlasy">
                             <i class="fa fa-plus-circle">
 
                             </i>
@@ -76,35 +81,25 @@
                         </a>
                     </li>
                 </ul>
-                <ul class="navbar-nav ">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fa fa-bell">
-                                <span class="badge badge-info">11</span>
-                            </i>
-                            Test
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fa fa-globe">
-                                <span class="badge badge-success">11</span>
-                            </i>
-                            Test
-                        </a>
-                    </li>
-                    
+                <ul class="navbar-nav">
+                    @using System.Security.Claims;
+                    @{  
+                        var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+                        var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
+                        var login = claim.Value;
+                    }
+                    <h5 class="p-4 text-light">Zalogowano jako <b>@login</b></h5>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
+                           aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-user"></i> Profile
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                            <a class="dropdown-item" href="#">Moje konto</a>
-                            <a class="dropdown-item" href="#">Wyloguj się</a>
+                            <a class="dropdown-item" href="/Login/MyAccount">Moje konto</a>
+                            <a class="dropdown-item" href="/Login/LogOut">Wyloguj się</a>
                         </div>
                     </li>
-                    
+
                 </ul>
             </div>
         </nav>
@@ -114,12 +109,6 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - Dziennik - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

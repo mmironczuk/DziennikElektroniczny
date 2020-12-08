@@ -30,8 +30,15 @@ namespace TestApp2
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-
+            services.AddAuthentication("CookieAuthentication")
+            .AddCookie("CookieAuthentication", config =>
+            {
+                config.Cookie.HttpOnly = true;
+                config.Cookie.SecurePolicy = CookieSecurePolicy.None;
+                config.Cookie.Name = "UserLoginCookie";
+                config.LoginPath = "/Login/UserLogin";
+                config.Cookie.SameSite = SameSiteMode.Strict;
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -48,6 +55,7 @@ namespace TestApp2
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

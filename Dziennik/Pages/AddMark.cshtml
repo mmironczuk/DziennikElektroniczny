@@ -2,13 +2,14 @@
 @model Dziennik.Pages.AddMarkModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
-    //Layout = "_Layout";
+    Layout = "_LayoutNauczyciel";
     ViewBag.Title = "Dodawanie oceny";
 }
 <br /><br />
-<div class="container">
+<div class="container card">
     <form class="form-horizontal" method="post">
-        <input asp-for="mark.Uczen.Id_ucznia" type="hidden" class="form-control">
+        <input asp-for="uczen_id" type="hidden" class="form-control">
+        <input asp-for="subject_id" type="hidden" class="form-control">
         <div class="form-group">
             <label asp-for="mark.ocena" class="control-label col-sm2"></label>
             <div class="col-sm-6">

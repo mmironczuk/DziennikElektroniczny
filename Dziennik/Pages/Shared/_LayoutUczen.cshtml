@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Dziennik</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="shortcut icon" type="image/ico" href="~/images/icon.ico" />
+    <link rel="stylesheet" href="~/css/topbar.css" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/css/Ladne.css" />
+    <style>
+        body {
+            background-image: url("/images/bcg.jpg") !important;
+        }
+
+        footer {
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" asp-area="" asp-page="/Index">Dziennik</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/MainUczen">
+                            <i class="fa fa-home"></i>
+                            Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ObecnosciList">
+                            <i class="fa fa-list-ul"></i>
+                            Obecności
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/OcenyUczen">
+                            <i class="fa fa-check-square"></i>
+                            Oceny
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ListaWydarzen">
+                            <i class="fa fa-calendar"></i>
+                            Kalendarz
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ">
+                    @using System.Security.Claims;
+                    @{
+                        var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+                        var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
+                        var login = claim.Value;
+                    }
+                    <h5 class="p-4 text-light">Zalogowano jako <b>@login</b></h5>
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle active" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user"></i> Profile
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                            <a class="dropdown-item" href="/Login/MyAccount">Moje konto</a>
+                            <a class="dropdown-item" href="/Login/LogOut">Wyloguj się</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

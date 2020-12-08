@@ -10,13 +10,13 @@ namespace Dziennik.Mappings
     {
         public KontoMapping()
         {
-            Id(x => x.Id_konta);
+            Id(x => x.Id_konta).GeneratedBy.Increment();
             Map(x => x.login).Length(20).Nullable();
             Map(x => x.haslo).Length(32).Nullable();
             Map(x => x.email).Length(50).Nullable();
             Map(x => x.typ_uzytkownika).Nullable();
-            HasOne(x => x.Nauczyciel);
-            HasOne(x => x.Uczen);
+            HasOne(x => x.Nauczyciel).Not.LazyLoad();
+            HasOne(x => x.Uczen).Not.LazyLoad();
             Table("Konto");
         }
     }

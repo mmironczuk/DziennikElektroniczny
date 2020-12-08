@@ -1,0 +1,70 @@
+﻿@page
+@model Dziennik.Pages.OcenyUczenModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_LayoutUczen";
+    ViewData["Title"] = "Home page";
+}
+
+<br />
+<br />
+<div class="card">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">
+                    Przedmioty
+                </th>
+                <th scope="col">
+                    Oceny
+                </th>
+                <th scope="col">
+                    Średnia
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.przedmioty.ToList())
+            {
+                double srednia = 0;
+                int ilosc = 0;
+                <tr>
+                    <td>@Html.DisplayFor(m => p.nazwa)</td>
+                    <td>
+
+                        @foreach (var u in p.Ocena.ToList())
+                        {
+                            ilosc++;
+                            if ((u.ocena).Contains('+'))
+                            {
+                                if (u.ocena == "1+") { srednia += 1.5; }
+                                if (u.ocena == "2+") { srednia += 2.5; }
+                                if (u.ocena == "3+") { srednia += 3.5; }
+                                if (u.ocena == "4+") { srednia += 4.5; }
+                                if (u.ocena == "5+") { srednia += 5.5; }
+                            }
+                            else if ((u.ocena).Contains('-'))
+                            {
+                                if (u.ocena == "2-") { srednia += 1.75; }
+                                if (u.ocena == "3-") { srednia += 2.75; }
+                                if (u.ocena == "4-") { srednia += 3.75; }
+                                if (u.ocena == "5-") { srednia += 4.75; }
+                                if (u.ocena == "6-") { srednia += 5.75; }
+                            }
+                            else { srednia += Convert.ToDouble(u.ocena); }
+                            <a asp-page="./DetailsMark" asp-route-id="@u.Id_oceny" class="btn btn btn-primary">@Html.DisplayFor(m => u.ocena)</a>
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (srednia == 0 || ilosc == 0)
+                            { <p>-</p> }
+                            else
+                            {<p>@Math.Round((srednia / ilosc), 2)</p> }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

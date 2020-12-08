@@ -11,5 +11,10 @@ namespace Dziennik.Models
         public virtual int obecnosc { get; set; }
         public virtual Uczen Uczen { get; set; }
         public virtual Lekcja Lekcja { get; set; }
+        public Obecnosc()
+        {
+            Uczen = new Uczen();
+            Lekcja = new Lekcja();
+        }
     }
 }

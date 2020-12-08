@@ -11,12 +11,12 @@ namespace Dziennik.Mappings
     {
         public OcenaMapping()
         {
-            Id(x => x.Id_oceny).GeneratedBy.Identity();
+            Id(x => x.Id_oceny).GeneratedBy.Increment();
             Map(x => x.ocena).Length(2).Nullable();
             Map(x => x.opis_oceny).Length(150).Nullable();
-            References(x => x.Uczen).Column("Id_ucznia").Cascade.All();
-            References(x => x.Nauczyciel).Column("Id_nauczyciela").Cascade.All();
-            References(x => x.Przedmiot).Column("Id_przedmiotu").Cascade.All();
+            References(x => x.Uczen).Column("Id_ucznia").Not.LazyLoad();
+            References(x => x.Nauczyciel).Column("Id_nauczyciela").Not.LazyLoad();
+            References(x => x.Przedmiot).Column("Id_przedmiotu").Not.LazyLoad();
             Table("Ocena");
         }
     }

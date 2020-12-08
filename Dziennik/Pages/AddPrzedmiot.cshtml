@@ -1,0 +1,32 @@
+﻿@page
+@model Dziennik.Pages.AddPrzedmiotModel
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "AddPrzedmiot";
+}
+<br /><br />
+<div class="container card d-flex justify-content-center bg-light">
+    <center><h2 class="py-5">Dodawanie przedmiotu</h2></center>
+    <form class="form-horizontal" method="post">
+        <div class="form-group">
+            <label class="control-label col-sm2">Nazwa:</label>
+            <div class="col-sm-6">
+                <input asp-for="przedmiot.nazwa" class="form-control">
+                <span asp-validation-for="przedmiot.nazwa" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm2">Dziedzina:</label>
+            <div class="col-sm-6">
+                <input asp-for="przedmiot.dziedzina" class="form-control">
+                <span asp-validation-for="przedmiot.dziedzina" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn btn-primary">Zatwierdź</button>
+            </div>
+        </div>
+    </form>
+</div>
+

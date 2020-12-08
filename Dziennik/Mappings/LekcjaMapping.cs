@@ -10,11 +10,11 @@ namespace Dziennik.Mappings
     {
         public LekcjaMapping()
         {
-            Id(x => x.Id_lekcji).GeneratedBy.Identity();
+            Id(x => x.Id_lekcji).GeneratedBy.Increment();
             Map(x => x.data).Nullable();
-            References(x => x.Nauczanie).Column("Id_nauczania");
-            References(x => x.Klasa).Column("Id_klasy");
-            HasMany(x => x.Obecnosc);
+            References(x => x.Nauczanie).Column("Id_nauczania").Not.LazyLoad();
+            References(x => x.Klasa).Column("Id_klasy").Not.LazyLoad();
+            HasMany(x => x.Obecnosc).Not.LazyLoad();
             Table("Lekcja");
         }
     }

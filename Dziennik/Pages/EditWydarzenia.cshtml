@@ -1,51 +1,41 @@
 ﻿@page
 @model Dziennik.Pages.EditWydarzeniaModel
 @{
+    Layout = "_LayoutNauczyciel";
     ViewData["Title"] = "EdycjaWydarzenia";
 }
-
-<h1>EdycjaWydarzenia</h1>
-<div class="form-group">
-    <label asp-for="wydarzenie.nazwa" class="control-label col-sm2"></label>
-    <div class="col-sm-6">
-        <input asp-for="wydarzenie.nazwa" class="form-control" value="@Dziennik.Pages.EditWydarzeniaModel.wydarzenieToShow.nazwa">
-        <span asp-validation-for="wydarzenie.nazwa" class="text-danger"></span>
-    </div>
-</div>
-<div class="form-group">
-    <label asp-for="wydarzenie.opis" class="control-label col-sm2"></label>
-    <div class="col-sm-6">
-        <input asp-for="wydarzenie.opis" class="form-control" value="@Dziennik.Pages.EditWydarzeniaModel.wydarzenieToShow.opis">
-        <span asp-validation-for="wydarzenie.opis" class="text-danger"></span>
-    </div>
-</div>
-<div class="form-group">
-    <label asp-for="wydarzenie.data" class="control-label col-sm2"></label>
-    <div class="col-sm-6">
-        <input asp-for="wydarzenie.data" class="form-control" type="datetime-local" data-val="true"
-               data-val-required="The DateTime field is required." id="DataTime" value="@Dziennik.Pages.EditWydarzeniaModel.wydarzenieToShow.data">
-        <span asp-validation-for="wydarzenie.data" class="text-danger"></span>
-    </div>
-</div>
-<div class="form-group">
-    <label asp-for="wydarzenie.Klasa.nazwa" class="control-label col-sm2"></label>
-    <div class="col-sm-6">
-        <select asp-for="wydarzenie.Klasa.nazwa" class="form-control" id="nrKlasy">
-            @foreach (Dziennik.Models.Klasa klass in Dziennik.Pages.EditWydarzeniaModel.klasy)
-            {
-                <option value="1">@klass.nazwa</option>
-            }
-        </select>
-    </div>
-</div>
-<div class="form-group">
-    <label asp-for="wydarzenie.Przedmiot.nazwa" class="control-label col-sm2"></label>
-    <div class="col-sm-6">
-        <select asp-for="wydarzenie.Przedmiot.nazwa" class="form-control" id="nrPrzedmiotu">
-            @foreach (Dziennik.Models.Przedmiot przedmiot in Dziennik.Pages.EditWydarzeniaModel.przedmioty)
-            {
-                <option value="1">@przedmiot.nazwa</option>
-            }
-        </select>
-    </div>
+<br />
+<br />
+<div class="container card">
+    <h1>Edycja Wydarzenia</h1>
+    <form class="form-horizontal" method="post">
+        <div class="form-group">
+            <input asp-for="wydarzenie.Id_wydarzenia" type="hidden" />
+            <label class="control-label col-sm2">Nazwa:</label>
+            <div class="col-sm-6">
+                <input asp-for="wydarzenie.nazwa" class="form-control">
+                <span asp-validation-for="wydarzenie.nazwa" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm2">Opis wydarzenia:</label>
+            <div class="col-sm-6">
+                <input asp-for="wydarzenie.opis" class="form-control">
+                <span asp-validation-for="wydarzenie.opis" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm2">Data wydarzenia:</label>
+            <div class="col-sm-6">
+                <input asp-for="wydarzenie.data" type="date" />
+                <span asp-validation-for="wydarzenie.data" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button asp-route-id="1" class="btn btn btn-primary">Zatwierdź zmiany</button>
+                <button asp-route-id="2" class="btn btn btn-primary">Usuń wydarzenie</button>
+            </div>
+        </div>
+    </form>
 </div>

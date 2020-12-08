@@ -2,16 +2,43 @@
 @model Dziennik.Pages.ListaWydarzenModel
 @{
     ViewData["Title"] = "ListaWydarzen";
+    if (Model.typ_uzytkownika == 1)
+    {
+        Layout = "_LayoutNauczyciel";
+    }
+    else if (Model.typ_uzytkownika == 2)
+    {
+        Layout = "_LayoutUczen";
+    }
 }
 
-<h1>ListaWydarzen</h1>
-@foreach (Dziennik.Models.Wydarzenie wydarzenie in Dziennik.Pages.ListaWydarzenModel.wydarzenia)
-{
-    <div class="card" style="width: 100%; margin-bottom: 1rem; background-color: gold">
-        <div class="card-body">
-            <h5 class="card-title">@wydarzenie.nazwa</h5>
-            <h6 class="card-subtitle mb-2 text-muted">@wydarzenie.Przedmiot.nazwa, @wydarzenie.data</h6>
-            <p class="card-text">@wydarzenie.opis</p>
-        </div>
-    </div>
-}
+<div class="card" style="background: transparent !important; text-align: center; border: none !important;">
+    <h1>ListaWydarzen</h1>
+
+    @foreach (var w in Model.wydarzenia.ToList())
+    {
+        @if (Model.typ_uzytkownika == 1)
+        {
+            <a asp-page="/EditWydarzenia" asp-route-id="@w.Id_wydarzenia">
+                <div class="card" style="width: 100%; margin-bottom: 1rem; background-color: gold">
+                    <div class="card-body">
+                        <h5 class="card-title">@w.nazwa</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@w.Przedmiot.nazwa, @w.data</h6>
+                        <p class="card-text">@w.opis</p>
+                    </div>
+                </div>
+            </a>
+        }
+        else
+        {
+
+            <div class="card" style="width: 100%; margin-bottom: 1rem; background-color: gold">
+                <div class="card-body">
+                    <h5 class="card-title">@w.nazwa</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@w.Przedmiot.nazwa, @w.data</h6>
+                    <p class="card-text">@w.opis</p>
+                </div>
+            </div>
+        }
+    }
+</div>

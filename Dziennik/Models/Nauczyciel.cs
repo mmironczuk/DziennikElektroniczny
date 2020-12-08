@@ -22,6 +22,7 @@ namespace Dziennik.Models
             Nauczanie = new List<Nauczanie>();
             Ocena = new List<Ocena>();
             Wydarzenie = new List<Wydarzenie>();
+            Konto = new Konto();
         }
     }
 }

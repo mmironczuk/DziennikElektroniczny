@@ -10,10 +10,10 @@ namespace Dziennik.Mappings
     {
         public ObecnoscMapping()
         {
-            Id(x => x.Id_obecnosci).GeneratedBy.Identity();
+            Id(x => x.Id_obecnosci).GeneratedBy.Increment();
             Map(x => x.obecnosc).Nullable();
-            References(x => x.Lekcja).Column("Id_lekcji").Cascade.All();
-            References(x => x.Uczen).Column("Id_ucznia").Cascade.All();
+            References(x => x.Lekcja).Column("Id_lekcji").Not.LazyLoad();
+            References(x => x.Uczen).Column("Id_ucznia").Not.LazyLoad();
             Table("Obecnosc");
         }
     }

@@ -5,12 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Video\**" />
+    <Content Remove="Video\**" />
+    <EmbeddedResource Remove="Video\**" />
+    <None Remove="Video\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Pages\Shared\_CookieConsentPartial.cshtml" />
     <None Include="Pages\Shared\_Layout.cshtml" />
     <None Include="Pages\Shared\_ValidationScriptsPartial.cshtml" />
     <None Include="wwwroot\images\banner1.svg" />
     <None Include="wwwroot\images\banner2.svg" />
     <None Include="wwwroot\images\banner3.svg" />
+    <None Include="wwwroot\images\pb.mp4" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\js\site.min.js" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css.map" />
