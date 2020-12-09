@@ -16,23 +16,27 @@ namespace Dziennik.Pages
         public MainDatabase mainDatabase = new MainDatabase();
         public int teacher_id { get; set; }
         public ObservableCollection<Nauczanie> nauczania { get; set; }
-        public IList<Lekcja> lekcje;
+        public ObservableCollection<Lekcja> lekcje { get; set; }
+        public List<Lekcja> lekcje2;
         [BindProperty]
         public int type { get; set; }
         public void OnGet(int TypeId)
         {
             type = TypeId;
-            nauczania = new ObservableCollection<Nauczanie>();
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
-            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
-            var login = claim.Value;
-            Konto konto =new Konto();
-            konto = mainDatabase.GetKontoLogin(login);
-            teacher_id = mainDatabase.GetNauczycielKonto(konto.Id_konta).Id_nauczyciela;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var id = Int32.Parse(claim.Value);
+            teacher_id = id;
             nauczania = mainDatabase.GetNauczaniaNauczyciel(teacher_id);
+            lekcje = mainDatabase.GetLekcjeDate();
             foreach(Nauczanie n in nauczania)
             {
-                n.Lekcja = mainDatabase.GetLekcjeNauczanie(n.Id_nauczania);
+                lekcje2 = new List<Lekcja>();
+                foreach(Lekcja l in lekcje)
+                {
+                    if (n.Id_nauczania == l.Nauczanie.Id_nauczania) lekcje2.Add(l);
+                }
+                n.Lekcja = lekcje2;
             }
         }
     }

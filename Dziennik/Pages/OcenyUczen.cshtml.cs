@@ -16,26 +16,24 @@ namespace Dziennik.Pages
         public ObservableCollection<Przedmiot> przedmioty = new ObservableCollection<Przedmiot>();
         private MainDatabase mainDatabase = new MainDatabase();
         public int id_ucznia;
-        public IList<Ocena> marks_all;
+        public ObservableCollection<Ocena> marks_all = new ObservableCollection<Ocena>();
         public List<Ocena> marks;
         public void OnGet()
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
-            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
-            var login = claim.Value;
-            Konto konto = new Konto();
-            konto = mainDatabase.GetKontoLogin(login);
-            Uczen uczen = new Uczen();
-            uczen = mainDatabase.GetUczenKonto(konto.Id_konta);
-            id_ucznia = uczen.Id_ucznia;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var id = Int32.Parse(claim.Value);
+            //Uczen uczen = new Uczen();
+            //uczen = mainDatabase.GetUczenKonto(id);
+            id_ucznia = id;
             przedmioty = mainDatabase.GetPrzedmiotyAll();
-            foreach(Przedmiot p in przedmioty)
+            marks_all = mainDatabase.GetOcenyAll();
+            foreach (Przedmiot p in przedmioty)
             {
                 marks = new List<Ocena>();
-                marks_all = mainDatabase.GetOcenyPrzedmiot(p.Id_przedmiotu);
                 foreach(Ocena o in marks_all)
                 {
-                    if (o.Uczen.Id_ucznia == id_ucznia) marks.Add(o);
+                    if (o.Uczen.Id_ucznia == id_ucznia&&o.Przedmiot.Id_przedmiotu==p.Id_przedmiotu) marks.Add(o);
                 }
                 p.Ocena = marks;
             }

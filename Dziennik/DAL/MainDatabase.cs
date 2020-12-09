@@ -55,6 +55,20 @@ namespace Dziennik.DAL
             return lekcje;
         }
 
+        public override ObservableCollection<Lekcja> GetLekcjeDate()
+        {
+            ObservableCollection<Lekcja> lekcje ;
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    lekcje = new ObservableCollection<Lekcja>(session.QueryOver<Lekcja>().Where(d=>d.data==Convert.ToDateTime(null)).List());
+                    transaction.Commit();
+                }
+            }
+            return lekcje;
+        }
+
         public override ObservableCollection<Nauczanie> GetNauczaniaAll()
         {
             ObservableCollection<Nauczanie> nauczania = new ObservableCollection<Nauczanie>();
@@ -88,9 +102,18 @@ namespace Dziennik.DAL
             throw new NotImplementedException();
         }
 
-        public override ObservableCollection<Uczen> GetOcenyAll()
+        public override ObservableCollection<Ocena> GetOcenyAll()
         {
-            throw new NotImplementedException();
+            ObservableCollection<Ocena> oceny;
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    oceny = new ObservableCollection<Ocena>(session.QueryOver<Ocena>().List());
+                    transaction.Commit();
+                }
+            }
+            return oceny;
         }
 
         public override ObservableCollection<Przedmiot> GetPrzedmiotyAll()

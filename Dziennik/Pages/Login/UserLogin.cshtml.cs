@@ -22,7 +22,6 @@ namespace Dziennik.Pages.Login
         public MainDatabase mainDatabase = new MainDatabase();
         public void OnGet()
         {
-
         }
         public int ValidateUser(string log, string pswd)
         {
@@ -43,14 +42,17 @@ namespace Dziennik.Pages.Login
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             int type = -1;
+            int id = 0;
             type = ValidateUser(login, password);
+            Konto konto = mainDatabase.GetKontoLogin(login);
+            if (type == 1) id = mainDatabase.GetNauczycielKonto(konto.Id_konta).Id_nauczyciela;
+            if (type == 2) id = mainDatabase.GetUczenKonto(konto.Id_konta).Id_ucznia;
             if (type!=-1)
             {
-                Konto konto = new Konto();
-                konto = mainDatabase.GetKontoLogin(login);
                 var claims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Name, konto.login)
+                    new Claim(ClaimTypes.Name, login),
+                    new Claim(ClaimTypes.NameIdentifier,id.ToString())
                 };
                 var claimsIdentity = new ClaimsIdentity(claims, "CookieAuthentication");
                 await HttpContext.SignInAsync("CookieAuthentication", new ClaimsPrincipal(claimsIdentity));
