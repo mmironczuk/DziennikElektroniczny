@@ -21,13 +21,12 @@ namespace Dziennik.Pages
         public void OnGet()
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
-            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
-            var login = claim.Value;
-            Konto konto = new Konto();
-            konto = mainDatabase.GetKontoLogin(login);
-            Uczen uczen = mainDatabase.GetUczenKonto(konto.Id_konta);
-            uczen_id = uczen.Id_ucznia;
-            class_id = uczen.Klasa.Id_klasy;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var id = Int32.Parse(claim.Value);
+            //Uczen uczen = mainDatabase.GetUczenKonto(id);
+            //uczen_id = uczen.Id_ucznia;
+            //class_id = uczen.Klasa.Id_klasy;
+            uczen_id = id;
             obecnosci = mainDatabase.GetObecnosciUczen(uczen_id);
             przedmioty = mainDatabase.GetPrzedmiotyAll();
         }

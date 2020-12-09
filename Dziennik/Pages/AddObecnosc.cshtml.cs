@@ -34,26 +34,18 @@ namespace Dziennik.Pages
                 lesson.Klasa.Id_klasy = lekcja.Klasa.Id_klasy;
                 lesson.data = date;
                 mainDatabase.CreateLekcja(lesson);
+                obecnosci = new ObservableCollection<Obecnosc>();
             }
             else
             {
                 lesson = lekcja;
+                obecnosci = mainDatabase.GetObecnosciLekcja(lekcja_id);
             }
             lekcja_id = lesson.Id_lekcji;
-            obecnosci = mainDatabase.GetObecnosciLekcja(lekcja_id);
-            /*Obecnosc obecnosc = new Obecnosc();
-            foreach(Uczen u in uczniowie)
-            {
-                obecnosc = new Obecnosc();
-                obecnosc.Uczen = u;
-                obecnosc.Lekcja.Id_lekcji = lesson.Id_lekcji;
-                obecnosci.Add(obecnosc);
-            }*/
         }
 
         public IActionResult OnPost()
         {
-            //mainDatabase.CreateObecnosci(obecnosci2);
             return RedirectToPage("./MainNauczyciel");
         }
     }

@@ -21,7 +21,6 @@ namespace Dziennik.Pages
         public MainDatabase mainDatabase = new MainDatabase();
         public void OnGet()
         {
-            klasy = new ObservableCollection<Klasa>();
             klasy = mainDatabase.GetKlasyAll();
             konto = new Konto();
             konto.typ_uzytkownika = 2;

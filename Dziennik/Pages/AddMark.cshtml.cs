@@ -18,26 +18,25 @@ namespace Dziennik.Pages
         public int uczen_id { get; set; }
         [BindProperty]
         public int subject_id { get; set; }
+        [BindProperty]
+        public int class_id { get; set; }
         MainDatabase maindatabase = new MainDatabase();
-        public void OnGet(int UczenId, int SubjectId)
+        public void OnGet(int UczenId, int ClassId, int SubjectId)
         {
+            class_id = ClassId;
             uczen_id = UczenId;
             subject_id = SubjectId;
         }
         public IActionResult OnPost(Ocena mark)
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
-            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
-            var login = claim.Value;
-            Konto konto = new Konto();
-            konto = maindatabase.GetKontoLogin(login);
-            Nauczyciel nauczyciel = maindatabase.GetNauczycielKonto(konto.Id_konta);
-            Uczen uczen = maindatabase.GetUczen(uczen_id);
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var id = Int32.Parse(claim.Value);
             mark.Uczen.Id_ucznia = uczen_id;
-            mark.Nauczyciel = nauczyciel;
+            mark.Nauczyciel.Id_nauczyciela = id;
             mark.Przedmiot.Id_przedmiotu = subject_id;
             maindatabase.CreateOcena(mark);
-            return RedirectToPage("/UsersList", new { ClassId = uczen.Klasa.Id_klasy, SubjectId = subject_id });
+            return RedirectToPage("/UsersList", new { ClassId = class_id, SubjectId = subject_id });
         }
     }
 }

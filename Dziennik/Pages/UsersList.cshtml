@@ -33,11 +33,11 @@
                     <td>
                         @foreach (var u in p.Ocena.ToList())
                         {
-                            <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" class="btn btn btn-primary">@Html.DisplayFor(m => u.ocena)</a>
+                            <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" asp-route-class_id="@Model.classId" asp-route-subject_id="@Model.subjectId" class="btn btn btn-primary">@Html.DisplayFor(m => u.ocena)</a>
                         }
                     </td>
                     <td>
-                        <a asp-page="AddMark" asp-route-UczenId="@p.Id_ucznia" asp-route-SubjectId="@Model.subjectId">Dodaj ocenę</a>
+                        <a asp-page="AddMark" asp-route-UczenId="@p.Id_ucznia" asp-route-ClassId="@Model.classId" asp-route-SubjectId="@Model.subjectId">Dodaj ocenę</a>
                     </td>
                 </tr>
             }
