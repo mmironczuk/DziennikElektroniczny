@@ -571,6 +571,33 @@ namespace Dziennik.DAL
             }
         }
 
+        public override void UpdateObecnosc(Obecnosc obecnosc)
+        {
+            Obecnosc obec = GetObecnosc(obecnosc.Id_obecnosci);
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    obec.obecnosc = obecnosc.obecnosc;
+                    session.SaveOrUpdate(obec);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void DeleteObecnosc(int id)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    Obecnosc obecnosc = GetObecnosc(id);
+                    session.Delete(obecnosc);
+                    transaction.Commit();
+                }
+            }
+        }
+
         public override void DeleteOcena(int id)
         {
             using (var session = NHibernateHelper.OpenSession())
