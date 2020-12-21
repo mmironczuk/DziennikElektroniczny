@@ -1,0 +1,37 @@
+﻿@page
+@model Dziennik.Pages.EditObecnoscModel
+@{
+    Layout = "_LayoutNauczyciel";
+    ViewData["Title"] = "EditObecnosc";
+}
+<br /><br />
+<div class="container card">
+    <form class="form-horizontal" method="post">
+        <input asp-for="obecnosc.Id_obecnosci" type="hidden" class="form-control">
+        <div class="form-group">
+            <label asp-for="obecnosc.Lekcja.data" class="control-label col-sm2"></label>
+            <div class="col-sm-6">
+                <input asp-for="obecnosc.Lekcja.data" readonly class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="obecnosc.obecnosc" class="control-label col-sm2"></label>
+            <div class="col-sm-6">
+                <select asp-for="obecnosc.obecnosc" class="form-control">
+                    <option value="1">nieobecność</option>
+                    <option value="2">spóźnienie</option>
+                    <option value="3">usprawiedliwienie</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button asp-route-id="1" class="btn btn btn-primary">Zatwierdź zmiany</button>
+                <button asp-route-id="2" class="btn btn btn-primary">Usuń obecność</button>
+            </div>
+            <div class="col-sm-offset-2 col-sm-10">
+
+            </div>
+        </div>
+    </form>
+</div>
