@@ -227,6 +227,21 @@ namespace Dziennik.DAL
             return lekcje;
         }
 
+        public override ObservableCollection<Uczen> GetUczniowieWychowawca(int id)
+        {
+            Klasa klasa = GetKlasaWychowawca(id);
+            ObservableCollection<Uczen> uczniowie;
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    uczniowie = new ObservableCollection<Uczen>(session.QueryOver<Uczen>().Where(d => (d.Klasa.Id_klasy == klasa.Id_klasy)).List());
+                    transaction.Commit();
+                }
+            }
+            return uczniowie;
+        }
+
         public override IList<Lekcja> GetLekcjeNauczanie(int id)
         {
             IList<Lekcja> lekcje;
@@ -402,6 +417,20 @@ namespace Dziennik.DAL
                 using (var transaction = session.BeginTransaction())
                 {
                     klasa = session.QueryOver<Klasa>().Where(d => d.Id_klasy == id).SingleOrDefault();
+                    transaction.Commit();
+                }
+            }
+            return klasa;
+        }
+
+        public override Klasa GetKlasaWychowawca(int id)
+        {
+            Klasa klasa = new Klasa();
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    klasa = session.QueryOver<Klasa>().Where(d => d.Nauczyciel.Id_nauczyciela == id).SingleOrDefault();
                     transaction.Commit();
                 }
             }
@@ -589,6 +618,33 @@ namespace Dziennik.DAL
                     wyd.opis = wydarzenie.opis;
                     wyd.data = wydarzenie.data;
                     session.SaveOrUpdate(wyd);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void UpdateObecnosc(Obecnosc obecnosc)
+        {
+            Obecnosc obec = GetObecnosc(obecnosc.Id_obecnosci);
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    obec.obecnosc = obecnosc.obecnosc;
+                    session.SaveOrUpdate(obec);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void DeleteObecnosc(int id)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    Obecnosc obecnosc = GetObecnosc(id);
+                    session.Delete(obecnosc);
                     transaction.Commit();
                 }
             }

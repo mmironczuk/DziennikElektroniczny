@@ -1,0 +1,26 @@
+﻿@page
+@model Dziennik.Pages.EditObecnoscModel
+@{
+    ViewData["Title"] = "EdycjaObecnosci";
+}
+<br />
+<br />
+<div class="container card">
+    <h1>Edycja Wydarzenia</h1>
+    <form class="form-horizontal" method="post">
+        <div class="form-group">
+            <input asp-for="obecnosc.Id_obecnosci" type="hidden" />
+            <label class="control-label col-sm2">Nazwa:</label>
+            <div class="col-sm-6">
+                <input asp-for="obecnosc.obecnosc" class="form-control">
+                <span asp-validation-for="obecnosc.obecnosc" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button asp-route-id="1" class="btn btn btn-primary">Zatwierdź zmiany</button>
+                <button asp-route-id="2" class="btn btn btn-primary">Usuń wydarzenie</button>
+            </div>
+        </div>
+    </form>
+</div>

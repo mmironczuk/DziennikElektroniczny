@@ -25,6 +25,7 @@ namespace Dziennik.DAL
         public abstract ObservableCollection<Obecnosc> GetObecnosciLekcja(int id);
         public abstract ObservableCollection<Lekcja> GetLekcjeKlasa(int id);
         public abstract ObservableCollection<Obecnosc> GetObecnosciUczen(int id);
+        public abstract ObservableCollection<Uczen> GetUczniowieWychowawca(int id);
         public abstract IList<Lekcja> GetLekcjeNauczanie(int id);
         public abstract IList<Ocena> GetOcenyUczen(int id);
         public abstract IList<Ocena> GetOcenyPrzedmiot(int id);
@@ -41,6 +42,7 @@ namespace Dziennik.DAL
         public abstract Wydarzenie GetWydarzenie(int id);
         public abstract Lekcja GetLekcja(int id);
         public abstract Obecnosc GetObecnosc(int id);
+        public abstract Klasa GetKlasaWychowawca(int id);
         public abstract void CreateKonto(Konto konto);
         public abstract void CreateUczen(Uczen uczen);
         public abstract void CreateNauczyciel(Nauczyciel nauczyciel);
@@ -52,6 +54,8 @@ namespace Dziennik.DAL
         public abstract void CreateLekcja(Lekcja lekcja);
         public abstract void UpdateOcena(Ocena ocena);
         public abstract void UpdateWydarzenie(Wydarzenie wydarzenie);
+        public abstract void UpdateObecnosc(Obecnosc obecnosc);
+        public abstract void DeleteObecnosc(int id);
         public abstract void DeleteOcena(int id);
         public abstract void DeleteWydarzenie(int id);
     }
