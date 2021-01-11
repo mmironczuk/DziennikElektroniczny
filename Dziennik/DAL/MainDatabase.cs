@@ -99,7 +99,16 @@ namespace Dziennik.DAL
 
         public override ObservableCollection<Obecnosc> GetObecnosciAll()
         {
-            throw new NotImplementedException();
+            ObservableCollection<Obecnosc> obecnosci;
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    obecnosci = new ObservableCollection<Obecnosc>(session.QueryOver<Obecnosc>().List());
+                    transaction.Commit();
+                }
+            }
+            return obecnosci;
         }
 
         public override ObservableCollection<Ocena> GetOcenyAll()
@@ -235,7 +244,7 @@ namespace Dziennik.DAL
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    uczniowie = new ObservableCollection<Uczen>(session.QueryOver<Uczen>().Where(d => (d.Klasa.Id_klasy == klasa.Id_klasy)).List());
+                    uczniowie = new ObservableCollection<Uczen>(session.QueryOver<Uczen>().Where(d => d.Klasa.Id_klasy == klasa.Id_klasy).List());
                     transaction.Commit();
                 }
             }
@@ -425,7 +434,7 @@ namespace Dziennik.DAL
 
         public override Klasa GetKlasaWychowawca(int id)
         {
-            Klasa klasa = new Klasa();
+            Klasa klasa;
             using (var session = NHibernateHelper.OpenSession())
             {
                 using (var transaction = session.BeginTransaction())
@@ -625,26 +634,13 @@ namespace Dziennik.DAL
 
         public override void UpdateObecnosc(Obecnosc obecnosc)
         {
-            Obecnosc obec = GetObecnosc(obecnosc.Id_obecnosci);
+            Obecnosc ob = GetObecnosc(obecnosc.Id_obecnosci);
             using (var session = NHibernateHelper.OpenSession())
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    obec.obecnosc = obecnosc.obecnosc;
-                    session.SaveOrUpdate(obec);
-                    transaction.Commit();
-                }
-            }
-        }
-
-        public override void DeleteObecnosc(int id)
-        {
-            using (var session = NHibernateHelper.OpenSession())
-            {
-                using (var transaction = session.BeginTransaction())
-                {
-                    Obecnosc obecnosc = GetObecnosc(id);
-                    session.Delete(obecnosc);
+                    ob.obecnosc = obecnosc.obecnosc;
+                    session.SaveOrUpdate(ob);
                     transaction.Commit();
                 }
             }
@@ -673,6 +669,19 @@ namespace Dziennik.DAL
                     Wydarzenie wydarzenie = new Wydarzenie();
                     wydarzenie = GetWydarzenie(id);
                     session.Delete(wydarzenie);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void DeleteObecnosc(int id)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    Obecnosc obecnosc = GetObecnosc(id);
+                    session.Delete(obecnosc);
                     transaction.Commit();
                 }
             }

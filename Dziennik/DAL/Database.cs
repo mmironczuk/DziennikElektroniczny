@@ -55,8 +55,8 @@ namespace Dziennik.DAL
         public abstract void UpdateOcena(Ocena ocena);
         public abstract void UpdateWydarzenie(Wydarzenie wydarzenie);
         public abstract void UpdateObecnosc(Obecnosc obecnosc);
-        public abstract void DeleteObecnosc(int id);
         public abstract void DeleteOcena(int id);
         public abstract void DeleteWydarzenie(int id);
+        public abstract void DeleteObecnosc(int id);
     }
 }
