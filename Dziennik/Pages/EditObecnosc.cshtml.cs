@@ -13,16 +13,16 @@ namespace Dziennik.Pages
     {
         [BindProperty]
         public Obecnosc obecnosc { get; set; }
-        public MainDatabase mainDatabase = new MainDatabase();
+        private MainDatabase mainDatabase = new MainDatabase();
         public void OnGet(int id)
         {
-            obecnosc= mainDatabase.GetObecnosc(id);
+            obecnosc = mainDatabase.GetObecnosc(id);
         }
         public IActionResult OnPost(int id)
         {
             if (id == 1) mainDatabase.UpdateObecnosc(obecnosc);
             else if (id == 2) mainDatabase.DeleteObecnosc(obecnosc.Id_obecnosci);
-            return RedirectToPage("/ListaObecnosci");
+            return RedirectToPage("/NieobecnosciKlasy");
         }
     }
 }

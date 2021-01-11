@@ -1,0 +1,51 @@
+﻿@page
+@model Dziennik.Pages.NieobecnosciKlasyModel
+@{
+    Layout = "_LayoutNauczyciel";
+    ViewData["Title"] = "NieobecnosciKlasy";
+}
+
+<br />
+<br />
+<div class="card">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">
+                    Uczniowie
+                </th>
+                <th scope="col">
+                    Nieobecności
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.uczniowie.ToList())
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => p.imie) @Html.DisplayFor(m => p.nazwisko)</td>
+                    <td>
+                        @foreach (var o in Model.obecnosci.ToList())
+                        {
+                            if (p.Id_ucznia == o.Uczen.Id_ucznia)
+                            {
+                                if (o.obecnosc == 1)
+                                {
+                                    <a asp-page="./EditObecnosc" asp-route-id="@o.Id_obecnosci" class="btn btn btn-primary">nb</a>
+                                }
+                                else if (o.obecnosc == 2)
+                                {
+                                    <a asp-page="./EditObecnosc" asp-route-id="@o.Id_obecnosci" class="btn btn btn-primary">sp</a>
+                                }
+                                else if (o.obecnosc == 3)
+                                {
+                                    <a asp-page="./EditObecnosc" asp-route-id="@o.Id_obecnosci" class="btn btn btn-primary">usp</a>
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
