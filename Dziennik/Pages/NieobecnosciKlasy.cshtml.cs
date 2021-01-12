@@ -11,24 +11,20 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Dziennik.Pages
 {
-    public class ObecnosciListModel : PageModel
+    public class NieobecnosciKlasyModel : PageModel
     {
-        public ObservableCollection<Obecnosc> obecnosci = new ObservableCollection<Obecnosc>();
         private MainDatabase mainDatabase = new MainDatabase();
-        public ObservableCollection<Przedmiot> przedmioty = new ObservableCollection<Przedmiot>();
-        public int uczen_id;
-        public int class_id;
+        [BindProperty]
+        public ObservableCollection<Uczen> uczniowie { get; set; }
+        [BindProperty]
+        public ObservableCollection<Obecnosc> obecnosci { get; set; }
         public void OnGet()
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             var id = Int32.Parse(claim.Value);
-            //Uczen uczen = mainDatabase.GetUczenKonto(id);
-            //uczen_id = uczen.Id_ucznia;
-            //class_id = uczen.Klasa.Id_klasy;
-            uczen_id = id;
-            obecnosci = mainDatabase.GetObecnosciUczen(uczen_id);
-            przedmioty = mainDatabase.GetPrzedmiotyAll();
+            uczniowie = mainDatabase.GetUczniowieWychowawca(id);
+            obecnosci = mainDatabase.GetObecnosciAll();
         }
     }
 }

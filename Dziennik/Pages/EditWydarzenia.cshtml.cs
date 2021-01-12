@@ -17,8 +17,6 @@ namespace Dziennik.Pages
 
         public void OnGet(int id)
         {
-            wydarzenie = new Wydarzenie();
-            wydarzenie.Id_wydarzenia = id;
             wydarzenie = mainDatabase.GetWydarzenie(id);
         }
 

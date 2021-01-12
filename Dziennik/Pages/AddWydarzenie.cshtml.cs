@@ -28,13 +28,11 @@ namespace Dziennik.Pages
         public IActionResult OnPost(Wydarzenie wydarzenie)
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
-            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
-            var login = claim.Value;
-            Konto konto = new Konto();
-            konto = mainDatabase.GetKontoLogin(login);
-            wydarzenie.Nauczyciel = mainDatabase.GetNauczycielKonto(konto.Id_konta);
-            wydarzenie.Klasa = mainDatabase.GetKlasa(class_id);
-            wydarzenie.Przedmiot = mainDatabase.GetPrzedmiot(subject_id);
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var id = Int32.Parse(claim.Value);
+            wydarzenie.Nauczyciel.Id_nauczyciela = id;
+            wydarzenie.Klasa.Id_klasy = class_id;
+            wydarzenie.Przedmiot.Id_przedmiotu = subject_id;
             mainDatabase.CreateWydarzenie(wydarzenie);
             return RedirectToPage("./ListaWydarzen");
         }

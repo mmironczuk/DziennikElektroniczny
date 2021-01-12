@@ -12,12 +12,16 @@ namespace Dziennik.Pages.Login
 {
     public class MyAccountModel : PageModel
     {
-        public MainDatabase mainDatabase = new MainDatabase();
+        public MainDatabase mainDatabase;
         public Konto konto { get; set; }
         public string imie { get; set; }
         public string nazwisko { get; set; }
         public string adres { get; set; }
         public string pesel { get; set; }
+        public MyAccountModel()
+        {
+            mainDatabase = new MainDatabase();
+        }
         public void OnGet()
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;

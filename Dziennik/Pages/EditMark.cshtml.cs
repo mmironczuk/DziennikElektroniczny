@@ -14,10 +14,15 @@ namespace Dziennik.Pages
         [BindProperty]
         public Ocena mark { get; set; }
         public MainDatabase mainDatabase = new MainDatabase();
-        public void OnGet(int id)
+        [BindProperty]
+        public int Class_id { get; set; }
+        [BindProperty]
+        public int Subject_id { get; set; }
+        public void OnGet(int id, int class_id, int subject_id)
         {
+            Class_id = class_id;
+            Subject_id = subject_id;
             mark = new Ocena();
-            mark.Id_oceny = id;
             mark = mainDatabase.GetOcena(id);
         }
 
@@ -25,7 +30,7 @@ namespace Dziennik.Pages
         {
             if (id == 1) mainDatabase.UpdateOcena(mark);
             else if(id==2)mainDatabase.DeleteOcena(mark.Id_oceny);
-            return RedirectToPage("/UsersList");
+            return RedirectToPage("/UsersList", new {ClassId=Class_id, SubjectId=Subject_id });
         }
     }
 }

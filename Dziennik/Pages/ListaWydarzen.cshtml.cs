@@ -24,14 +24,15 @@ namespace Dziennik.Pages
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
             var login = claim.Value;
-
-            typ_uzytkownika = db.GetKontoLogin(login).typ_uzytkownika;
+            Konto konto = new Konto();
+            konto = db.GetKontoLogin(login);
+            typ_uzytkownika = konto.typ_uzytkownika;
 
             wydarzenia = new ObservableCollection<Wydarzenie>();
             ObservableCollection<Wydarzenie> wszystkie_wydarzenia = db.GetWydarzeniaAll();
 
             if (typ_uzytkownika == 2) {
-                Uczen uczen = db.GetUczenKonto(db.GetKontoLogin(login).Id_konta);
+                Uczen uczen = db.GetUczenKonto(konto.Id_konta);
 
                 foreach (Wydarzenie w in wszystkie_wydarzenia)
                 {
@@ -42,7 +43,7 @@ namespace Dziennik.Pages
                 }
             } else if (typ_uzytkownika == 1)
             {
-                Nauczyciel nauczyciel = db.GetNauczycielKonto(db.GetKontoLogin(login).Id_konta);
+                Nauczyciel nauczyciel = db.GetNauczycielKonto(konto.Id_konta);
 
                 foreach (Wydarzenie w in wszystkie_wydarzenia)
                 {

@@ -12,10 +12,11 @@ namespace Dziennik.DAL
         public abstract ObservableCollection<Klasa> GetKlasyAll();
         public abstract ObservableCollection<Konto> GetKontaAll();
         public abstract ObservableCollection<Lekcja> GetLekcjeAll();
+        public abstract ObservableCollection<Lekcja> GetLekcjeDate();
         public abstract ObservableCollection<Nauczanie> GetNauczaniaAll();
         public abstract ObservableCollection<Nauczyciel> GetNauczycielAll();
         public abstract ObservableCollection<Obecnosc> GetObecnosciAll();
-        public abstract ObservableCollection<Uczen> GetOcenyAll();
+        public abstract ObservableCollection<Ocena> GetOcenyAll();
         public abstract ObservableCollection<Przedmiot> GetPrzedmiotyAll();
         public abstract ObservableCollection<Uczen> GetUczniowieAll();
         public abstract ObservableCollection<Wydarzenie> GetWydarzeniaAll();
@@ -54,8 +55,8 @@ namespace Dziennik.DAL
         public abstract void UpdateOcena(Ocena ocena);
         public abstract void UpdateWydarzenie(Wydarzenie wydarzenie);
         public abstract void UpdateObecnosc(Obecnosc obecnosc);
-        public abstract void DeleteObecnosc(int id);
         public abstract void DeleteOcena(int id);
         public abstract void DeleteWydarzenie(int id);
+        public abstract void DeleteObecnosc(int id);
     }
 }
