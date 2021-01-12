@@ -20,7 +20,7 @@ namespace Dziennik.Models
         {
             Ocena = new List<Ocena>();
             Klasa = new Klasa();
-            Konto = new Konto();
+            //Konto = new Konto();
             Obecnosc = new List<Obecnosc>();
         }
     }

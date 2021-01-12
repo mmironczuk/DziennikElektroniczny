@@ -20,6 +20,7 @@ namespace Dziennik.Pages.Login
         [BindProperty]
         public string password { get; set; }
         public MainDatabase mainDatabase = new MainDatabase();
+        public Konto konto = new Konto();
         public void OnGet()
         {
 
@@ -27,16 +28,21 @@ namespace Dziennik.Pages.Login
         public int ValidateUser(string log, string pswd)
         {
             int type = -1;
-            ObservableCollection<Konto> konta = new ObservableCollection<Konto>();
-            konta=mainDatabase.GetKontaAll();
             var passwordHasher = new PasswordHasher<string>();
-            foreach (Konto k in konta)
+            /*foreach (Konto k in konta)
             {
                 if (log == k.login)
                 {
                     string haslo = passwordHasher.HashPassword(login,pswd);
                     if(passwordHasher.VerifyHashedPassword(null, haslo, pswd) == PasswordVerificationResult.Success) type = k.typ_uzytkownika;
                 }
+            }*/
+            //Konto konto = konta.Where(x => x.login == log).Single();
+            konto = mainDatabase.GetKontoLogin(log);
+            if(konto!=null)
+            {
+                string haslo = passwordHasher.HashPassword(login, pswd);
+                if (passwordHasher.VerifyHashedPassword(null, haslo, pswd) == PasswordVerificationResult.Success) type = konto.typ_uzytkownika;
             }
             return type;
         }
@@ -44,7 +50,9 @@ namespace Dziennik.Pages.Login
         {
             int type = -1;
             type = ValidateUser(login, password);
-            if (type!=-1)
+            if (type == 1) id = mainDatabase.GetNauczycielKonto(konto.Id_konta).Id_nauczyciela;
+            else if (type == 2) id = mainDatabase.GetUczenKonto(konto.Id_konta).Id_ucznia;
+            if(type!=-1)
             {
                 Konto konto = new Konto();
                 konto = mainDatabase.GetKontoLogin(login);

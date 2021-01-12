@@ -363,11 +363,7 @@ namespace Dziennik.DAL
             Konto konto = new Konto();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     konto = session.QueryOver<Konto>().Where(d => d.login == login).SingleOrDefault();
-                    transaction.Commit();
-                }
             }
             return konto;
         }
