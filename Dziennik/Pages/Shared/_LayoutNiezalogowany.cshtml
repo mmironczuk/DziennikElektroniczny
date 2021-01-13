@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="~/css/Ladne.css" />
     <style>
         body {
-            background-image: url("/images/bcg.jpg") !important;
+            background-image: url("/images/bcg.jpg");
         }
 
         footer {
@@ -25,7 +25,10 @@
 <body>
     <header>
         <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" asp-area="" asp-page="/Index">Dziennik</a>
+            <a class="navbar-brand" asp-area="" asp-page="/Index">
+                <img src="~/images/icon.ico" />
+                Dziennik
+            </a>
         </nav>
     </header>
     <div class="container">

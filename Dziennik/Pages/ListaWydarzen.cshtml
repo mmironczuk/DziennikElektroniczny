@@ -1,7 +1,7 @@
 ﻿@page
 @model Dziennik.Pages.ListaWydarzenModel
 @{
-    ViewData["Title"] = "ListaWydarzen";
+    ViewData["Title"] = "Lista Wydarzeń";
     if (Model.typ_uzytkownika == 1)
     {
         Layout = "_LayoutNauczyciel";
@@ -13,7 +13,7 @@
 }
 
 <div class="card" style="background: transparent !important; text-align: center; border: none !important;">
-    <h1>ListaWydarzen</h1>
+    <h1>Lista Wydarzeń</h1>
 
     @foreach (var w in Model.wydarzenia.ToList())
     {
