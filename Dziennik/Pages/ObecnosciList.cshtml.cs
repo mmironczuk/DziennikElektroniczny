@@ -23,9 +23,6 @@ namespace Dziennik.Pages
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             var id = Int32.Parse(claim.Value);
-            //Uczen uczen = mainDatabase.GetUczenKonto(id);
-            //uczen_id = uczen.Id_ucznia;
-            //class_id = uczen.Klasa.Id_klasy;
             uczen_id = id;
             obecnosci = mainDatabase.GetObecnosciUczen(uczen_id);
             przedmioty = mainDatabase.GetPrzedmiotyAll();
