@@ -8,22 +8,21 @@
 }
 <br/>
 <br/>
-<div class="container card d-flex justify-content-center bg-light" style="text-align:center">
+<div class="container card d-flex justify-content-center bg-light fadeIn first" style="background-image: url('/images/loginbackground.jpg'); background-size: 100% auto; ">
     <div class="row">
-        <div class="col"></div>
-        <div class="col-8">
+        <div class="col-12 ">
             <center><h1 class="py-5">Zaloguj się</h1></center>
             <form class="form-horizontal" method="post">
                 <div class="form-group">
-                    <label asp-for="login" class="control-label" ></label>
+                    <label asp-for="login" class="control-label"></label>
                     <div class="col-12">
-                        <input asp-for="login" class="form-control">
+                        <input asp-for="login" class="form-control fadeIn second">
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="password" class="control-label col-sm2"></label>
                     <div class="col-12">
-                        <input type="password" asp-for="password" class="form-control">
+                        <input type="password" asp-for="password" class="form-control fadeIn third">
                     </div>
                 </div>
                 <div class="form-group row">
