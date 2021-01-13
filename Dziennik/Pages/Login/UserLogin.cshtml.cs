@@ -48,6 +48,7 @@ namespace Dziennik.Pages.Login
         }
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            int id;
             int type = -1;
             type = ValidateUser(login, password);
             if (type == 1) id = mainDatabase.GetNauczycielKonto(konto.Id_konta).Id_nauczyciela;
