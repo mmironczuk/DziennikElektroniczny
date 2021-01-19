@@ -17,6 +17,8 @@ namespace Dziennik.Mappings
             Map(x => x.typ_uzytkownika).Nullable();
             HasOne(x => x.Nauczyciel).Not.LazyLoad();
             HasOne(x => x.Uczen).Not.LazyLoad();
+            HasMany(x => x.wiadomosci_odebrane).Not.LazyLoad();
+            HasMany(x => x.wiadomosci_wyslane).Not.LazyLoad();
             Table("Konto");
         }
     }

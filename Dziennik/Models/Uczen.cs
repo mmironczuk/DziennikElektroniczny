@@ -16,11 +16,11 @@ namespace Dziennik.Models
         public virtual Konto Konto { get; set; }
         public virtual IList<Ocena> Ocena { get; set; }
         public virtual IList<Obecnosc> Obecnosc { get; set; }
+        //public virtual IList<Wiadomosc> wiadomosci_odebrane { get; set; }
         public Uczen()
         {
             Ocena = new List<Ocena>();
             Klasa = new Klasa();
-            //Konto = new Konto();
             Obecnosc = new List<Obecnosc>();
         }
     }

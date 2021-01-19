@@ -15,5 +15,7 @@ namespace Dziennik.Models
         public virtual int typ_uzytkownika { get; set; }
         public virtual Nauczyciel Nauczyciel { get; set; }
         public virtual Uczen Uczen { get; set; }
+        public virtual IList<Wiadomosc> wiadomosci_wyslane { get; set; }
+        public virtual IList<Wiadomosc> wiadomosci_odebrane { get; set; }
     }
 }
