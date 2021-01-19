@@ -33,7 +33,23 @@
                     <td>
                         @foreach (var u in p.Ocena.ToList())
                         {
-                            <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" asp-route-class_id="@Model.classId" asp-route-subject_id="@Model.subjectId" class="btn btn btn-primary">@Html.DisplayFor(m => u.ocena)</a>
+                            //<a asp-page="./EditMark" asp-route-id="@u.Id_oceny" asp-route-class_id="@Model.classId" asp-route-subject_id="@Model.subjectId" class="btn btn btn-primary">@Html.DisplayFor(m => u.ocena)</a>
+                            if (u.ocena[0] == '1')
+                            {
+                                <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" class="ocena_przycisk" style="background-color: red">@Html.DisplayFor(m => u.ocena)</a>
+                            }
+                            else if (u.ocena[0] == '2')
+                            {
+                                <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" class="ocena_przycisk" style="background-color: #ff5500">@Html.DisplayFor(m => u.ocena)</a>
+                            }
+                            else if (u.ocena[0] == '6')
+                            {
+                                <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" class="ocena_przycisk" style="background-color: green;">@Html.DisplayFor(m => u.ocena)</a>
+                            }
+                            else
+                            {
+                                <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" class="ocena_przycisk">@Html.DisplayFor(m => u.ocena)</a>
+                            }
                         }
                     </td>
                     <td>

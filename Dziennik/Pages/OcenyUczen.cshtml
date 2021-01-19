@@ -54,16 +54,43 @@
                                     if (u.ocena == "6-") { srednia += 5.75; }
                                 }
                                 else { srednia += Convert.ToDouble(u.ocena); }
-                                <a asp-page="./DetailsMark" asp-route-id="@u.Id_oceny" class="btn btn btn-primary">@Html.DisplayFor(m => u.ocena)</a>
+
+                                if (u.ocena[0] == '1')
+                                {
+                                    <a asp-page="./DetailsMark" asp-route-id="@u.Id_oceny" class="ocena_przycisk" style="background-color: red">@Html.DisplayFor(m => u.ocena)</a>
+                                }
+                                else if (u.ocena[0] == '2')
+                                {
+                                    <a asp-page="./DetailsMark" asp-route-id="@u.Id_oceny" class="ocena_przycisk" style="background-color: #ff5500">@Html.DisplayFor(m => u.ocena)</a>
+                                }
+                                else if (u.ocena[0] == '6')
+                                {
+                                    <a asp-page="./DetailsMark" asp-route-id="@u.Id_oceny" class="ocena_przycisk" style="background-color: green;">@Html.DisplayFor(m => u.ocena)</a>
+                                }
+                                else 
+                                {
+                                    <a asp-page="./DetailsMark" asp-route-id="@u.Id_oceny" class="ocena_przycisk">@Html.DisplayFor(m => u.ocena)</a>
+                                }
                             }
                         }
                     </td>
                     <td>
                         @{
                             if (srednia == 0 || ilosc == 0)
-                            { <p>-</p> }
+                            {
+                                <p>-</p> 
+                            }
                             else
-                            {<p>@Math.Round((srednia / ilosc), 2)</p> }
+                            {
+                                if ((srednia / ilosc) < 2)
+                                {
+                                    <p style="color: red; font-weight: bold;">@Math.Round((srednia / ilosc), 2)</p>
+                                }
+                                else
+                                {
+                                    <p>@Math.Round((srednia / ilosc), 2)</p> 
+                                }
+                            }
                         }
                     </td>
                 </tr>
