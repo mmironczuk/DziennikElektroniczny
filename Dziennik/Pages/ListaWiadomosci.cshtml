@@ -1,4 +1,50 @@
 ﻿@page
 @model Dziennik.Pages.ListaWiadomosciModel
 @{
+    ViewData["Title"] = "Lista Wiadomości";
+    if (Model.typ_uzytkownika == 1)
+    {
+        Layout = "_LayoutNauczyciel";
+    }
+    else if (Model.typ_uzytkownika == 2)
+    {
+        Layout = "_LayoutUczen";
+    }
 }
+
+<div class="card" style="background: transparent !important; text-align: center; border: none !important;">
+    <h1>Lista Wydarzeń</h1>
+
+    <h2>Odebrane:</h2>
+
+    @foreach (var w in Model.wiadomosci_odebrane.ToList())
+    {
+        <div class="card" style="width: 100%; margin-bottom: 1rem; background-color: gold">
+            <div class="card-body">
+                <h5 class="card-title">@w.tytul</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@w.data_wyslania</h6>
+                @if (Model.typ_uzytkownika == 1)
+                {
+                    <p class="card-text">@w.konto_nadawcy.Nauczyciel.imie @w.konto_nadawcy.Nauczyciel.nazwisko</p>
+                }
+                else
+                {
+                    <p class="card-text">@w.konto_nadawcy.Uczen.imie @w.konto_nadawcy.Uczen.nazwisko</p>
+                }
+
+            </div>
+        </div>
+    }
+
+    <h2>Wysłane:</h2>
+
+    @foreach (var w in Model.wiadomosci_wyslane.ToList())
+    {
+        <div class="card" style="width: 100%; margin-bottom: 1rem; background-color: gold">
+            <div class="card-body">
+                <h5 class="card-title">@w.tytul</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@w.data_wyslania</h6>
+            </div>
+        </div>
+    }
+</div>

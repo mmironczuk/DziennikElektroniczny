@@ -31,15 +31,15 @@
                             {
                                 if (o.obecnosc == 1)
                                 {
-                                    <a asp-page="./EditObecnosc" asp-route-id="@o.Id_obecnosci" class="btn btn btn-primary">nb</a>
+                                    <a asp-page="./EditObecnosc" asp-route-id="@o.Id_obecnosci" class="ocena_przycisk">nb</a>
                                 }
                                 else if (o.obecnosc == 2)
                                 {
-                                    <a asp-page="./EditObecnosc" asp-route-id="@o.Id_obecnosci" class="btn btn btn-primary">sp</a>
+                                    <a asp-page="./EditObecnosc" asp-route-id="@o.Id_obecnosci" class="ocena_przycisk">sp</a>
                                 }
                                 else if (o.obecnosc == 3)
                                 {
-                                    <a asp-page="./EditObecnosc" asp-route-id="@o.Id_obecnosci" class="btn btn btn-primary">usp</a>
+                                    <a asp-page="./EditObecnosc" asp-route-id="@o.Id_obecnosci" class="ocena_przycisk">usp</a>
                                 }
                             }
                         }

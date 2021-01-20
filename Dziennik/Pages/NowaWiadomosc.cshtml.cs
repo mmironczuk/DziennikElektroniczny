@@ -26,9 +26,14 @@ namespace Dziennik.Pages
         public string imie { get; set; }
         public string nazwisko { get; set; }
 
-        public Konto konto_odbiorcy { get; set; }
+        [BindProperty]
+        public int id_konta_odbiorcy { get; set; }
 
+        [BindProperty]
         public Wiadomosc wiadomosc { get; set; }
+
+        [BindProperty]
+        public int id_konta { get; set; }
 
         public void OnGet()
         {
@@ -38,6 +43,7 @@ namespace Dziennik.Pages
             Konto konto = new Konto();
             konto = db.GetKontoLogin(login);
             typ_uzytkownika = konto.typ_uzytkownika;
+            id_konta = konto.Id_konta;
 
             odbiorcy_uczniowie = db.GetUczniowieAll();
             odbiorcy_nauczyciele = db.GetNauczycielAll();
@@ -55,8 +61,14 @@ namespace Dziennik.Pages
             }
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(Wiadomosc wiadomosc, int id_konta_odbiorcy)
         {
+            wiadomosc.konto_odbiorcy.Id_konta = id_konta_odbiorcy;
+            wiadomosc.konto_nadawcy.Id_konta = id_konta;
+            wiadomosc.data_wyslania = DateTime.Now;
+
+            db.CreateWiadomosc(wiadomosc);
+
             if (typ_uzytkownika == 1)
             {
                 return RedirectToPage("MainNauczyciel");

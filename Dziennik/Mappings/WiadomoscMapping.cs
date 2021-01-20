@@ -13,6 +13,7 @@ namespace Dziennik.Mappings
             Id(x => x.Id_wiadomosci).GeneratedBy.Increment();
             Map(x => x.tytul).Length(50).Nullable();
             Map(x => x.tresc).Length(250).Nullable();
+            Map(x => x.data_wyslania).Not.Nullable();
             References(x => x.konto_nadawcy).Column("Id_nadawcy").Not.LazyLoad();
             References(x => x.konto_odbiorcy).Column("Id_odbiorcy").Not.LazyLoad();
             Table("Wiadomosc");

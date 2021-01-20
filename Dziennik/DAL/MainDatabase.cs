@@ -251,6 +251,20 @@ namespace Dziennik.DAL
             return uczniowie;
         }
 
+        public override ObservableCollection<Wiadomosc> GetWiadomosciKonta(int id)
+        {
+            ObservableCollection<Wiadomosc> wiadomosci;
+
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    wiadomosci = new ObservableCollection<Wiadomosc>(session.QueryOver<Wiadomosc>().Where(d => d.konto_nadawcy.Id_konta == id || d.konto_odbiorcy.Id_konta == id).List());
+                }
+            }
+            return wiadomosci;
+        }
+
         public override IList<Lekcja> GetLekcjeNauczanie(int id)
         {
             IList<Lekcja> lekcje;
@@ -590,6 +604,18 @@ namespace Dziennik.DAL
                 using (var transaction = session.BeginTransaction())
                 {
                     session.Save(lekcja);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void CreateWiadomosc(Wiadomosc wiadomosc)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Save(wiadomosc);
                     transaction.Commit();
                 }
             }
