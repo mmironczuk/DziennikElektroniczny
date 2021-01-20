@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="~/css/Ladne.css" />
     <style>
         body {
-            background-image: url("/images/bcg.jpg") !important;
+            background-image: url("/images/bcg.jpg");
         }
 
         footer {
@@ -24,16 +24,12 @@
 </head>
 <body>
     <header>
-        <div>
-            
-            <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
-                <img style="float: left; width: 50px; height: 50px; margin-right: 20px" src="~/images/hat.png" alt="logo" />
-                <a class="navbar-brand" asp-area="" asp-page="/Index">
-                    Dziennik
-                </a>
-
-            </nav>
-        </div>
+        <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" asp-area="" asp-page="/Index">
+                <img src="~/images/icon.ico" />
+                Dziennik
+            </a>
+        </nav>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
