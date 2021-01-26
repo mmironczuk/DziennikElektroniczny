@@ -13,7 +13,13 @@ namespace Dziennik.Models
         public virtual string haslo { get; set; }
         public virtual string email { get; set; }
         public virtual int typ_uzytkownika { get; set; }
+        public virtual string imie { get; set; }
+        public virtual string nazwisko { get; set; }
+        public virtual string adres { get; set; }
+        public virtual string pesel { get; set; }
         public virtual Nauczyciel Nauczyciel { get; set; }
         public virtual Uczen Uczen { get; set; }
+        public virtual IList<Wiadomosc> wiadomosci_wyslane { get; set; }
+        public virtual IList<Wiadomosc> wiadomosci_odebrane { get; set; }
     }
 }
