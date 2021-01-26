@@ -48,7 +48,7 @@ namespace Dziennik.Pages.Login
         }
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            int id;
+            //int id;
             int type = -1;
             int id = 0;
             type = ValidateUser(login, password);

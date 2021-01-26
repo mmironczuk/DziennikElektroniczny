@@ -1,0 +1,17 @@
+﻿@page
+@model Dziennik.Pages.ListaWiadomosciModel
+@{
+    ViewData["Title"] = "ListaWiadomosci";
+    if (Model.typ_uzytkownika == 1)
+    {
+        Layout = "_LayoutNauczyciel";
+    }
+    else if (Model.typ_uzytkownika == 2)
+    {
+        Layout = "_LayoutUczen";
+    }
+}
+
+    <div class="card" style="background: transparent !important; text-align: center; border: none !important;">
+        <h1>Lista wiadomości mockup</h1>
+    </div>
