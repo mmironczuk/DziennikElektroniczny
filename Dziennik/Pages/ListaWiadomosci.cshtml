@@ -13,7 +13,7 @@
 }
 
 <div class="card" style="background: transparent !important; text-align: center; border: none !important;">
-    <h1>Lista Wydarzeń</h1>
+    <h1>Skrzynka wiadomości</h1>
 
     <h2>Odebrane:</h2>
 
@@ -23,15 +23,7 @@
             <div class="card-body">
                 <h5 class="card-title">@w.tytul</h5>
                 <h6 class="card-subtitle mb-2 text-muted">@w.data_wyslania</h6>
-                @if (Model.typ_uzytkownika == 1)
-                {
-                    <p class="card-text">@w.konto_nadawcy.Nauczyciel.imie @w.konto_nadawcy.Nauczyciel.nazwisko</p>
-                }
-                else
-                {
-                    <p class="card-text">@w.konto_nadawcy.Uczen.imie @w.konto_nadawcy.Uczen.nazwisko</p>
-                }
-
+                <p class="card-text">@w.konto_nadawcy.imie @w.konto_nadawcy.nazwisko</p>
             </div>
         </div>
     }

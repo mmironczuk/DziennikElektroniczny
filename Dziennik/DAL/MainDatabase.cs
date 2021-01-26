@@ -498,6 +498,16 @@ namespace Dziennik.DAL
             return obecnosc;
         }
 
+        public override string GetHasloLogin(string login)
+        {
+            Konto konto;
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                konto = session.QueryOver<Konto>().Where(d => d.login == login).SingleOrDefault();
+            }
+            return konto.haslo;
+        }
+
         public override void CreateKonto(Konto konto)
         {
             Konto account = new Konto();
@@ -663,6 +673,36 @@ namespace Dziennik.DAL
                 {
                     ob.obecnosc = obecnosc.obecnosc;
                     session.SaveOrUpdate(ob);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void UpdatePassword(string login, string password)
+        {
+            Konto konto = GetKontoLogin(login);
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    var passwordHasher = new PasswordHasher<string>();
+                    string haslo = passwordHasher.HashPassword(konto.login, password).Substring(0, 32);
+                    konto.haslo = haslo;
+                    session.SaveOrUpdate(konto);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void UpdateEmail(string login, string email)
+        {
+            Konto konto = GetKontoLogin(login);
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    konto.email = email;
+                    session.SaveOrUpdate(konto);
                     transaction.Commit();
                 }
             }

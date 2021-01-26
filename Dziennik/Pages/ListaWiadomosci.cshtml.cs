@@ -39,6 +39,8 @@ namespace Dziennik.Pages
             wiadomosci_wyslane = new ObservableCollection<Wiadomosc>();
 
             ObservableCollection<Wiadomosc> wszystkie_wiadomosci = db.GetWiadomosciKonta(konto.Id_konta);
+            ObservableCollection<Uczen> uczniowie = db.GetUczniowieAll();
+            ObservableCollection<Nauczyciel> nauczyciele = db.GetNauczycielAll();
             foreach (var wiadomosc in wszystkie_wiadomosci)
             {
                 if(wiadomosc.konto_nadawcy.Id_konta == konto.Id_konta)

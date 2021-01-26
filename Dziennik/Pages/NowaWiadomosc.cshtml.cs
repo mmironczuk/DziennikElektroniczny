@@ -48,17 +48,8 @@ namespace Dziennik.Pages
             odbiorcy_uczniowie = db.GetUczniowieAll();
             odbiorcy_nauczyciele = db.GetNauczycielAll();
 
-            if(typ_uzytkownika == 2)
-            {
-                Uczen uczen = odbiorcy_uczniowie.Where(x => x.Konto.Id_konta == konto.Id_konta).Single();
-                imie = uczen.imie;
-                nazwisko = uczen.nazwisko;
-            } else
-            {
-                Nauczyciel nauczyciel = db.GetNauczycielKonto(konto.Id_konta);
-                imie = nauczyciel.imie;
-                nazwisko = nauczyciel.nazwisko;
-            }
+            imie = konto.imie;
+            nazwisko = konto.nazwisko;
         }
 
         public IActionResult OnPost(Wiadomosc wiadomosc, int id_konta_odbiorcy)
