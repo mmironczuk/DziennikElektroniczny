@@ -28,24 +28,10 @@ namespace Dziennik.Pages.Login
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
             var login = claim.Value;
             konto = mainDatabase.GetKontoLogin(login);
-            if (konto.typ_uzytkownika == 2)
-            {
-                Uczen uczen = new Uczen();
-                uczen = mainDatabase.GetUczenKonto(konto.Id_konta);
-                imie = uczen.imie;
-                nazwisko = uczen.nazwisko;
-                adres = uczen.adres;
-                pesel = uczen.pesel;
-            }
-            if (konto.typ_uzytkownika == 1)
-            {
-                Nauczyciel nauczyciel = new Nauczyciel();
-                nauczyciel = mainDatabase.GetNauczycielKonto(konto.Id_konta);
-                imie = nauczyciel.imie;
-                nazwisko = nauczyciel.nazwisko;
-                adres = nauczyciel.adres;
-                pesel = nauczyciel.pesel;
-            }
+            imie = konto.imie;
+            nazwisko = konto.nazwisko;
+            adres = konto.adres;
+            pesel = konto.pesel;
         }
     }
 }

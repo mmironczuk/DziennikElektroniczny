@@ -20,6 +20,7 @@ namespace Dziennik.Mappings
             HasMany(x => x.Wydarzenie).Not.LazyLoad();
             References(x => x.Konto).Column("Id_konta").Not.LazyLoad();
             HasOne(x => x.Klasa).Not.LazyLoad();
+            //HasMany(x => x.wiadomosci_wyslane).Not.LazyLoad();
             Table("Nauczyciel");
         }
     }

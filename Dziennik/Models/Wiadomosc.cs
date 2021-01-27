@@ -8,15 +8,16 @@ namespace Dziennik.Models
     public class Wiadomosc
     {
         public virtual int Id_wiadomosci { get; set; }
-        public virtual string Tresc { get; set; }
-        public virtual Konto Nadawca { get; set; }
-        public virtual Konto Odbiorca { get; set; }
+        public virtual string tytul { get; set; }
+        public virtual string tresc { get; set; }
+        public virtual DateTime data_wyslania { get; set; }
+        public virtual Konto konto_nadawcy { get; set; }
+        public virtual Konto konto_odbiorcy { get; set; }
 
-        public Wiadomosc(Konto nadawca, Konto odbiorca, string tresc)
+        public Wiadomosc()
         {
-            this.Nadawca = nadawca;
-            this.Odbiorca = odbiorca;
-            this.Tresc = tresc;
+            konto_nadawcy = new Konto();
+            konto_odbiorcy = new Konto();
         }
     }
 }

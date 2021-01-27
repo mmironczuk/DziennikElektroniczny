@@ -1,0 +1,69 @@
+﻿@page
+@model Dziennik.Pages.NowaWiadomoscModel
+@{
+    ViewData["Title"] = "Nowa Wiadomosc";
+    if (Model.typ_uzytkownika == 1)
+    {
+        Layout = "_LayoutNauczyciel";
+    }
+    else if (Model.typ_uzytkownika == 2)
+    {
+        Layout = "_LayoutUczen";
+    }
+}
+
+<div class="container card" style="text-align:center">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6">
+            <h1>Nowe wydarzenie</h1>
+            <form class="form-horizontal" method="post">
+                <input asp-for="typ_uzytkownika" type="hidden"/>
+                <input asp-for="id_konta" type="hidden"/>
+                <div class="form-group">
+                    <label class="control-label col-sm2">Nadawca:</label>
+                    <div class="col-sm-12">
+                        <label class="form-control">@Model.imie @Model.nazwisko</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm2">Odbiorca:</label>
+                    <div class="col-sm-12">
+                        <select asp-for="id_konta_odbiorcy" class="form-control">
+                            <optgroup label="Nauczyciele">
+                                @foreach (var n in Model.odbiorcy_nauczyciele)
+                                {
+                                    <option value="@n.Konto.Id_konta">@n.imie @n.nazwisko</option>
+                                }
+                            </optgroup>
+                            <optgroup label="Uczniowie">
+                                @foreach (var u in Model.odbiorcy_uczniowie)
+                                {
+                                    <option value="@u.Konto.Id_konta">@u.imie @u.nazwisko</option>
+                                }
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm2">Tytuł:</label>
+                    <div class="col-sm-12">
+                        <input class="form-control" asp-for="wiadomosc.tytul"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm2">Treść:</label>
+                    <div class="col-sm-12">
+                        <textarea class="form-control" asp-for="wiadomosc.tresc" rows="8"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-12">
+                        <button class="btn btn btn-primary">Wyślij</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>

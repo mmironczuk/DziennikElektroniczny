@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,10 +14,18 @@ namespace Dziennik.Pages
     public class ListaWiadomosciModel : PageModel
     {
         [BindProperty]
-        public ObservableCollection<Wiadomosc> wiadomosci { get; set; }
-        [BindProperty]
         public int typ_uzytkownika { get; set; }
         public MainDatabase db = new MainDatabase();
+
+        [BindProperty]
+        public Konto konto { get; set; }
+
+
+        [BindProperty]
+        public ObservableCollection<Wiadomosc> wiadomosci_odebrane { get; set; }
+        [BindProperty]
+        public ObservableCollection<Wiadomosc> wiadomosci_wyslane { get; set; }
+
         public void OnGet()
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
@@ -26,14 +34,22 @@ namespace Dziennik.Pages
             Konto konto = new Konto();
             konto = db.GetKontoLogin(login);
             typ_uzytkownika = konto.typ_uzytkownika;
-            if (typ_uzytkownika == 2)
-            {
-                Uczen uczen = db.GetUczenKonto(konto.Id_konta);
-            }
-            else if (typ_uzytkownika == 1)
-            {
-                Nauczyciel nauczyciel = db.GetNauczycielKonto(konto.Id_konta);
 
+            wiadomosci_odebrane = new ObservableCollection<Wiadomosc>();
+            wiadomosci_wyslane = new ObservableCollection<Wiadomosc>();
+
+            ObservableCollection<Wiadomosc> wszystkie_wiadomosci = db.GetWiadomosciKonta(konto.Id_konta);
+            ObservableCollection<Uczen> uczniowie = db.GetUczniowieAll();
+            ObservableCollection<Nauczyciel> nauczyciele = db.GetNauczycielAll();
+            foreach (var wiadomosc in wszystkie_wiadomosci)
+            {
+                if(wiadomosc.konto_nadawcy.Id_konta == konto.Id_konta)
+                {
+                    wiadomosci_wyslane.Add(wiadomosc);
+                } else
+                {
+                    wiadomosci_odebrane.Add(wiadomosc);
+                }
             }
         }
     }
