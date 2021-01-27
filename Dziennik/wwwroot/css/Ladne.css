@@ -43,12 +43,8 @@ body::before {
     width: 120vw;
     height: 120vh;
     background-image: url("/images/bcg.jpg");
-    filter: blur(12px);
 }
 
-footer {
-    background: white;
-}
 
 .py-3 tr {
     background-color: #333 !important;
@@ -224,3 +220,4 @@ footer {
     width: 40px !important;
     height: 40px !important;
 }
+

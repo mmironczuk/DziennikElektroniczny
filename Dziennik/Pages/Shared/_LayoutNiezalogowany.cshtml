@@ -11,15 +11,17 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
     <link rel="stylesheet" href="~/css/Ladne.css" />
+    <link rel="stylesheet" href="~/css/footer.css" />
     <style>
         body {
             background-image: url("/images/bcg.jpg");
+
         }
 
-        footer {
-            background: white;
-        }
     </style>
 </head>
 <body>
@@ -31,16 +33,61 @@
             </a>
         </nav>
     </header>
-    <div class="container">
+    <div class="container" style="padding-bottom:350px;">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
     @RenderSection("Scripts", required: false)
+<footer class="site-footer" style="height:300px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <h6>O platformie</h6>
+                <p class="text-justify">www.DZIENNIK.pl <i> Dziennik </i> to platforma wspomagajaca uczelnie. Zarządzanie uczniami oraz ich ocenami.</div>
+
+            <div class="col-xs-6 col-md-3">
+                <h6>Powiązane strony</h6>
+                <ul class="footer-links">
+                    <li><a href="https://usosweb.pb.edu.pl/">USOS</a></li>
+                    <li><a href="https://pb.edu.pl/">Politechnika Białostocka</a></li>
+                    <li><a href="https://wi.pb.edu.pl/">Wydział Informatyki</a></li>
+                </ul>
+            </div>
+
+            <div class="col-xs-6 col-md-3">
+                <h6>Twórcy</h6>
+                <ul class="footer-links">
+                    <li><a >Michał Mirończuk</a></li>
+                    <li><a >Michał Mitrosz</a></li>
+                    <li><a >Tomasz Śmietało</a></li>
+                    <li><a >Krzysztof Kozaczuk</a></li>
+                    <li><a >Damian Krawczun</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="container" >
+        <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-12">
+                <p class="copyright-text">
+                    Copyright &copy; 2020 All Rights Reserved by
+                    <a href="#">Dziennik</a>.
+                </p>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <ul class="social-icons">
+                    <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                    <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
