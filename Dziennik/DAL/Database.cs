@@ -40,6 +40,7 @@ namespace Dziennik.DAL
         public abstract Konto GetKontoLogin(string login);
         public abstract Ocena GetOcena(int id);
         public abstract Klasa GetKlasa(int id);
+        public abstract Wiadomosc GetWiadomosc(int id);
         public abstract Wydarzenie GetWydarzenie(int id);
         public abstract Lekcja GetLekcja(int id);
         public abstract Obecnosc GetObecnosc(int id);
@@ -63,5 +64,6 @@ namespace Dziennik.DAL
         public abstract void DeleteOcena(int id);
         public abstract void DeleteWydarzenie(int id);
         public abstract void DeleteObecnosc(int id);
+        public abstract void DeleteWiadomosc(int id);
     }
 }

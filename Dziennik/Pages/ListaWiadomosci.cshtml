@@ -21,9 +21,13 @@
     {
         <div class="card" style="width: 100%; margin-bottom: 1rem; background-color: gold">
             <div class="card-body">
-                <h5 class="card-title">@w.tytul</h5>
-                <h6 class="card-subtitle mb-2 text-muted">@w.data_wyslania</h6>
+                <h4 class="card-title">@w.tytul</h4>
+                <h5 class="card-subtitle mb-2 text-muted">@w.data_wyslania</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@w.tresc</h6>
                 <p class="card-text">@w.konto_nadawcy.imie @w.konto_nadawcy.nazwisko</p>
+                <form method="post">
+                    <button asp-route-id="@w.Id_wiadomosci" class="btn btn-danger">Usuń</button>
+                </form>
             </div>
         </div>
     }
@@ -34,8 +38,13 @@
     {
         <div class="card" style="width: 100%; margin-bottom: 1rem; background-color: gold">
             <div class="card-body">
-                <h5 class="card-title">@w.tytul</h5>
-                <h6 class="card-subtitle mb-2 text-muted">@w.data_wyslania</h6>
+                <h4 class="card-title">@w.tytul</h4>
+                <h5 class="card-subtitle mb-2 text-muted">@w.data_wyslania</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@w.tresc</h6>
+                <p class="card-text">@w.konto_odbiorcy.imie @w.konto_odbiorcy.nazwisko</p>
+                <form method="post">
+                    <button asp-route-id="@w.Id_wiadomosci" class="btn btn-danger">Usuń</button>
+                </form>
             </div>
         </div>
     }
