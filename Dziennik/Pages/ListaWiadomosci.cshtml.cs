@@ -52,5 +52,13 @@ namespace Dziennik.Pages
                 }
             }
         }
+
+
+        public IActionResult OnPost(int id)
+        {
+            db.DeleteWiadomosc(id);
+
+            return Redirect("/ListaWiadomosci");
+        }
     }
 }

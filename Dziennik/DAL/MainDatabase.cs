@@ -322,6 +322,16 @@ namespace Dziennik.DAL
             return klasa;
         }
 
+        public override Wiadomosc GetWiadomosc(int id)
+        {
+            Wiadomosc wiadomosc = null;
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                wiadomosc = session.QueryOver<Wiadomosc>().Where(w => w.Id_wiadomosci == id).SingleOrDefault();
+            }
+            return wiadomosc;
+        }
+
         public override Klasa GetKlasaWychowawca(int id)
         {
             Klasa klasa;
@@ -606,6 +616,19 @@ namespace Dziennik.DAL
                 {
                     Obecnosc obecnosc = GetObecnosc(id);
                     session.Delete(obecnosc);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void DeleteWiadomosc(int id)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    Wiadomosc wiadomosc = GetWiadomosc(id);
+                    session.Delete(wiadomosc);
                     transaction.Commit();
                 }
             }
