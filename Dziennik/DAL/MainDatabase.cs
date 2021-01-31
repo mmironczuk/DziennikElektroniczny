@@ -20,11 +20,7 @@ namespace Dziennik.DAL
             ObservableCollection<Klasa> klasy = new ObservableCollection<Klasa>();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     klasy = new ObservableCollection<Klasa>(session.QueryOver<Klasa>().List());
-                    transaction.Commit();
-                }
             }
             return klasy;
         }
@@ -33,11 +29,7 @@ namespace Dziennik.DAL
             ObservableCollection<Konto> konta = new ObservableCollection<Konto>();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     konta = new ObservableCollection<Konto>(session.QueryOver<Konto>().List());
-                    transaction.Commit();
-                }
             }
             return konta;
         }
@@ -46,11 +38,7 @@ namespace Dziennik.DAL
             ObservableCollection<Lekcja> lekcje = new ObservableCollection<Lekcja>();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     lekcje = new ObservableCollection<Lekcja>(session.QueryOver<Lekcja>().List());
-                    transaction.Commit();
-                }
             }
             return lekcje;
         }
@@ -60,11 +48,7 @@ namespace Dziennik.DAL
             ObservableCollection<Lekcja> lekcje ;
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     lekcje = new ObservableCollection<Lekcja>(session.QueryOver<Lekcja>().Where(d=>d.data==Convert.ToDateTime(null)).List());
-                    transaction.Commit();
-                }
             }
             return lekcje;
         }
@@ -74,11 +58,7 @@ namespace Dziennik.DAL
             ObservableCollection<Nauczanie> nauczania = new ObservableCollection<Nauczanie>();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     nauczania = new ObservableCollection<Nauczanie>(session.QueryOver<Nauczanie>().List());
-                    transaction.Commit();
-                }
             }
             return nauczania;
         }
@@ -88,11 +68,7 @@ namespace Dziennik.DAL
             ObservableCollection<Nauczyciel> nauczyciele = new ObservableCollection<Nauczyciel>();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     nauczyciele = new ObservableCollection<Nauczyciel>(session.QueryOver<Nauczyciel>().List());
-                    transaction.Commit();
-                }
             }
             return nauczyciele;
         }
@@ -102,11 +78,7 @@ namespace Dziennik.DAL
             ObservableCollection<Obecnosc> obecnosci;
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     obecnosci = new ObservableCollection<Obecnosc>(session.QueryOver<Obecnosc>().List());
-                    transaction.Commit();
-                }
             }
             return obecnosci;
         }
@@ -116,11 +88,7 @@ namespace Dziennik.DAL
             ObservableCollection<Ocena> oceny;
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     oceny = new ObservableCollection<Ocena>(session.QueryOver<Ocena>().List());
-                    transaction.Commit();
-                }
             }
             return oceny;
         }
@@ -130,11 +98,7 @@ namespace Dziennik.DAL
             ObservableCollection<Przedmiot> przedmioty = new ObservableCollection<Przedmiot>();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     przedmioty = new ObservableCollection<Przedmiot>(session.QueryOver<Przedmiot>().List());
-                    transaction.Commit();
-                }
             }
             return przedmioty;
         }
@@ -144,11 +108,7 @@ namespace Dziennik.DAL
             ObservableCollection<Wydarzenie> wydarzenia = new ObservableCollection<Wydarzenie>();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     wydarzenia = new ObservableCollection<Wydarzenie>(session.QueryOver<Wydarzenie>().List());
-                    transaction.Commit();
-                }
             }
             return wydarzenia;
         }
@@ -157,11 +117,7 @@ namespace Dziennik.DAL
             ObservableCollection<Uczen> uczniowie = new ObservableCollection<Uczen>();
             using(var session=NHibernateHelper.OpenSession())
             {
-                using(var transaction=session.BeginTransaction())
-                {
                     uczniowie = new ObservableCollection<Uczen>(session.QueryOver<Uczen>().List());
-                    transaction.Commit();
-                }
             }
             return uczniowie;
         }
@@ -171,11 +127,7 @@ namespace Dziennik.DAL
             ObservableCollection<Nauczanie> nauczania = new ObservableCollection<Nauczanie>();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     nauczania = new ObservableCollection<Nauczanie>(session.QueryOver<Nauczanie>().Where(d => d.Nauczyciel.Id_nauczyciela == id).List());
-                    transaction.Commit();
-                }
             }
             return nauczania;
         }
@@ -185,11 +137,7 @@ namespace Dziennik.DAL
             ObservableCollection<Uczen> uczniowie = new ObservableCollection<Uczen>();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     uczniowie = new ObservableCollection<Uczen>(session.QueryOver<Uczen>().Where(d=>d.Klasa.Id_klasy==id).List());
-                    transaction.Commit();
-                }
             }
             return uczniowie;
         }
@@ -199,11 +147,7 @@ namespace Dziennik.DAL
             ObservableCollection<Obecnosc> obecnosci = new ObservableCollection<Obecnosc>();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     obecnosci = new ObservableCollection<Obecnosc>(session.QueryOver<Obecnosc>().Where(d => d.Lekcja.Id_lekcji == id).List());
-                    transaction.Commit();
-                }
             }
             return obecnosci;
         }
@@ -213,11 +157,7 @@ namespace Dziennik.DAL
             ObservableCollection<Obecnosc> obecnosci = new ObservableCollection<Obecnosc>();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     obecnosci = new ObservableCollection<Obecnosc>(session.QueryOver<Obecnosc>().Where(d => d.Uczen.Id_ucznia == id).List());
-                    transaction.Commit();
-                }
             }
             return obecnosci;
         }
@@ -227,11 +167,7 @@ namespace Dziennik.DAL
             ObservableCollection<Lekcja> lekcje = new ObservableCollection<Lekcja>();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     lekcje = new ObservableCollection<Lekcja>(session.QueryOver<Lekcja>().Where(d => (d.Klasa.Id_klasy == id)&&(d.data!=Convert.ToDateTime(null))).List());
-                    transaction.Commit();
-                }
             }
             return lekcje;
         }
@@ -242,11 +178,7 @@ namespace Dziennik.DAL
             ObservableCollection<Uczen> uczniowie;
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     uczniowie = new ObservableCollection<Uczen>(session.QueryOver<Uczen>().Where(d => d.Klasa.Id_klasy == klasa.Id_klasy).List());
-                    transaction.Commit();
-                }
             }
             return uczniowie;
         }
@@ -257,10 +189,7 @@ namespace Dziennik.DAL
 
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     wiadomosci = new ObservableCollection<Wiadomosc>(session.QueryOver<Wiadomosc>().Where(d => d.konto_nadawcy.Id_konta == id || d.konto_odbiorcy.Id_konta == id).List());
-                }
             }
             return wiadomosci;
         }
@@ -270,11 +199,7 @@ namespace Dziennik.DAL
             IList<Lekcja> lekcje;
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     lekcje = session.QueryOver<Lekcja>().Where(d => (d.Nauczanie.Id_nauczania == id)&&(d.data == Convert.ToDateTime(null))).List();
-                    transaction.Commit();
-                }
             }
             return lekcje;
         }
@@ -284,11 +209,7 @@ namespace Dziennik.DAL
             IList<Ocena> oceny;
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     oceny = session.QueryOver<Ocena>().Where(d => d.Uczen.Id_ucznia == id).List();
-                    transaction.Commit();
-                }
             }
             return oceny;
         }
@@ -298,25 +219,16 @@ namespace Dziennik.DAL
             IList<Ocena> oceny;
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     oceny = session.QueryOver<Ocena>().Where(d => d.Przedmiot.Id_przedmiotu == id).List();
-                    transaction.Commit();
-                }
             }
             return oceny;
         }
-        // To Do
         public override IList<Wydarzenie> GetWydarzeniaUczen(int id)
         {
             IList<Wydarzenie> wydarzenia;
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     wydarzenia = session.QueryOver<Wydarzenie>().Where(d => d.Klasa.Id_klasy == id).List();
-                    transaction.Commit();
-                }
             }
             return wydarzenia;
         }
@@ -326,11 +238,7 @@ namespace Dziennik.DAL
             IList<Wydarzenie> wydarzenia;
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     wydarzenia = session.QueryOver<Wydarzenie>().Where(d => d.Nauczyciel.Id_nauczyciela == id).List();
-                    transaction.Commit();
-                }
             }
             return wydarzenia;
         }
@@ -340,11 +248,7 @@ namespace Dziennik.DAL
             Uczen uczen = new Uczen();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     uczen = session.QueryOver<Uczen>().Where(d => d.Id_ucznia == id).SingleOrDefault();
-                    transaction.Commit();
-                }
             }
             return uczen;
         }
@@ -354,11 +258,7 @@ namespace Dziennik.DAL
             Uczen uczen = new Uczen();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     uczen = session.QueryOver<Uczen>().Where(d => d.Konto.Id_konta == id).SingleOrDefault();
-                    transaction.Commit();
-                }
             }
             return uczen;
         }
@@ -368,11 +268,7 @@ namespace Dziennik.DAL
             Nauczyciel nauczyciel= new Nauczyciel();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     nauczyciel = session.QueryOver<Nauczyciel>().Where(d => d.Id_nauczyciela == id).SingleOrDefault();
-                    transaction.Commit();
-                }
             }
             return nauczyciel;
         }
@@ -382,11 +278,7 @@ namespace Dziennik.DAL
             Nauczyciel nauczyciel = new Nauczyciel();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     nauczyciel = session.QueryOver<Nauczyciel>().Where(d => d.Konto.Id_konta == id).SingleOrDefault();
-                    transaction.Commit();
-                }
             }
             return nauczyciel;
         }
@@ -396,11 +288,7 @@ namespace Dziennik.DAL
             Przedmiot przedmiot = new Przedmiot();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     przedmiot = session.QueryOver<Przedmiot>().Where(d=>d.Id_przedmiotu==id).SingleOrDefault();
-                    transaction.Commit();
-                }
             }
             return przedmiot;
         }
@@ -419,11 +307,7 @@ namespace Dziennik.DAL
             Ocena ocena = new Ocena();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     ocena = session.QueryOver<Ocena>().Where(d => d.Id_oceny == id).SingleOrDefault();
-                    transaction.Commit();
-                }
             }
             return ocena;
         }
@@ -433,11 +317,7 @@ namespace Dziennik.DAL
             Klasa klasa = new Klasa();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     klasa = session.QueryOver<Klasa>().Where(d => d.Id_klasy == id).SingleOrDefault();
-                    transaction.Commit();
-                }
             }
             return klasa;
         }
@@ -447,11 +327,7 @@ namespace Dziennik.DAL
             Klasa klasa;
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     klasa = session.QueryOver<Klasa>().Where(d => d.Nauczyciel.Id_nauczyciela == id).SingleOrDefault();
-                    transaction.Commit();
-                }
             }
             return klasa;
         }
@@ -461,11 +337,7 @@ namespace Dziennik.DAL
             Wydarzenie wydarzenie = new Wydarzenie();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     wydarzenie = session.QueryOver<Wydarzenie>().Where(d => d.Id_wydarzenia == id).SingleOrDefault();
-                    transaction.Commit();
-                }
             }
             return wydarzenie;
         }
@@ -475,11 +347,7 @@ namespace Dziennik.DAL
             Lekcja lekcja = new Lekcja();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     lekcja = session.QueryOver<Lekcja>().Where(d => d.Id_lekcji == id).SingleOrDefault();
-                    transaction.Commit();
-                }
             }
             return lekcja;
         }
@@ -489,11 +357,7 @@ namespace Dziennik.DAL
             Obecnosc obecnosc = new Obecnosc();
             using (var session = NHibernateHelper.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
-                {
                     obecnosc = session.QueryOver<Obecnosc>().Where(d => d.Id_obecnosci == id).SingleOrDefault();
-                    transaction.Commit();
-                }
             }
             return obecnosc;
         }
@@ -685,9 +549,7 @@ namespace Dziennik.DAL
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    var passwordHasher = new PasswordHasher<string>();
-                    string haslo = passwordHasher.HashPassword(konto.login, password).Substring(0, 32);
-                    konto.haslo = haslo;
+                    konto.haslo = password;
                     session.SaveOrUpdate(konto);
                     transaction.Commit();
                 }
