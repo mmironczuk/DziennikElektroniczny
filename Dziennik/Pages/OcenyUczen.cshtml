@@ -67,7 +67,7 @@
                                 {
                                     <a asp-page="./DetailsMark" asp-route-id="@u.Id_oceny" class="ocena_przycisk" style="background-color: green;">@Html.DisplayFor(m => u.ocena)</a>
                                 }
-                                else 
+                                else
                                 {
                                     <a asp-page="./DetailsMark" asp-route-id="@u.Id_oceny" class="ocena_przycisk">@Html.DisplayFor(m => u.ocena)</a>
                                 }
@@ -78,7 +78,7 @@
                         @{
                             if (srednia == 0 || ilosc == 0)
                             {
-                                <p>-</p> 
+                                <p>-</p>
                             }
                             else
                             {
@@ -88,13 +88,25 @@
                                 }
                                 else
                                 {
-                                    <p>@Math.Round((srednia / ilosc), 2)</p> 
+                                    <p>@Math.Round((srednia / ilosc), 2)</p>
                                 }
                             }
                         }
                     </td>
                 </tr>
-            }
+                            }
+            <tr>
+                <td>
+                </td>
+                <td align="right">Średnia ogólna:</td>
+                <td>@Model.srednia_ucznia</td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td align="right">Miejsce w rankingu:</td>
+                <td>@Model.ranking_ucznia/@Model.ilosc_uczniow</td>
+            </tr>
         </tbody>
     </table>
 </div>
