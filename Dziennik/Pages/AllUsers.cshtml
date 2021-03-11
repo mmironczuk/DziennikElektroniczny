@@ -1,0 +1,31 @@
+﻿@page
+@model Dziennik.Pages.AllUsersModel
+@{
+    Layout = "_LayoutAdmin";
+    ViewBag.Title = "Zarządzanie uczniami";
+}
+
+<br />
+<br />
+<div class="card">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Imię i nazwisko</th>
+                <th scope="col">Akcja</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.uczniowie.ToList())
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => p.imie) @Html.DisplayFor(m => p.nazwisko)</td>
+                    <td>
+                        <a asp-page="./AdminPage" class="btn btn-warning">Edytuj dane</a>
+                        <a asp-page="./DeleteUczen" asp-route-id="@p.Id_ucznia" class="btn btn-danger">Usuń ucznia</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

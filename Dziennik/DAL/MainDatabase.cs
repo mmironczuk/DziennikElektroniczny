@@ -382,6 +382,16 @@ namespace Dziennik.DAL
             return konto.haslo;
         }
 
+        public override Konto GetKontoUczen(int id)
+        {
+            Konto konto;
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                konto = session.QueryOver<Konto>().Where(d => d.Uczen.Id_ucznia==id).SingleOrDefault();
+            }
+            return konto;
+        }
+
         public override void CreateKonto(Konto konto)
         {
             Konto account = new Konto();
@@ -629,6 +639,21 @@ namespace Dziennik.DAL
                 {
                     Wiadomosc wiadomosc = GetWiadomosc(id);
                     session.Delete(wiadomosc);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void DeleteUczen(int id)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    Uczen uczen = GetUczen(id);
+                    session.Delete(uczen);
+                    Konto konto = GetKontoUczen(id);
+                    session.Delete(konto);
                     transaction.Commit();
                 }
             }
