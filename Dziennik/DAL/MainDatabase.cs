@@ -372,6 +372,16 @@ namespace Dziennik.DAL
             return obecnosc;
         }
 
+        public override Uczen GetUczenLogin(string login)
+        {
+            Uczen uczen = new Uczen();
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                uczen = session.QueryOver<Uczen>().Where(d => d.Konto.login == login).SingleOrDefault();
+            }
+            return uczen;
+        }
+
         public override string GetHasloLogin(string login)
         {
             Konto konto;

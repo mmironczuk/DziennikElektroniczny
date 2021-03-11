@@ -43,6 +43,7 @@ body::before {
     width: 120vw;
     height: 120vh;
     background-image: url("/images/bcg.jpg");
+    filter: blur(8px);
 }
 
 
