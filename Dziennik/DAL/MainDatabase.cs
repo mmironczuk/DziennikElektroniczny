@@ -600,6 +600,22 @@ namespace Dziennik.DAL
             }
         }
 
+        public override void UpdateStudent(Uczen uczen)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                Uczen user = GetUczen(uczen.Id_ucznia);
+                using (var transaction = session.BeginTransaction())
+                {
+                    user.imie = uczen.imie;
+                    user.nazwisko = uczen.nazwisko;
+                    user.adres = uczen.adres;
+                    session.SaveOrUpdate(user);
+                    transaction.Commit();
+                }
+            }
+        }
+
         public override void DeleteOcena(int id)
         {
             using (var session = NHibernateHelper.OpenSession())
