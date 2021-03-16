@@ -68,5 +68,7 @@ namespace Dziennik.DAL
         public abstract void DeleteObecnosc(int id);
         public abstract void DeleteWiadomosc(int id);
         public abstract void DeleteUczen(int id);
+        public abstract void BlockStudent(int id);
+        public abstract void UnblockStudent(int id);
     }
 }

@@ -56,7 +56,7 @@ namespace Dziennik.Pages.Login
             type = ValidateUser(login, password);
             if (type == 1) id = mainDatabase.GetNauczycielKonto(konto.Id_konta).Id_nauczyciela;
             else if (type == 2) id = mainDatabase.GetUczenKonto(konto.Id_konta).Id_ucznia;
-            if (type != -1)
+            if (type != -1 && konto.active==1)
             {
                 var claims = new List<Claim>()
                 {

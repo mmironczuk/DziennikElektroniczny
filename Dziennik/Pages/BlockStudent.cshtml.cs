@@ -8,12 +8,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Dziennik.Pages
 {
-    public class DeleteUczenModel : PageModel
+    public class BlockStudentModel : PageModel
     {
         MainDatabase mainDatabase = new MainDatabase();
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(int id, int type)
         {
-            mainDatabase.DeleteUczen(id);
+            if(type==1) mainDatabase.BlockStudent(id);
+            else mainDatabase.UnblockStudent(id);
             return RedirectToPage("AllUsers");
         }
     }
