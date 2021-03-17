@@ -616,6 +616,34 @@ namespace Dziennik.DAL
             }
         }
 
+        public override void UpdateClass(Klasa klasa)
+        {
+            Klasa klasa_new = GetKlasa(klasa.Id_klasy);
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    klasa_new.nazwa = klasa.nazwa;
+                    session.SaveOrUpdate(klasa_new);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void UpdateStudentClass(int user_id, int class_id)
+        {
+            Uczen uczen = GetUczen(user_id);
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    uczen.Klasa.Id_klasy = class_id;
+                    session.SaveOrUpdate(uczen);
+                    transaction.Commit();
+                }
+            }
+        }
+
         public override void DeleteOcena(int id)
         {
             using (var session = NHibernateHelper.OpenSession())

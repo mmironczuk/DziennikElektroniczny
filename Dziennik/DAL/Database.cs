@@ -64,6 +64,8 @@ namespace Dziennik.DAL
         public abstract void UpdatePassword(string login, string password);
         public abstract void UpdateEmail(string login, string email);
         public abstract void UpdateStudent(Uczen uczen);
+        public abstract void UpdateClass(Klasa klasa);
+        public abstract void UpdateStudentClass(int user_id, int class_id);
         public abstract void DeleteOcena(int id);
         public abstract void DeleteWydarzenie(int id);
         public abstract void DeleteObecnosc(int id);
