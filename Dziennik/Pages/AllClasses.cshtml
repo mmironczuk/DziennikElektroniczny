@@ -1,0 +1,35 @@
+﻿@page
+@model Dziennik.Pages.AllClassesModel
+@{
+    ViewData["Title"] = "Wybór klasy";
+    Layout = "_LayoutAdmin";
+}
+
+<br />
+<br />
+<div class="card">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">
+                    Klasa
+                </th>
+                <th scope="col">
+                    Wybór
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var k in Model.klasy.ToList())
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => k.nazwa)</td>
+                    <td>
+                        <a asp-page="./EditClass" asp-route-id="@k.Id_klasy" class="btn btn-warning" style="margin:10px">Zmień numer klasy</a>
+                        <a asp-page="./EditClassStudents" asp-route-id="@k.Id_klasy" class="btn btn-outline-info" style="margin:10px">Uczniowie w klasie</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

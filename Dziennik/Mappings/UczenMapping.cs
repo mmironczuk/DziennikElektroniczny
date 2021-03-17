@@ -17,9 +17,8 @@ namespace Dziennik.Mappings
             Map(x => x.pesel).Length(11).Nullable();
             References(x => x.Klasa).Column("Id_klasy").Not.LazyLoad();
             References(x => x.Konto).Column("Id_konta").Not.LazyLoad();
-            HasMany(x => x.Ocena).Not.LazyLoad();
-            HasMany(x => x.Obecnosc).Not.LazyLoad();
-            //HasMany(x => x.wiadomosci_odebrane).Not.LazyLoad();
+            HasMany(x => x.Ocena).Not.LazyLoad().Inverse();
+            HasMany(x => x.Obecnosc).Not.LazyLoad().Inverse();
             Table("Uczen");
         }
     }

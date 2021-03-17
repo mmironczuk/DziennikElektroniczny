@@ -394,7 +394,7 @@ namespace Dziennik.DAL
 
         public override Konto GetKontoUczen(int id)
         {
-            Konto konto;
+            Konto konto = new Konto();
             using (var session = NHibernateHelper.OpenSession())
             {
                 konto = session.QueryOver<Konto>().Where(d => d.Uczen.Id_ucznia==id).SingleOrDefault();
@@ -600,6 +600,50 @@ namespace Dziennik.DAL
             }
         }
 
+        public override void UpdateStudent(Uczen uczen)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                Uczen user = GetUczen(uczen.Id_ucznia);
+                using (var transaction = session.BeginTransaction())
+                {
+                    user.imie = uczen.imie;
+                    user.nazwisko = uczen.nazwisko;
+                    user.adres = uczen.adres;
+                    session.SaveOrUpdate(user);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void UpdateClass(Klasa klasa)
+        {
+            Klasa klasa_new = GetKlasa(klasa.Id_klasy);
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    klasa_new.nazwa = klasa.nazwa;
+                    session.SaveOrUpdate(klasa_new);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void UpdateStudentClass(int user_id, int class_id)
+        {
+            Uczen uczen = GetUczen(user_id);
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    uczen.Klasa.Id_klasy = class_id;
+                    session.SaveOrUpdate(uczen);
+                    transaction.Commit();
+                }
+            }
+        }
+
         public override void DeleteOcena(int id)
         {
             using (var session = NHibernateHelper.OpenSession())
@@ -664,6 +708,33 @@ namespace Dziennik.DAL
                     session.Delete(uczen);
                     Konto konto = GetKontoUczen(id);
                     session.Delete(konto);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void BlockStudent(int id)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    Uczen uczen = session.QueryOver<Uczen>().Where(d => d.Id_ucznia == id).SingleOrDefault();
+                    uczen.Konto.active = 2;
+                    session.SaveOrUpdate(uczen);
+                    transaction.Commit();
+                }
+            }
+        }
+        public override void UnblockStudent(int id)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    Uczen uczen = session.QueryOver<Uczen>().Where(d => d.Id_ucznia == id).SingleOrDefault();
+                    uczen.Konto.active = 1;
+                    session.SaveOrUpdate(uczen);
                     transaction.Commit();
                 }
             }

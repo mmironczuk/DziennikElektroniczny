@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Dziennik.DAL;
+using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Dziennik.Pages
 {
-    public class DeleteUczenModel : PageModel
+    public class AllClassesModel : PageModel
     {
         MainDatabase mainDatabase = new MainDatabase();
-        public IActionResult OnGet(int id)
+        public ObservableCollection<Klasa> klasy { get; set; }
+        public void OnGet()
         {
-            mainDatabase.DeleteUczen(id);
-            return RedirectToPage("AllUsers");
+            klasy = mainDatabase.GetKlasyAll();
         }
     }
 }
