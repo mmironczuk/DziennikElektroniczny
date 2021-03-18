@@ -29,7 +29,7 @@ namespace Dziennik.Pages
         public IActionResult OnPost(int id)
         {
             if (id == 1) mainDatabase.UpdateOcena(mark);
-            else if(id==2)mainDatabase.DeleteOcena(mark.Id_oceny);
+            else if(id==2) mainDatabase.DeleteOcena(mark.Id_oceny);
             return RedirectToPage("/UsersList", new {ClassId=Class_id, SubjectId=Subject_id });
         }
     }

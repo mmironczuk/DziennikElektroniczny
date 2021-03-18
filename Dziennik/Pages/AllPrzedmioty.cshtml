@@ -1,0 +1,71 @@
+﻿@page
+@model Dziennik.Pages.AllPrzedmiotyModel
+@{
+    Layout = "_LayoutAdmin";
+    ViewBag.Title = "Zarządzanie przedmiotami";
+}
+
+<br />
+<br />
+<div class="card">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Nazwa przedmiotu</th>
+                <th scope="col">Akcja</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.przedmioty.ToList())
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => p.nazwa)
+                    </td>
+                    <td>
+                        <a asp-page="./EditPrzedmiot" asp-route-id="@p.Id_przedmiotu" class="btn btn-warning">Edytuj przedmiot</a>
+                    </td>
+                </tr>
+            }
+                <form method="post">
+                    <tr>
+                        <td>
+                            <div class="newData">
+                                <label>Nazwa przedmiotu: </label>
+                                <input asp-for="newPrzedmiot.nazwa" placeholder="Nazwa przedmiotu">
+                                <span asp-validation-for="newPrzedmiot.nazwa" class="text-danger"></span>
+                            </div>
+
+                            <div class="newData">
+                                <label>Dziedzina: </label>
+                                <input asp-for="newPrzedmiot.dziedzina" placeholder="Dziedzina">
+                                <span asp-validation-for="newPrzedmiot.dziedzina" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn btn btn-primary">Dodaj</button>
+                        </td>
+                    </tr>
+                </form>
+        </tbody>
+    </table>
+</div>
+
+<style>
+
+.newData {
+    margin: 10px;
+    float: left !important;
+}
+
+.newData input {
+    height: 35px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.newData label {
+    font-weight: bold;
+}
+
+</style>
