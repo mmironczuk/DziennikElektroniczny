@@ -1,0 +1,38 @@
+﻿@page
+@model Dziennik.Pages.EditPrzedmiotModel
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "EditPrzedmiot";
+}
+
+<br /> <br />
+<div class="container card d-flex justify-content-center bg-light" style="text-align:center">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6">
+            <center><h1 class="py-3">Dodawanie przedmiotu</h1></center>
+            <form class="form-horizontal" method="post">
+                <input type="hidden" asp-for="newPrzedmiot.Id_przedmiotu" class="form-control"/>
+                <div class="form-group">
+                    <label class="control-label col-sm2">Nazwa:</label>
+                    <div class="col-sm-12">
+                        <input asp-for="newPrzedmiot.nazwa" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm2">Dziedzina:</label>
+                    <div class="col-sm-12">
+                        <input asp-for="newPrzedmiot.dziedzina" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-12">
+                        <button asp-route-id="1" class="btn btn btn-primary">Edytuj</button>
+                        <button asp-route-id="2" class="btn btn-warning" style="background-color: orangered; border: 1px solid orangered">Usuń przedmiot</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>

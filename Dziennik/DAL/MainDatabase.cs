@@ -600,6 +600,23 @@ namespace Dziennik.DAL
             }
         }
 
+        public override void UpdatePrzedmiot(Przedmiot przedmiot)
+        {
+            Przedmiot prze = new Przedmiot();
+            prze = GetPrzedmiot(przedmiot.Id_przedmiotu);
+
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    prze.nazwa = przedmiot.nazwa;
+                    prze.dziedzina = przedmiot.dziedzina;
+                    session.SaveOrUpdate(prze);
+                    transaction.Commit();
+                }
+            }
+        }
+
         public override void UpdateStudent(Uczen uczen)
         {
             using (var session = NHibernateHelper.OpenSession())
@@ -708,6 +725,19 @@ namespace Dziennik.DAL
                     session.Delete(uczen);
                     Konto konto = GetKontoUczen(id);
                     session.Delete(konto);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void DeletePrzedmiot(int id)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    Przedmiot przedmiot = GetPrzedmiot(id);
+                    session.Delete(przedmiot);
                     transaction.Commit();
                 }
             }
