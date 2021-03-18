@@ -222,3 +222,68 @@ body::before {
     height: 40px !important;
 }
 
+.container {
+    position: relative;
+    width: 40%;
+}
+
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    width: 0;
+    height: 100%;
+    transition: .5s ease;
+}
+
+.container:hover .overlay {
+    width: 100%;
+}
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%)
+}
+
+.container:hover .image {
+    opacity: 0.3;
+}
+
+.container:hover .middle {
+    opacity: 1;
+}
+
+.text {
+    white-space: nowrap;
+    color: white;
+    font-size: 25px;
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+.message {
+    display: block; 
+    height: 100%; 
+    width: 100%; 
+    color: white;
+}
+.message:hover {
+    background-color: coral;
+}
+
+

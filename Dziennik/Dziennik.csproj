@@ -53,6 +53,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="wwwroot\images\emptyPostbox.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\images\icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
