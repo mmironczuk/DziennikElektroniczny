@@ -13,12 +13,13 @@ namespace Dziennik.Models
         public virtual Uczen Uczen { get; set; }
         public virtual Nauczyciel Nauczyciel { get; set; }
         public virtual Przedmiot Przedmiot { get; set; }
-
+        public virtual Semestr Semestr { get; set; }
         public Ocena()
         {
             Uczen = new Uczen();
             Nauczyciel = new Nauczyciel();
             Przedmiot = new Przedmiot();
+            Semestr = new Semestr();
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Dziennik.Mappings
             References(x => x.Uczen).Column("Id_ucznia").Not.LazyLoad();
             References(x => x.Nauczyciel).Column("Id_nauczyciela").Not.LazyLoad();
             References(x => x.Przedmiot).Column("Id_przedmiotu").Not.LazyLoad();
+            References(x => x.Semestr).Column("Id_semestru").Not.LazyLoad();
             Table("Ocena");
         }
     }
