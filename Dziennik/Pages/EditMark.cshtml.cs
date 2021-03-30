@@ -18,10 +18,13 @@ namespace Dziennik.Pages
         public int Class_id { get; set; }
         [BindProperty]
         public int Subject_id { get; set; }
-        public void OnGet(int id, int class_id, int subject_id)
+        [BindProperty]
+        public int mark_type { get; set; }
+        public void OnGet(int id, int class_id, int subject_id, int type)
         {
             Class_id = class_id;
             Subject_id = subject_id;
+            mark_type = type;
             mark = new Ocena();
             mark = mainDatabase.GetOcena(id);
         }

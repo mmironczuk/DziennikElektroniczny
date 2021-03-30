@@ -20,12 +20,15 @@ namespace Dziennik.Pages
         public int subject_id { get; set; }
         [BindProperty]
         public int class_id { get; set; }
+        [BindProperty]
+        public int mark_type { get; set; }
         MainDatabase maindatabase = new MainDatabase();
-        public void OnGet(int UczenId, int ClassId, int SubjectId)
+        public void OnGet(int UczenId, int ClassId, int SubjectId, int type)
         {
             class_id = ClassId;
             uczen_id = UczenId;
             subject_id = SubjectId;
+            mark_type = type;
         }
         public IActionResult OnPost(Ocena mark)
         {
@@ -35,6 +38,8 @@ namespace Dziennik.Pages
             mark.Uczen.Id_ucznia = uczen_id;
             mark.Nauczyciel.Id_nauczyciela = id;
             mark.Przedmiot.Id_przedmiotu = subject_id;
+            mark.czy_koncowa = mark_type;
+            mark.Semestr = null;
             maindatabase.CreateOcena(mark);
             return RedirectToPage("/UsersList", new { ClassId = class_id, SubjectId = subject_id });
         }

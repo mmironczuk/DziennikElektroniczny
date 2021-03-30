@@ -12,51 +12,111 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => Model.uczniowie[0].imie)
-                </th>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => Model.uczniowie[0].nazwisko)
-                </th>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => Model.uczniowie[0].Ocena)
-                </th>
+                <th scope="col">Imię</th>
+                <th scope="col">Nazwisko</th>
+                <th scope="col">Ocena</th>
+                <th scope="col">Średnia ocen</th>
+                <th scope="col">Ocena końcowa</th>
                 <th scope="col">Akcja</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var p in Model.uczniowie.ToList())
             {
-                <tr>
-                    <td>@Html.DisplayFor(m => p.imie)</td>
-                    <td>@Html.DisplayFor(m => p.nazwisko)</td>
-                    <td>
-                        @foreach (var u in p.Ocena.ToList())
+                double srednia = 0;
+                int ilosc = 0;
+                string ocena_koncowa = "";
+                int id_oceny_koncowej = 1;
+            <tr>
+                <td>@Html.DisplayFor(m => p.imie)</td>
+                <td>@Html.DisplayFor(m => p.nazwisko)</td>
+                <td>
+                    @foreach (var u in p.Ocena.ToList())
+                    {
+                        if (u.czy_koncowa == 2) {
+                            ocena_koncowa = u.ocena;
+                            id_oceny_koncowej = u.Id_oceny;
+                        }
+                        else
                         {
-                            //<a asp-page="./EditMark" asp-route-id="@u.Id_oceny" asp-route-class_id="@Model.classId" asp-route-subject_id="@Model.subjectId" class="btn btn btn-primary">@Html.DisplayFor(m => u.ocena)</a>
+                            ilosc++;
+                            if ((u.ocena).Contains('+'))
+                            {
+                                if (u.ocena == "1+") { srednia += 1.5; }
+                                if (u.ocena == "2+") { srednia += 2.5; }
+                                if (u.ocena == "3+") { srednia += 3.5; }
+                                if (u.ocena == "4+") { srednia += 4.5; }
+                                if (u.ocena == "5+") { srednia += 5.5; }
+                            }
+                            else if ((u.ocena).Contains('-'))
+                            {
+                                if (u.ocena == "2-") { srednia += 1.75; }
+                                if (u.ocena == "3-") { srednia += 2.75; }
+                                if (u.ocena == "4-") { srednia += 3.75; }
+                                if (u.ocena == "5-") { srednia += 4.75; }
+                                if (u.ocena == "6-") { srednia += 5.75; }
+                            }
+                            else { srednia += Convert.ToDouble(u.ocena); }
                             if (u.ocena[0] == '1')
                             {
-                                <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" class="ocena_przycisk" style="background-color: red">@Html.DisplayFor(m => u.ocena)</a>
+                                <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" asp-route-classId="@Model.classId" asp-route-subjectId="@Model.subjectId" asp-route-type="@u.czy_koncowa" class="ocena_przycisk" style="background-color: red">@Html.DisplayFor(m => u.ocena)</a>
                             }
                             else if (u.ocena[0] == '2')
                             {
-                                <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" class="ocena_przycisk" style="background-color: #ff5500">@Html.DisplayFor(m => u.ocena)</a>
+                                <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" asp-route-classId="@Model.classId" asp-route-subjectId="@Model.subjectId" asp-route-type="@u.czy_koncowa" class="ocena_przycisk" style="background-color: #ff5500">@Html.DisplayFor(m => u.ocena)</a>
                             }
                             else if (u.ocena[0] == '6')
                             {
-                                <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" class="ocena_przycisk" style="background-color: green;">@Html.DisplayFor(m => u.ocena)</a>
+                                <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" asp-route-classId="@Model.classId" asp-route-subjectId="@Model.subjectId" asp-route-type="@u.czy_koncowa" class="ocena_przycisk" style="background-color: green;">@Html.DisplayFor(m => u.ocena)</a>
                             }
                             else
                             {
-                                <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" class="ocena_przycisk">@Html.DisplayFor(m => u.ocena)</a>
+                                <a asp-page="./EditMark" asp-route-id="@u.Id_oceny" asp-route-classId="@Model.classId" asp-route-subjectId="@Model.subjectId" asp-route-type="@u.czy_koncowa" class="ocena_przycisk">@Html.DisplayFor(m => u.ocena)</a>
                             }
                         }
+                    }
+                </td>
+                <td>
+                    @{
+                        if (srednia == 0 || ilosc == 0)
+                        {
+                            <p>-</p>
+                        }
+                        else
+                        {
+                            if ((srednia / ilosc) < 2)
+                            {
+                                <p style="color: red; font-weight: bold;">@Math.Round((srednia / ilosc), 2)</p>
+                            }
+                            else
+                            {
+                                <p>@Math.Round((srednia / ilosc), 2)</p>
+                            }
+                        }
+                    }
+                </td>
+                @if (ocena_koncowa == "")
+                {
+                    <td>
+                        <p>-</p>
                     </td>
                     <td>
-                        <a asp-page="AddMark" asp-route-UczenId="@p.Id_ucznia" asp-route-ClassId="@Model.classId" asp-route-SubjectId="@Model.subjectId">Dodaj ocenę</a>
+                        <a asp-page="AddMark" asp-route-UczenId="@p.Id_ucznia" asp-route-ClassId="@Model.classId" asp-route-SubjectId="@Model.subjectId" asp-route-type="1" class="btn btn-warning" style="margin:10px">Dodaj ocenę</a>
+                        <a asp-page="AddMark" asp-route-UczenId="@p.Id_ucznia" asp-route-ClassId="@Model.classId" asp-route-SubjectId="@Model.subjectId" asp-route-type="2" class="btn btn-success" style="margin:10px">Wystaw ocenę końcową</a>
                     </td>
-                </tr>
-            }
+                }
+                else
+                {
+                    <td>
+                        <p>@ocena_koncowa</p>
+                    </td>
+                    <td>
+                        <a asp-page="AddMark" asp-route-UczenId="@p.Id_ucznia" asp-route-ClassId="@Model.classId" asp-route-SubjectId="@Model.subjectId" asp-route-type="1" class="btn btn-warning" style="margin:10px">Dodaj ocenę</a>
+                        <a asp-page="EditMark" asp-route-id="@id_oceny_koncowej" asp-route-classId="@Model.classId" asp-route-subjectId="@Model.subjectId" asp-route-type="2" class="btn btn-warning" style="margin:10px">Edytuj ocenę końcową</a>
+                    </td>
+                }
+            </tr>
+                }
         </tbody>
     </table>
 </div>
