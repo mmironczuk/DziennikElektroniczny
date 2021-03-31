@@ -7,6 +7,24 @@
 
 <br />
 <br />
+
+<div class="card" id="filtr">
+    <form method="post">
+        <tr>
+            <td class="col-10">
+                <label>Filtruj </label>
+                <label>Numer klasy: </label>
+                <input type="text" placeholder="IIF" asp-for="@Model.findClass" />
+                <label> Nauczyciel: </label>
+                <input type="text" placeholder="Jan Nowak" asp-for="@Model.findTeacher" />
+            </td>
+            <td class="col-1">
+                <button class="btn btn btn-primary">Filtruj</button>
+            </td>
+        </tr>
+    </form>
+</div>
+
 <div class="card">
     <table class="table table-striped">
         <thead>
@@ -33,3 +51,11 @@
         </tbody>
     </table>
 </div>
+
+<style>
+    #filtr {
+        height: 50px;
+        padding: 5px;
+        align-content: flex-end;
+    }
+</style>

@@ -53,6 +53,16 @@ namespace Dziennik.DAL
             return lekcje;
         }
 
+        public override ObservableCollection<Semestr> GetSemestryAll()
+        {
+            ObservableCollection<Semestr> semestry;
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                semestry = new ObservableCollection<Semestr>(session.QueryOver<Semestr>().List());
+            }
+            return semestry;
+        }
+
         public override ObservableCollection<Nauczanie> GetNauczaniaAll()
         {
             ObservableCollection<Nauczanie> nauczania = new ObservableCollection<Nauczanie>();
@@ -212,6 +222,16 @@ namespace Dziennik.DAL
                     oceny = session.QueryOver<Ocena>().Where(d => d.Uczen.Id_ucznia == id).List();
             }
             return oceny;
+        }
+
+        public override Semestr GetSemestr(int id)
+        {
+            Semestr semestr;
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                semestr = session.QueryOver<Semestr>().Where(d => d.Id_semestru == id).SingleOrDefault();
+            }
+            return semestr;
         }
 
         public override IList<Ocena> GetOcenyPrzedmiot(int id)
@@ -442,6 +462,19 @@ namespace Dziennik.DAL
                 }
             }
         }
+
+        public override void CreateSemestr(Semestr semestr)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Save(semestr);
+                    transaction.Commit();
+                }
+            }
+        }
+
         public override void CreateOcena(Ocena ocena)
         {
             using (var session = NHibernateHelper.OpenSession())
@@ -612,6 +645,23 @@ namespace Dziennik.DAL
                     prze.nazwa = przedmiot.nazwa;
                     prze.dziedzina = przedmiot.dziedzina;
                     session.SaveOrUpdate(prze);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public override void UpdateSemestr(Semestr semestr)
+        {
+            Semestr sem = new Semestr();
+            sem = GetSemestr(semestr.Id_semestru);
+
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    sem.data_rozpoczecia = semestr.data_rozpoczecia;
+                    sem.data_zakonczenia = semestr.data_zakonczenia;
+                    session.SaveOrUpdate(sem);
                     transaction.Commit();
                 }
             }

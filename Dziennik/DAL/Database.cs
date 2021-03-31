@@ -20,10 +20,12 @@ namespace Dziennik.DAL
         public abstract ObservableCollection<Przedmiot> GetPrzedmiotyAll();
         public abstract ObservableCollection<Uczen> GetUczniowieAll();
         public abstract ObservableCollection<Wydarzenie> GetWydarzeniaAll();
+        public abstract ObservableCollection<Semestr> GetSemestryAll();
         public abstract ObservableCollection<Nauczanie> GetNauczaniaNauczyciel(int id);
         public abstract ObservableCollection<Uczen> GetUczniowieKlasa(int id);
         public abstract ObservableCollection<Obecnosc> GetObecnosciLekcja(int id);
         public abstract ObservableCollection<Lekcja> GetLekcjeKlasa(int id);
+        public abstract Semestr GetSemestr(int id);
         public abstract ObservableCollection<Obecnosc> GetObecnosciUczen(int id);
         public abstract ObservableCollection<Uczen> GetUczniowieWychowawca(int id);
         public abstract ObservableCollection<Wiadomosc> GetWiadomosciKonta(int id);
@@ -54,6 +56,7 @@ namespace Dziennik.DAL
         public abstract void CreateOcena(Ocena ocena);
         public abstract void CreateWydarzenie(Wydarzenie wydarzenie);
         public abstract void CreatePrzedmiot(Przedmiot przedmiot);
+        public abstract void CreateSemestr(Semestr semestr);
         public abstract void CreateKlasa(Klasa klasa);
         public abstract void CreateObecnosc(Obecnosc obecnosc);
         public abstract void CreateLekcja(Lekcja lekcja);
@@ -65,6 +68,7 @@ namespace Dziennik.DAL
         public abstract void UpdateEmail(string login, string email);
         public abstract void UpdateStudent(Uczen uczen);
         public abstract void UpdateClass(Klasa klasa);
+        public abstract void UpdateSemestr(Semestr semestr);
         public abstract void UpdatePrzedmiot(Przedmiot przedmiot);
         public abstract void UpdateStudentClass(int user_id, int class_id);
         public abstract void DeleteOcena(int id);

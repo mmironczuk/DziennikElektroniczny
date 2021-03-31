@@ -1,0 +1,85 @@
+﻿@page
+@model Dziennik.Pages.AllSemestryModel
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "AllSemestry";
+}
+
+<br />
+<br />
+<div class="card">
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th scope="col">Nazwa przedmiotu</th>
+                <th scope="col">Akcja</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.semestry.ToList())
+            {
+                <tr>
+                    <td>
+                        @if (@p.data_zakonczenia.Year - @p.data_rozpoczecia.Year == 1)
+                        {
+                            <p>Semestr zimowy @p.data_rozpoczecia.Year/@p.data_zakonczenia.Year</p>
+                        }
+                        else
+                        {
+                            <p>Semestr letni @p.data_rozpoczecia.Year</p>
+                        }
+                    </td>
+                    <td>
+                        <a asp-page="./EditSemestr" asp-route-id="@p.Id_semestru" class="btn btn-warning">Edytuj semestr</a>
+                    </td>
+                </tr>
+            }
+            <form method="post">
+                <tr>
+                    <td>
+                        <div class="newData">
+                            <label>Data rozpoczęcia: </label>
+                            <input type="date" asp-for="newSemestr.data_rozpoczecia">
+                            <span asp-validation-for="newSemestr.data_rozpoczecia" class="text-danger"></span>
+                        </div>
+
+                        <div class="newData">
+                            <label>Data zakończenia: </label>
+                            <input type="date" asp-for="newSemestr.data_zakonczenia">
+                            <span asp-validation-for="newSemestr.data_zakonczenia" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn btn-primary">Dodaj</button>
+                    </td>
+                </tr>
+            </form>
+        </tbody>
+    </table>
+</div>
+
+<style>
+
+    .newData {
+        margin: 10px;
+        float: left !important;
+    }
+
+        .newData input {
+            height: 35px;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+
+        .newData label {
+            font-weight: bold;
+        }
+
+    #filtr {
+        height: 50px;
+        padding: 5px;
+        align-content: flex-end;
+    }
+</style>
+

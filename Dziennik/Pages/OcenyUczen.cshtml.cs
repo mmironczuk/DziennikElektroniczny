@@ -23,8 +23,13 @@ namespace Dziennik.Pages
         public double[] licznosci_ocen_uczniow = new double[1000];
         public int ranking_ucznia;
         public int ilosc_uczniow;
+
+        [BindProperty]
+        public string semesterTitle { get; set; }
         public void OnGet()
         {
+            Ocena ocena = new Ocena();
+            DateTime datka = ocena.Przedmiot.Nauczanie[0].Lekcja[0].data;
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             var id = Int32.Parse(claim.Value);
@@ -75,7 +80,19 @@ namespace Dziennik.Pages
             ranking_ucznia = lista_srednich.IndexOf(srednie_uczniow[id])+1;
             ilosc_uczniow = lista_srednich.Count;
             srednia_ucznia = Math.Round(srednie_uczniow[id],2);
+        }
 
+        public IActionResult OnPost(int id)
+        {
+            if(id == 1)
+            {
+
+            }
+            if(id == 2)
+            {
+
+            }
+            return RedirectToPage("OcenyUczen");
         }
     }
 }
