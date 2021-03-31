@@ -39,6 +39,7 @@ namespace Dziennik.Pages
             mark.Nauczyciel.Id_nauczyciela = id;
             mark.Przedmiot.Id_przedmiotu = subject_id;
             mark.czy_koncowa = mark_type;
+            mark.data = DateTime.Now;
             mark.Semestr = null;
             maindatabase.CreateOcena(mark);
             return RedirectToPage("/UsersList", new { ClassId = class_id, SubjectId = subject_id });
