@@ -20,10 +20,10 @@ namespace Dziennik.Pages
         public int Subject_id { get; set; }
         [BindProperty]
         public int mark_type { get; set; }
-        public void OnGet(int id, int class_id, int subject_id, int type)
+        public void OnGet(int id, int class_Id, int subject_Id, int type)
         {
-            Class_id = class_id;
-            Subject_id = subject_id;
+            Class_id = class_Id;
+            Subject_id = subject_Id;
             mark_type = type;
             mark = new Ocena();
             mark = mainDatabase.GetOcena(id);
