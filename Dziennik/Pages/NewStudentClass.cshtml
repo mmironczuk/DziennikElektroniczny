@@ -1,0 +1,38 @@
+﻿@page
+@model Dziennik.Pages.NewStudentClassModel
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Nowy przydział";
+}
+
+<<br />
+<br />
+<div class="container card" style="text-align:center">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6">
+            <h1>Nowy przydział ucznia</h1>
+            <form class="form-horizontal" method="post">
+                <div class="form-group">
+                    <input asp-for="user_id" type="hidden" />
+                    <input asp-for="old_class_id" type="hidden" />
+                    <label class="control-label col-sm2">Imię:</label>
+                    <div class="col-sm-12">
+                        <select asp-for="class_id" class="form-control">
+                            @foreach (var k in Model.klasy.ToList())
+                            {
+                                <option value="@k.Id_klasy">@k.nazwa</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-12">
+                        <button class="btn btn-success" style="margin:10px">Zatwierdź przydział</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+﻿@page
+@model Dziennik.Pages.EditClassStudentsModel
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Edycja uczniów w klasie";
+}
+
+<br />
+<br />
+<div class="card">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">
+                    Klasa
+                </th>
+                <th scope="col">
+                    Wybór
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var u in Model.uczniowie.ToList())
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => u.imie) @Html.DisplayFor(m => u.nazwisko)</td>
+                    <td>
+                        <a asp-page="./NewStudentClass" asp-route-id="@u.Id_ucznia" asp-route-Old_class_id="@u.Klasa.Id_klasy" class="btn btn-warning" style="margin:10px">Zmień przydział</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

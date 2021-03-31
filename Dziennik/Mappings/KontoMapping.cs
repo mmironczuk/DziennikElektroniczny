@@ -19,6 +19,7 @@ namespace Dziennik.Mappings
             Map(x => x.nazwisko).Nullable().Length(40);
             Map(x => x.adres).Nullable().Length(80);
             Map(x => x.pesel).Nullable().Length(11);
+            Map(x => x.active).Nullable();
             HasOne(x => x.Nauczyciel).Not.LazyLoad();
             HasOne(x => x.Uczen).Not.LazyLoad();
             HasMany(x => x.wiadomosci_odebrane).Not.LazyLoad();

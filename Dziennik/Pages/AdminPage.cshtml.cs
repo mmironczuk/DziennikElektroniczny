@@ -24,6 +24,7 @@ namespace Dziennik.Pages
             klasy = mainDatabase.GetKlasyAll();
             konto = new Konto();
             konto.typ_uzytkownika = 2;
+            konto.active = 1;
         }
         public IActionResult OnPost(Konto konto)
         {

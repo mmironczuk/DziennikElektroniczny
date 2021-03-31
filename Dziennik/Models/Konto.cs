@@ -17,6 +17,7 @@ namespace Dziennik.Models
         public virtual string nazwisko { get; set; }
         public virtual string adres { get; set; }
         public virtual string pesel { get; set; }
+        public virtual int active { get; set; }
         public virtual Nauczyciel Nauczyciel { get; set; }
         public virtual Uczen Uczen { get; set; }
         public virtual IList<Wiadomosc> wiadomosci_wyslane { get; set; }

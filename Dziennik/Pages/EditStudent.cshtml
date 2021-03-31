@@ -1,0 +1,50 @@
+﻿@page
+@model Dziennik.Pages.EditStudentModel
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Edycja danych ucznia";
+}
+
+<br />
+<br />
+<div class="container card" style="text-align:center">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6">
+            <h1>Edycja danych ucznia</h1>
+            <form class="form-horizontal" method="post">
+                <div class="form-group">
+                    <input asp-for="uczen.Id_ucznia" type="hidden" />
+                    <label class="control-label col-sm2">Imię:</label>
+                    <div class="col-sm-12">
+                        <input asp-for="uczen.imie" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm2">Nazwisko:</label>
+                    <div class="col-sm-12">
+                        <input asp-for="uczen.nazwisko" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm2">Adres:</label>
+                    <div class="col-sm-12">
+                        <input asp-for="uczen.adres" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm2">Pesel:</label>
+                    <div class="col-sm-12">
+                        <input asp-for="uczen.pesel" readonly class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-12">
+                        <button class="btn btn-success" style="margin:10px">Zatwierdź zmiany</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>

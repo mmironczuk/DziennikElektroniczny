@@ -21,6 +21,7 @@ namespace Dziennik.Pages
         {
             konto = new Konto();
             konto.typ_uzytkownika = 1;
+            konto.active = 1;
         }
         public IActionResult OnPost(Konto konto, Nauczyciel nauczyciel)
         {
