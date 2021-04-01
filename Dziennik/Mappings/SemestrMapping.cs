@@ -11,8 +11,9 @@ namespace Dziennik.Mappings
         public SemestrMapping()
         {
             Id(x => x.Id_semestru).GeneratedBy.Increment();
-            Map(x => x.data_rozpoczecia);
-            Map(x => x.data_zakonczenia);
+            Map(x => x.data_rozpoczecia).Nullable();
+            Map(x => x.data_zakonczenia).Nullable();
+            HasMany(x => x.oceny).Not.LazyLoad();
             Table("Semestr");
         }
     }

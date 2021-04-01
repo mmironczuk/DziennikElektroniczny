@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Dziennik.DAL
@@ -422,6 +424,17 @@ namespace Dziennik.DAL
             return konto;
         }
 
+        public static string MD5Hash(string text)
+        {
+            byte[] hash = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(text));
+            StringBuilder strBuilder = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                strBuilder.Append(hash[i].ToString("X2"));
+            }
+            return strBuilder.ToString();
+        }
+
         public override void CreateKonto(Konto konto)
         {
             Konto account = new Konto();
@@ -430,8 +443,7 @@ namespace Dziennik.DAL
                 using (var transaction = session.BeginTransaction())
                 {
                     account = konto;
-                    var passwordHasher = new PasswordHasher<string>();
-                    string haslo = passwordHasher.HashPassword(konto.login, konto.haslo).Substring(0,32);
+                    string haslo = MD5Hash(konto.haslo);
                     account.haslo = haslo;
                     session.Save(account);
                     transaction.Commit();
