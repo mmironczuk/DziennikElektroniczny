@@ -7,6 +7,22 @@
 
 <br />
 <br />
+
+<div class="card" id="filtr">
+    <form method="post">
+        <tr>
+            <td class="col-10">
+                <label>Filtruj </label>
+                <label>Imie ucznia: </label>
+                <input type="text" placeholder="Jan Nowak" asp-for="@Model.findUser" />
+            </td>
+            <td class="col-1">
+                <button class="btn btn btn-primary">Filtruj</button>
+            </td>
+        </tr>
+    </form>
+</div>
+
 <div class="card">
     <table class="table table-striped">
         <thead>
@@ -43,3 +59,11 @@
         </tbody>
     </table>
 </div>
+
+<style>
+    #filtr {
+        height: 50px;
+        padding: 5px;
+        align-content: flex-end;
+    }
+</style>

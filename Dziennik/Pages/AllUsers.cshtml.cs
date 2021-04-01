@@ -14,9 +14,27 @@ namespace Dziennik.Pages
     {
         MainDatabase mainDatabase = new MainDatabase();
         public ObservableCollection<Uczen> uczniowie = new ObservableCollection<Uczen>();
-        public void OnGet()
+
+        [BindProperty]
+        public string findUser { get; set; }
+        public void OnGet(string imie)
         {
-            uczniowie = mainDatabase.GetUczniowieAll();
+            ObservableCollection<Uczen> uczniowieCopy = mainDatabase.GetUczniowieAll();
+
+            if (imie != null)
+            {
+                for (int i = 0; i < uczniowieCopy.Count; i++)
+                {
+                    if ((uczniowieCopy[i].imie + " " + uczniowieCopy[i].nazwisko).Contains(imie) ||
+                        (uczniowieCopy[i].nazwisko + " " + uczniowieCopy[i].imie).Contains(imie)) uczniowie.Add(uczniowieCopy[i]);
+                }
+            }
+            else uczniowie = uczniowieCopy;
+        }
+
+        public IActionResult OnPost()
+        {
+            return RedirectToPage("AllUsers", new { imie = findUser });
         }
     }
 }

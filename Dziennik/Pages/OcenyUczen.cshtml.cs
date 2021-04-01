@@ -23,8 +23,32 @@ namespace Dziennik.Pages
         public double[] licznosci_ocen_uczniow = new double[1000];
         public int ranking_ucznia;
         public int ilosc_uczniow;
-        public void OnGet()
+
+        [BindProperty]
+        public string semesterTitle { get; set; }
+        public ObservableCollection<Semestr> semestry = new ObservableCollection<Semestr>();
+
+        [BindProperty]
+        public Semestr currentSemestr { get; set; }
+        public int idSemestru = new int();
+        public void OnGet(string semID)
         {
+            semestry = mainDatabase.GetSemestryAll();
+            for (int i = 0; i < semestry.Count; i++)
+            {
+                if (semestry[i].data_rozpoczecia < DateTime.Today && semestry[i].data_zakonczenia > DateTime.Today)
+                {
+                    currentSemestr = semestry[i];
+                    break;
+                }
+            }
+
+            idSemestru = currentSemestr.Id_semestru;
+            if (currentSemestr.data_zakonczenia.Year - currentSemestr.data_rozpoczecia.Year == -1)
+                semesterTitle = "Semestr zimowy " + currentSemestr.data_rozpoczecia.Year + "/" + currentSemestr.data_zakonczenia.Year;
+            else 
+                semesterTitle = "Semestr letni " + (currentSemestr.data_rozpoczecia.Year - 1) + "/" + currentSemestr.data_zakonczenia.Year;
+
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             var id = Int32.Parse(claim.Value);
@@ -75,7 +99,21 @@ namespace Dziennik.Pages
             ranking_ucznia = lista_srednich.IndexOf(srednie_uczniow[id])+1;
             ilosc_uczniow = lista_srednich.Count;
             srednia_ucznia = Math.Round(srednie_uczniow[id],2);
+        }
 
+        public IActionResult OnPost(int id)
+        {
+            if(id == 1)
+            {
+                if (currentSemestr.Id_semestru == 1) RedirectToPage("/OcenyUczen", new { semID = "1" });
+                else return RedirectToPage("/OcenyUczen", new { semID = idSemestru - 1 });
+            }
+            if(id == 2)
+            {
+                if (currentSemestr.Id_semestru == semestry.Count) RedirectToPage("/OcenyUczen", new { semID = currentSemestr.Id_semestru.ToString() });
+                else RedirectToPage("/OcenyUczen", new { semID = idSemestru + 1 });
+            }
+            return RedirectToPage("/OcenyUczen");
         }
     }
 }
