@@ -14,9 +14,12 @@ namespace Dziennik.Mappings
             Id(x => x.Id_oceny).GeneratedBy.Increment();
             Map(x => x.ocena).Length(2).Nullable();
             Map(x => x.opis_oceny).Length(150).Nullable();
+            Map(x => x.czy_koncowa).Nullable();
+            Map(x => x.data).Nullable();
             References(x => x.Uczen).Column("Id_ucznia").Not.LazyLoad();
             References(x => x.Nauczyciel).Column("Id_nauczyciela").Not.LazyLoad();
             References(x => x.Przedmiot).Column("Id_przedmiotu").Not.LazyLoad();
+            References(x => x.Semestr).Column("Id_semestru").Not.LazyLoad();
             Table("Ocena");
         }
     }

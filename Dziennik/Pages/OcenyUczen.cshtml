@@ -19,6 +19,9 @@
                     Oceny
                 </th>
                 <th scope="col">
+                    Ocena końcowa
+                </th>
+                <th scope="col">
                     Średnia
                 </th>
             </tr>
@@ -28,6 +31,7 @@
             {
                 double srednia = 0;
                 int ilosc = 0;
+                string koncowa = "";
                 <tr>
                     <td>@Html.DisplayFor(m => p.nazwa)</td>
                     <td>
@@ -36,6 +40,7 @@
                         {
                             @if (u.Uczen.Id_ucznia == @Model.id_ucznia)
                             {
+                                if (u.czy_koncowa == 2) { koncowa = u.ocena; }
                                 ilosc++;
                                 if ((u.ocena).Contains('+'))
                                 {
@@ -73,6 +78,10 @@
                                 }
                             }
                         }
+                    </td>
+                    <td>
+                        @if (koncowa == "") { <p>-</p>}
+                        else { <p>@koncowa</p>}
                     </td>
                     <td>
                         @{
