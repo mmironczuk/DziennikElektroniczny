@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Dziennik.DAL;
+using Dziennik.Data;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,14 +14,19 @@ namespace Dziennik.Pages
 {
     public class NowaWiadomoscModel : PageModel
     {
+        private readonly ApplicationDbContext _context;
+        public NowaWiadomoscModel(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         [BindProperty]
-        public ObservableCollection<Uczen> odbiorcy_uczniowie { get; set; }
+        public ICollection<Konto> odbiorcy_uczniowie { get; set; }
         [BindProperty]
-        public ObservableCollection<Nauczyciel> odbiorcy_nauczyciele { get; set; }
+        public ICollection<Konto> odbiorcy_nauczyciele { get; set; }
 
         [BindProperty]
         public int typ_uzytkownika { get; set; }
-        public MainDatabase db = new MainDatabase();
+        //public MainDatabase db = new MainDatabase();
 
         [BindProperty]
         public string imie { get; set; }
@@ -41,24 +47,28 @@ namespace Dziennik.Pages
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
             var login = claim.Value;
             Konto konto = new Konto();
-            konto = db.GetKontoLogin(login);
+            //konto = db.GetKontoLogin(login);
+            konto= _context.Konto.Where(x => x.login == login).FirstOrDefault();
             typ_uzytkownika = konto.typ_uzytkownika;
-            id_konta = konto.Id_konta;
+            //d_konta = konto.Id_konta;
 
-            odbiorcy_uczniowie = db.GetUczniowieAll();
-            odbiorcy_nauczyciele = db.GetNauczycielAll();
-
+            //odbiorcy_uczniowie = db.GetUczniowieAll();
+            //odbiorcy_nauczyciele = db.GetNauczycielAll();
+            odbiorcy_uczniowie= _context.Konto.Where(x => x.typ_uzytkownika == 3).ToList();
+            odbiorcy_nauczyciele= _context.Konto.Where(x => x.typ_uzytkownika == 2).ToList();
             imie = konto.imie;
             nazwisko = konto.nazwisko;
         }
 
         public IActionResult OnPost(Wiadomosc wiadomosc, int id_konta_odbiorcy)
         {
-            wiadomosc.konto_odbiorcy.Id_konta = id_konta_odbiorcy;
-            wiadomosc.konto_nadawcy.Id_konta = id_konta;
-            wiadomosc.data_wyslania = DateTime.Now;
+            wiadomosc.OdbiorcaId = id_konta_odbiorcy;
+            wiadomosc.NadawcaId = id_konta;
+            wiadomosc.data = DateTime.Now;
 
-            db.CreateWiadomosc(wiadomosc);
+            //db.CreateWiadomosc(wiadomosc);
+            _context.Add(wiadomosc);
+            _context.SaveChanges();
 
             if (typ_uzytkownika == 1)
             {

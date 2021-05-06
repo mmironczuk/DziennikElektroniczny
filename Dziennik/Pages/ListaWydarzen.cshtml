@@ -2,11 +2,11 @@
 @model Dziennik.Pages.ListaWydarzenModel
 @{
     ViewData["Title"] = "Lista Wydarzeń";
-    if (Model.typ_uzytkownika == 1)
+    if (Model.typ_uzytkownika == 2)
     {
         Layout = "_LayoutNauczyciel";
     }
-    else if (Model.typ_uzytkownika == 2)
+    else if (Model.typ_uzytkownika == 3)
     {
         Layout = "_LayoutUczen";
     }
@@ -19,11 +19,11 @@
     {
         @if (Model.typ_uzytkownika == 1)
         {
-            <a asp-page="/EditWydarzenia" asp-route-id="@w.Id_wydarzenia">
+            <a asp-page="/EditWydarzenia" asp-route-id="@w.WydarzenieId">
                 <div class="card" style="width: 100%; margin-bottom: 1rem; background-color: gold">
                     <div class="card-body">
                         <h5 class="card-title">@w.nazwa</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@w.Przedmiot.nazwa, @w.data</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">@w.Nauczania.Przedmiot.nazwa, @w.data</h6>
                         <p class="card-text">@w.opis</p>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
             <div class="card" style="width: 100%; margin-bottom: 1rem; background-color: gold">
                 <div class="card-body">
                     <h5 class="card-title">@w.nazwa</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">@w.Przedmiot.nazwa, @w.data</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">@w.Nauczania.Przedmiot.nazwa, @w.data</h6>
                     <p class="card-text">@w.opis</p>
                 </div>
             </div>

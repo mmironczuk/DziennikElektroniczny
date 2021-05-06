@@ -7,14 +7,11 @@ namespace Dziennik.Models
 {
     public class Obecnosc
     {
-        public virtual int Id_obecnosci { get; set; }
-        public virtual int obecnosc { get; set; }
-        public virtual Uczen Uczen { get; set; }
+        public int ObecnoscId { get; set; }
+        public int typ_obecnosci { get; set; }
+        public int? LekcjaId { get; set; }
+        public int KontoId { get; set; }
         public virtual Lekcja Lekcja { get; set; }
-        public Obecnosc()
-        {
-            Uczen = new Uczen();
-            Lekcja = new Lekcja();
-        }
+        public virtual Konto Konto { get; set; }
     }
 }

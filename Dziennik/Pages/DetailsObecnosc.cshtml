@@ -11,15 +11,15 @@
     <table class="py-3" style="margin-bottom: 50px !important; width: 100% !important">
         <tr>
             <td><b>Rodzaj nieobecności:</b></td>
-            @if (Model.obecnosc.obecnosc == 1)
+            @if (Model.obecnosc.typ_obecnosci == 1)
             {
                 <td>nieobecność</td>
             }
-            @if (Model.obecnosc.obecnosc == 2)
+            @if (Model.obecnosc.typ_obecnosci == 2)
             {
                 <td>spóźnienie</td>
             }
-            @if (Model.obecnosc.obecnosc == 3)
+            @if (Model.obecnosc.typ_obecnosci == 3)
             {
                 <td>usprawiedliwione</td>
             }

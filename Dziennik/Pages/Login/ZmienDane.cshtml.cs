@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Dziennik.DAL;
+using Dziennik.Data;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +16,13 @@ namespace Dziennik.Pages.Login
 {
     public class ZmienDaneModel : PageModel
     {
-        private MainDatabase db = new MainDatabase();
-
-		[BindProperty]
+        //private MainDatabase db = new MainDatabase();
+        private readonly ApplicationDbContext _context;
+        public ZmienDaneModel(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        [BindProperty]
         public string passwordOld { get; set; }
         [BindProperty]
         public string password { get; set; }
@@ -55,17 +60,30 @@ namespace Dziennik.Pages.Login
 
         public IActionResult OnPost(int id)
         {
-            Konto konto = db.GetKontoLogin(login);
+            //Konto konto = db.GetKontoLogin(login);
+            Konto konto = _context.Konto.Where(x => x.login == login).FirstOrDefault();
             if (id == 1)
             {
-                if (konto.haslo == MD5Hash(passwordOld) && password == passwordConfirm) db.UpdatePassword(login, MD5Hash(password));
+                //if (konto.haslo == MD5Hash(passwordOld) && password == passwordConfirm) db.UpdatePassword(login, MD5Hash(password));
+                if (konto.haslo == MD5Hash(passwordOld) && password == passwordConfirm)
+                {
+                    //db.UpdateEmail(login, MD5Hash(password));
+                    Konto k = _context.Konto.Where(x => x.login == login).FirstOrDefault();
+                    k.haslo = MD5Hash(password);
+                    _context.Update(k);
+                    _context.SaveChanges();
+                }
                 else return Page();
             }
             else
             {
                 if (email == emailConfirm)
                 {
-                    db.UpdateEmail(login, email);
+                    //db.UpdateEmail(login, email);
+                    Konto k = _context.Konto.Where(x => x.login == login).FirstOrDefault();
+                    k.email = email;
+                    _context.Update(k);
+                    _context.SaveChanges();
                 }
             }
             return RedirectToPage("./MyAccount");

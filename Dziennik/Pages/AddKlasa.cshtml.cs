@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Dziennik.DAL;
+using Dziennik.Data;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,17 +15,24 @@ namespace Dziennik.Pages
     {
         [BindProperty]
         public Klasa klasa { get; set; }
-        public MainDatabase mainDatabase = new MainDatabase();
+        //public MainDatabase mainDatabase = new MainDatabase();
+        private readonly ApplicationDbContext _context;
+        public AddKlasaModel(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         [BindProperty]
-        public ObservableCollection<Nauczyciel> nauczyciele {get;set;}
+        public ICollection<Konto> nauczyciele {get;set;}
         public void OnGet()
         {
-            nauczyciele = new ObservableCollection<Nauczyciel>();
-            nauczyciele = mainDatabase.GetNauczycielAll();
+            //nauczyciele = mainDatabase.GetNauczycielAll();
+            nauczyciele= _context.Konto.Where(x => x.typ_uzytkownika == 2).ToList();
         }
         public IActionResult OnPost()
         {
-            mainDatabase.CreateKlasa(klasa);
+            //mainDatabase.CreateKlasa(klasa);
+            _context.Add(klasa);
+            _context.SaveChanges();
             return RedirectToPage("/AddKlasa");
         }
     }

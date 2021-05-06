@@ -35,7 +35,7 @@
             @foreach (var p in Model.uczniowie.ToList())
             {
             <tr>
-                @if (p.Konto.active == 2)
+                @if (p.active == 2)
                 {
                     <td style="text-decoration:line-through"><b>@Html.DisplayFor(m => p.imie) @Html.DisplayFor(m => p.nazwisko)</b></td>
                 }
@@ -44,14 +44,14 @@
                     <td>@Html.DisplayFor(m => p.imie) @Html.DisplayFor(m => p.nazwisko)</td>
                 }
                 <td>
-                    <a asp-page="./EditStudent" asp-route-id="@p.Id_ucznia" class="btn btn-warning">Edytuj dane</a>
-                    @if (p.Konto.active == 1)
+                    <a asp-page="./EditStudent" asp-route-id="@p.KontoId" class="btn btn-warning">Edytuj dane</a>
+                    @if (p.active == 1)
                     {
-                        <a asp-page="./BlockStudent" asp-route-id="@p.Id_ucznia" asp-route-type="1" class="btn btn-danger" style="margin:10px">Blokuj ucznia</a>
+                        <a asp-page="./BlockStudent" asp-route-id="@p.KontoId" asp-route-type="1" class="btn btn-danger" style="margin:10px">Blokuj ucznia</a>
                     }
                     else
                     {
-                        <a asp-page="./BlockStudent" asp-route-id="@p.Id_ucznia" asp-route-type="2" class="btn btn-info" style="margin:10px">Odblokuj ucznia</a>
+                        <a asp-page="./BlockStudent" asp-route-id="@p.KontoId" asp-route-type="2" class="btn btn-info" style="margin:10px">Odblokuj ucznia</a>
                     }
                 </td>
             </tr>

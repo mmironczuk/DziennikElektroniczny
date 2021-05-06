@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Dziennik.DAL;
+using Dziennik.Data;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,8 +13,14 @@ namespace Dziennik.Pages
 {
     public class AllClassesModel : PageModel
     {
-        MainDatabase mainDatabase = new MainDatabase();
-        public ObservableCollection<Klasa> klasy = new ObservableCollection<Klasa>();
+        private readonly ApplicationDbContext _context;
+        public AllClassesModel(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        //MainDatabase mainDatabase = new MainDatabase();
+        //public ObservableCollection<Klasa> klasy = new ObservableCollection<Klasa>();
+        public ICollection<Klasa> klasy;
 
         [BindProperty]
         public string findClass { get; set; }
@@ -22,17 +29,26 @@ namespace Dziennik.Pages
 
         public void OnGet(string klasa, string ticza)
         {
-            ObservableCollection<Klasa> klasyCopy = mainDatabase.GetKlasyAll();
+            //ICollection<Klasa> klasyCopy = mainDatabase.GetKlasyAll();
+            ICollection<Klasa> klasyCopy= _context.Klasa.ToList();
 
             if (klasa != null)
-                for (int i = 0; i < klasyCopy.Count; i++)
-                    if (klasyCopy[i].nazwa.Contains(klasa)) klasy.Add(klasyCopy[i]);
+            {
+                foreach(Klasa k in klasyCopy)
+                {
+                    if (k.nazwa.Contains(klasa)) klasy.Add(k);
+                }
+            }
 
             if (ticza != null)
-                for (int i = 0; i < klasyCopy.Count; i++)
-                    if (((klasyCopy[i].Nauczyciel.imie + " " + klasyCopy[i].Nauczyciel.nazwisko).Contains(ticza) ||
-                       (klasyCopy[i].Nauczyciel.nazwisko + " " + klasyCopy[i].Nauczyciel.imie).Contains(ticza)) &&
-                       !klasy.Contains(klasyCopy[i])) klasy.Add(klasyCopy[i]);
+            {
+                foreach(Klasa k in klasyCopy)
+                {
+                    if (((k.Wychowawca.imie + " " + k.Wychowawca.nazwisko).Contains(ticza) ||
+                    (k.Wychowawca.nazwisko + " " + k.Wychowawca.imie).Contains(ticza)) &&
+                    !klasy.Contains(k)) klasy.Add(k);
+                }
+            }
                         
             if (klasa == null && ticza == null) klasy = klasyCopy;
         }

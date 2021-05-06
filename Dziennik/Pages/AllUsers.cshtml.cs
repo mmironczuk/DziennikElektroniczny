@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Dziennik.DAL;
+using Dziennik.Data;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,21 +13,28 @@ namespace Dziennik.Pages
 {
     public class AllUsersModel : PageModel
     {
-        MainDatabase mainDatabase = new MainDatabase();
-        public ObservableCollection<Uczen> uczniowie = new ObservableCollection<Uczen>();
+        private readonly ApplicationDbContext _context;
+        public AllUsersModel(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        //MainDatabase mainDatabase = new MainDatabase();
+        //public ObservableCollection<Konto> uczniowie = new ObservableCollection<Konto>();
+        public ICollection<Konto> uczniowie;
 
         [BindProperty]
         public string findUser { get; set; }
         public void OnGet(string imie)
         {
-            ObservableCollection<Uczen> uczniowieCopy = mainDatabase.GetUczniowieAll();
+            //ObservableCollection<Konto> uczniowieCopy = mainDatabase.GetUczniowieAll();
+            ICollection<Konto> uczniowieCopy= _context.Konto.Where(x => x.typ_uzytkownika == 3).ToList();
 
             if (imie != null)
             {
-                for (int i = 0; i < uczniowieCopy.Count; i++)
+                foreach(Konto k in uczniowieCopy)
                 {
-                    if ((uczniowieCopy[i].imie + " " + uczniowieCopy[i].nazwisko).Contains(imie) ||
-                        (uczniowieCopy[i].nazwisko + " " + uczniowieCopy[i].imie).Contains(imie)) uczniowie.Add(uczniowieCopy[i]);
+                    if ((k.imie + " " + k.nazwisko).Contains(imie) ||
+                        (k.nazwisko + " " + k.imie).Contains(imie)) uczniowie.Add(k);
                 }
             }
             else uczniowie = uczniowieCopy;

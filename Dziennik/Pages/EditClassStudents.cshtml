@@ -25,7 +25,7 @@
                 <tr>
                     <td>@Html.DisplayFor(m => u.imie) @Html.DisplayFor(m => u.nazwisko)</td>
                     <td>
-                        <a asp-page="./NewStudentClass" asp-route-id="@u.Id_ucznia" asp-route-Old_class_id="@u.Klasa.Id_klasy" class="btn btn-warning" style="margin:10px">Zmień przydział</a>
+                        <a asp-page="./NewStudentClass" asp-route-id="@u.KontoId" asp-route-Old_class_id="@u.Klasa.KontoId" class="btn btn-warning" style="margin:10px">Zmień przydział</a>
                     </td>
                 </tr>
             }

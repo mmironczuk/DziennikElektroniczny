@@ -7,17 +7,11 @@ namespace Dziennik.Models
 {
     public class Klasa
     {
-        public virtual int Id_klasy { get; set; }
-        public virtual string nazwa { get; set; }
-        public virtual Nauczyciel Nauczyciel { get; set; }
-        public virtual IList<Uczen> Uczen { get; set; }
-        public virtual IList<Lekcja> Lekcja { get; set; }
-        public virtual IList<Wydarzenie> Wydarzenie { get; set; }
-        public Klasa()
-        {
-            Uczen = new List<Uczen>();
-            Lekcja = new List<Lekcja>();
-            Wydarzenie = new List<Wydarzenie>();
-        }
+        public int KlasaId { get; set; }
+        public string nazwa { get; set; }
+        public int KontoId { get; set; }
+        public virtual Konto Wychowawca{ get; set; }
+        public virtual ICollection<Konto> Uczniowie { get; set; }
+        public virtual ICollection<Nauczanie> Nauczania { get; set; }
     }
 }

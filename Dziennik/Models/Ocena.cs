@@ -7,21 +7,16 @@ namespace Dziennik.Models
 {
     public class Ocena
     {
-        public virtual int Id_oceny { get; set; }
-        public virtual string ocena { get; set; }
-        public virtual string opis_oceny { get; set; }
-        public virtual int czy_koncowa { get; set; }
-        public virtual DateTime data { get; set; }
-        public virtual Uczen Uczen { get; set; }
-        public virtual Nauczyciel Nauczyciel { get; set; }
-        public virtual Przedmiot Przedmiot { get; set; }
+        public int OcenaId { get; set; }
+        public DateTime data { get; set; }
+        public string wartosc { get; set; }
+        public string opis { get; set; }
+        public int KontoId { get; set; }
+        public int? NauczanieId { get; set; }
+        public int koncowa { get; set; }
+        public int SemestrId { get; set; }
         public virtual Semestr Semestr { get; set; }
-        public Ocena()
-        {
-            Uczen = new Uczen();
-            Nauczyciel = new Nauczyciel();
-            Przedmiot = new Przedmiot();
-            Semestr = new Semestr();
-        }
+        public virtual Konto Konto { get; set; }
+        public virtual Nauczanie Nauczanie { get; set; }
     }
 }

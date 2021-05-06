@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Dziennik.DAL;
+using Dziennik.Data;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -17,11 +18,15 @@ namespace Dziennik.Pages.Login
 {
     public class UserLoginModel : PageModel
     {
+        private readonly ApplicationDbContext _context;
+        public UserLoginModel(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         [BindProperty]
         public string login { get; set; }
         [BindProperty]
         public string password { get; set; }
-        public MainDatabase mainDatabase = new MainDatabase();
         public Konto konto = new Konto();
         public void OnGet()
         {
@@ -29,8 +34,16 @@ namespace Dziennik.Pages.Login
         }
         public int ValidateUser(string log, string pswd)
         {
+            //konto.login = log;
+            //konto.haslo = MD5Hash(pswd);
+            //konto.typ_uzytkownika = 1;
+            //konto.active = 1;
+            //_context.Add(konto);
+            //_context.SaveChanges();
+            //return 1;
             int type = -1;
-            konto = mainDatabase.GetKontoLogin(log);
+            //konto = mainDatabase.GetKontoLogin(log);
+            konto = _context.Konto.Where(x => x.login == login).FirstOrDefault();
             if (konto != null)
             {
                 if (konto.haslo == MD5Hash(pswd)) type = konto.typ_uzytkownika;
@@ -52,10 +65,8 @@ namespace Dziennik.Pages.Login
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             int type = -1;
-            int id = 1;
             type = ValidateUser(login, password);
-            if (type == 1) id = mainDatabase.GetNauczycielKonto(konto.Id_konta).Id_nauczyciela;
-            else if (type == 2) id = mainDatabase.GetUczenKonto(konto.Id_konta).Id_ucznia;
+            int id = konto.KontoId;
             if (type != -1 && konto.active==1)
             {
                 var claims = new List<Claim>()
@@ -65,9 +76,9 @@ namespace Dziennik.Pages.Login
                 };
                 var claimsIdentity = new ClaimsIdentity(claims, "CookieAuthentication");
                 await HttpContext.SignInAsync("CookieAuthentication", new ClaimsPrincipal(claimsIdentity));
-                if (type == 1) return RedirectToPage("/MainNauczyciel");
-                if (type == 2) return RedirectToPage("/MainUczen");
-                if (type == 0) return RedirectToPage("/AdminPage");
+                if (type == 2) return RedirectToPage("/MainNauczyciel");
+                if (type == 3) return RedirectToPage("/MainUczen");
+                if (type == 1) return RedirectToPage("/AdminPage");
             }
             return Page();
         }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Dziennik.DAL;
+using Dziennik.Data;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,11 +14,16 @@ namespace Dziennik.Pages
 {
     public class ListaWydarzenModel : PageModel
     {
+        private readonly ApplicationDbContext _context;
+        public ListaWydarzenModel(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         [BindProperty]
-        public ObservableCollection<Wydarzenie> wydarzenia { get; set; }
+        public ICollection<Wydarzenie> wydarzenia { get; set; }
         [BindProperty]
         public int typ_uzytkownika { get; set; }
-        public MainDatabase db = new MainDatabase();
+        //public MainDatabase db = new MainDatabase();
 
         public void OnGet()
         {
@@ -25,27 +31,26 @@ namespace Dziennik.Pages
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
             var login = claim.Value;
             Konto konto = new Konto();
-            konto = db.GetKontoLogin(login);
+            //konto = db.GetKontoLogin(login);
+            konto= _context.Konto.Where(x => x.login == login).FirstOrDefault();
             typ_uzytkownika = konto.typ_uzytkownika;
-            wydarzenia = new ObservableCollection<Wydarzenie>();
-            ObservableCollection<Wydarzenie> wszystkie_wydarzenia = db.GetWydarzeniaAll();
-            if (typ_uzytkownika == 2) {
-                Uczen uczen = db.GetUczenKonto(konto.Id_konta);
-
+            //ObservableCollection<Wydarzenie> wszystkie_wydarzenia = db.GetWydarzeniaAll();
+            ICollection<Wydarzenie> wszystkie_wydarzenia = _context.Wydarzenie.ToList();
+            if (typ_uzytkownika == 3)
+            {
                 foreach (Wydarzenie w in wszystkie_wydarzenia)
                 {
-                    if (w.Klasa.Id_klasy == uczen.Klasa.Id_klasy)
+                    if (w.Nauczania.KlasaId == konto.KlasaId)
                     {
                         wydarzenia.Add(w);
                     }
                 }
             }
-            else if (typ_uzytkownika == 1)
+            else if (typ_uzytkownika == 2)
             {
-                Nauczyciel nauczyciel = db.GetNauczycielKonto(konto.Id_konta);
                 foreach (Wydarzenie w in wszystkie_wydarzenia)
                 {
-                    if (w.Nauczyciel.Id_nauczyciela == nauczyciel.Id_nauczyciela)
+                    if (w.Nauczania.KontoId == konto.KontoId)
                     {
                         wydarzenia.Add(w);
                     }

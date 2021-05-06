@@ -21,7 +21,7 @@
                         <select asp-for="class_id" class="form-control">
                             @foreach (var k in Model.klasy.ToList())
                             {
-                                <option value="@k.Id_klasy">@k.nazwa</option>
+                                <option value="@k.KlasaId">@k.nazwa</option>
                             }
                         </select>
                     </div>

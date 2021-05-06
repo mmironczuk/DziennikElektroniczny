@@ -32,11 +32,11 @@
                         <td>@Html.DisplayFor(m => p.nazwisko)</td>
                         @foreach (var o in Model.obecnosci.ToList())
                         {
-                            @if ((o.Uczen.Id_ucznia == p.Id_ucznia) && o.obecnosc == 1)
+                            @if ((o.KontoId == p.KontoId) && o.typ_obecnosci == 1)
                             {
                                 type = 1;
                             }
-                            else if ((o.Uczen.Id_ucznia == p.Id_ucznia) && o.obecnosc == 2)
+                            else if ((o.KontoId == p.KontoId) && o.typ_obecnosci == 2)
                             {
                                 type = 2;
                             }
@@ -52,8 +52,8 @@
                         else
                         {
                         <td>
-                            <a asp-page="ObecnoscHelper" asp-route-UczenId="@p.Id_ucznia" asp-route-LekcjaId="@Model.lekcja_id" asp-route-ob="1">Nieobecny  |  </a>
-                            <a asp-page="ObecnoscHelper" asp-route-UczenId="@p.Id_ucznia" asp-route-LekcjaId="@Model.lekcja_id" asp-route-ob="2">Spóźniony</a>
+                            <a asp-page="ObecnoscHelper" asp-route-UczenId="@p.KontoId" asp-route-LekcjaId="@Model.lekcja_id" asp-route-ob="1">Nieobecny  |  </a>
+                            <a asp-page="ObecnoscHelper" asp-route-UczenId="@p.KontoId" asp-route-LekcjaId="@Model.lekcja_id" asp-route-ob="2">Spóźniony</a>
                         </td>
                         }
                     </tr>
