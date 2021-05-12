@@ -26,7 +26,7 @@ namespace Dziennik.Pages
         public void OnGet()
         {
             //nauczyciele = mainDatabase.GetNauczycielAll();
-            nauczyciele= _context.Konto.Where(x => x.typ_uzytkownika == 2).ToList();
+            nauczyciele= _context.Konto.Where(x => x.typ_uzytkownika == 2 && x.Wychowankowie==null).ToList();
         }
         public IActionResult OnPost()
         {

@@ -8,6 +8,7 @@ using Dziennik.Data;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dziennik.Pages
 {
@@ -25,7 +26,7 @@ namespace Dziennik.Pages
         {
             //uczniowie = new ObservableCollection<Konto>();
             //uczniowie = mainDatabase.GetUczniowieKlasa(id);
-            uczniowie= _context.Konto.Where(x => x.KlasaId == id).ToList();
+            uczniowie= _context.Konto.Include(x=>x.Klasa).Where(x => x.KlasaId == id).ToList();
         }
     }
 }

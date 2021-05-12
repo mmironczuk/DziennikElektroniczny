@@ -20,7 +20,7 @@ namespace Dziennik.Pages
         }
         //MainDatabase mainDatabase = new MainDatabase();
         //public ObservableCollection<Przedmiot> przedmioty = new ObservableCollection<Przedmiot>();
-        public ICollection<Przedmiot> przedmioty;
+        public List<Przedmiot> przedmioty=new List<Przedmiot>();
 
         [BindProperty]
         public Przedmiot newPrzedmiot { get; set; }
@@ -34,7 +34,7 @@ namespace Dziennik.Pages
             newPrzedmiot = new Przedmiot();
 
             //ObservableCollection<Przedmiot> przedmiotyCheck = new ObservableCollection<Przedmiot>();
-            ICollection<Przedmiot> przedmiotyCheck;
+            List<Przedmiot> przedmiotyCheck=new List<Przedmiot>();
             //przedmiotyCheck = mainDatabase.GetPrzedmiotyAll();
             przedmiotyCheck = _context.Przedmiot.ToList();
 

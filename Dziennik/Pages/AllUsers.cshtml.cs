@@ -20,14 +20,14 @@ namespace Dziennik.Pages
         }
         //MainDatabase mainDatabase = new MainDatabase();
         //public ObservableCollection<Konto> uczniowie = new ObservableCollection<Konto>();
-        public ICollection<Konto> uczniowie;
+        public List<Konto> uczniowie=new List<Konto>();
 
         [BindProperty]
         public string findUser { get; set; }
         public void OnGet(string imie)
         {
             //ObservableCollection<Konto> uczniowieCopy = mainDatabase.GetUczniowieAll();
-            ICollection<Konto> uczniowieCopy= _context.Konto.Where(x => x.typ_uzytkownika == 3).ToList();
+            List<Konto> uczniowieCopy= _context.Konto.Where(x => x.typ_uzytkownika == 3).ToList();
 
             if (imie != null)
             {

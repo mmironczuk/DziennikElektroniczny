@@ -8,6 +8,7 @@ using Dziennik.Data;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dziennik.Pages
 {
@@ -20,7 +21,7 @@ namespace Dziennik.Pages
         }
         //MainDatabase mainDatabase = new MainDatabase();
         //public ObservableCollection<Klasa> klasy = new ObservableCollection<Klasa>();
-        public ICollection<Klasa> klasy;
+        public List<Klasa> klasy=new List<Klasa>();
 
         [BindProperty]
         public string findClass { get; set; }
@@ -30,7 +31,7 @@ namespace Dziennik.Pages
         public void OnGet(string klasa, string ticza)
         {
             //ICollection<Klasa> klasyCopy = mainDatabase.GetKlasyAll();
-            ICollection<Klasa> klasyCopy= _context.Klasa.ToList();
+            List<Klasa> klasyCopy= _context.Klasa.Include(x=>x.Wychowawca).ToList();
 
             if (klasa != null)
             {

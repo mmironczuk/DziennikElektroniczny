@@ -42,7 +42,7 @@ namespace Dziennik.Pages
             //klasy = mainDatabase.GetKlasyAll();
             klasy= _context.Klasa.ToList();
             konto = new Konto();
-            konto.typ_uzytkownika = 2;
+            konto.typ_uzytkownika = 3;
             konto.active = 1;
         }
         public IActionResult OnPost(Konto konto)

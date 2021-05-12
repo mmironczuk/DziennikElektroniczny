@@ -28,7 +28,11 @@ namespace Dziennik.Pages
         public IActionResult OnPost()
         {
             //mainDatabase.UpdateStudent(uczen);
-            _context.Update(uczen);
+            //_context.Update(uczen);
+            _context.Attach(uczen);
+            _context.Entry(uczen).Property(p => p.imie).IsModified = true;
+            _context.Entry(uczen).Property(p => p.nazwisko).IsModified = true;
+            _context.Entry(uczen).Property(p => p.adres).IsModified = true;
             _context.SaveChanges();
             return RedirectToPage("/AllUsers");
         }

@@ -33,7 +33,8 @@ namespace Dziennik.Pages
             //if(id==1) mainDatabase.UpdateClass(klasa);
             if (id == 1)
             {
-                _context.Update(klasa);
+                _context.Attach(klasa);
+                _context.Entry(klasa).Property(p => p.nazwa).IsModified = true;
                 _context.SaveChanges();
             }
             return RedirectToPage("AllClasses");
