@@ -7,18 +7,11 @@ namespace Dziennik.Models
 {
     public class Wydarzenie
     {
-        public virtual int Id_wydarzenia { get; set; }
-        public virtual string nazwa { get; set; }
-        public virtual DateTime data { get; set; }
-        public virtual string opis { get; set; }
-        public virtual Klasa Klasa { get; set; }
-        public virtual Nauczyciel Nauczyciel { get; set; }
-        public virtual Przedmiot Przedmiot { get; set; }
-        public Wydarzenie()
-        {
-            Klasa = new Klasa();
-            Nauczyciel = new Nauczyciel();
-            Przedmiot = new Przedmiot();
-        }
+        public int WydarzenieId { get; set; }
+        public int NauczanieId { get; set; }
+        public string nazwa { get; set; }
+        public string opis { get; set; }
+        public DateTime data { get; set; }
+        public virtual Nauczanie Nauczania { get; set; }
     }
 }

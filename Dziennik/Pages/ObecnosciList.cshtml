@@ -27,14 +27,14 @@
                     <td>
                         @foreach (var o in Model.obecnosci.ToList())
                         {
-                            if (o.Lekcja.Nauczanie.Przedmiot.Id_przedmiotu == p.Id_przedmiotu)
+                            if (o.Lekcja.Nauczanie.Przedmiot.PrzedmiotId == p.PrzedmiotId)
                             {
-                                if (o.obecnosc == 1)
-                                {<span>&nbsp;<a asp-page="./DetailsObecnosc" asp-route-id="@o.Id_obecnosci" class="btn btn btn-primary">nb</a></span>}
-                                if (o.obecnosc == 2)
-                                {<span>&nbsp;<a asp-page="./DetailsObecnosc" asp-route-id="@o.Id_obecnosci" class="btn btn btn-primary">sp</a></span>}
-                                if (o.obecnosc == 3)
-                                {<span>&nbsp;<a asp-page="./DetailsObecnosc" asp-route-id="@o.Id_obecnosci" class="btn btn btn-primary">usp</a></span>}
+                                if (o.typ_obecnosci == 1)
+                                {<span>&nbsp;<a asp-page="./DetailsObecnosc" asp-route-id="@o.ObecnoscId" class="btn btn btn-primary">nb</a></span>}
+                                if (o.typ_obecnosci == 2)
+                                {<span>&nbsp;<a asp-page="./DetailsObecnosc" asp-route-id="@o.ObecnoscId" class="btn btn btn-primary">sp</a></span>}
+                                if (o.typ_obecnosci == 3)
+                                {<span>&nbsp;<a asp-page="./DetailsObecnosc" asp-route-id="@o.ObecnoscId" class="btn btn btn-primary">usp</a></span>}
                             }
                         }
                     </td>

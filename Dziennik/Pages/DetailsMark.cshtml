@@ -11,19 +11,19 @@
     <table class="py-3" style="margin-bottom: 50px !important; width: 100% !important">
         <tr>
             <td><b>Ocena:</b></td>
-            <td>@Model.ocena.ocena</td>
+            <td>@Model.ocena.wartosc</td>
         </tr>
         <tr>
             <td><b>Opis:</b></td>
-            <td>@Model.ocena.opis_oceny</td>
+            <td>@Model.ocena.opis</td>
         </tr>
         <tr>
             <td><b>Wystawiający:</b></td>
-            <td>@Model.ocena.Nauczyciel.imie @Model.ocena.Nauczyciel.nazwisko</td>
+            <td>@Model.ocena.Nauczanie.Konto.imie @Model.ocena.Nauczanie.Konto.nazwisko</td>
         </tr>
         <tr>
             <td><b>Przedmiot:</b></td>
-            <td>@Model.ocena.Przedmiot.nazwa</td>
+            <td>@Model.ocena.Nauczanie.Przedmiot.nazwa</td>
         </tr>
     </table>
         <div style="margin-top: -40px; margin-bottom: 10px; text-align: center;">

@@ -12,14 +12,14 @@
               <div class="col-6">
                   <h1>Edycja oceny</h1>
                   <form class="form-horizontal" method="post">
-                      <input asp-for="mark.Id_oceny" type="hidden" class="form-control">
+                      <input asp-for="mark.OcenaId" type="hidden" class="form-control">
                       <input asp-for="Class_id" type="hidden" class="form-control">
                       <input asp-for="Subject_id" type="hidden" class="form-control">
                       <input asp-for="mark_type" type="hidden" class="form-control">
                       <div class="form-group">
-                          <label asp-for="mark.ocena" class="control-label col-sm2"></label>
+                          <label asp-for="mark.wartosc" class="control-label col-sm2"></label>
                           <div class="col-sm-12">
-                              <select asp-for="mark.ocena" class="form-control">
+                              <select asp-for="mark.wartosc" class="form-control">
                                   @if (Model.mark_type == 1)
                                   {
                                       <option value="1">1</option>
@@ -54,10 +54,10 @@
                       @if (Model.mark_type == 1)
                       {
                           <div class="form-group">
-                              <label asp-for="mark.opis_oceny" class="control-label col-sm2"></label>
+                              <label asp-for="mark.opis" class="control-label col-sm2"></label>
                               <div class="col-sm-12">
-                                  <input asp-for="mark.opis_oceny" class="form-control">
-                                  <span asp-validation-for="mark.opis_oceny" class="text-danger"></span>
+                                  <input asp-for="mark.opis" class="form-control">
+                                  <span asp-validation-for="mark.opis" class="text-danger"></span>
                               </div>
                           </div>
                       }

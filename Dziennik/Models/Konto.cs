@@ -1,4 +1,4 @@
-﻿using NHibernate.Dialect;
+﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,19 +8,23 @@ namespace Dziennik.Models
 {
     public class Konto
     {
-        public virtual int Id_konta { get; set; }
-        public virtual string login { get; set; }
-        public virtual string haslo { get; set; }
-        public virtual string email { get; set; }
-        public virtual int typ_uzytkownika { get; set; }
-        public virtual string imie { get; set; }
-        public virtual string nazwisko { get; set; }
-        public virtual string adres { get; set; }
-        public virtual string pesel { get; set; }
-        public virtual int active { get; set; }
-        public virtual Nauczyciel Nauczyciel { get; set; }
-        public virtual Uczen Uczen { get; set; }
-        public virtual IList<Wiadomosc> wiadomosci_wyslane { get; set; }
-        public virtual IList<Wiadomosc> wiadomosci_odebrane { get; set; }
+        public int KontoId { get; set; }
+        public string login { get; set; }
+        public string haslo { get; set; }
+        public string imie { get; set; }
+        public string nazwisko { get; set; }
+        public string email { get; set; }
+        public string pesel { get; set; }
+        public string adres { get; set; }
+        public int active { get; set; }
+        public int typ_uzytkownika { get; set; }
+        public int? KlasaId { get; set; }
+        public virtual Klasa Klasa { get; set; }
+        public virtual Klasa Wychowankowie { get; set; }
+        public virtual ICollection<Wiadomosc> odebrane { get; set; }
+        public virtual ICollection<Wiadomosc> wyslane { get; set; }
+        public virtual ICollection<Obecnosc> Obecnosci { get; set; }
+        public virtual ICollection<Ocena> Oceny { get; set; }
+        public virtual ICollection<Nauczanie> Nauczania { get; set; }
     }
 }

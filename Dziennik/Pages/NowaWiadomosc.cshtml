@@ -2,11 +2,11 @@
 @model Dziennik.Pages.NowaWiadomoscModel
 @{
     ViewData["Title"] = "Nowa Wiadomosc";
-    if (Model.typ_uzytkownika == 1)
+    if (Model.typ_uzytkownika == 2)
     {
         Layout = "_LayoutNauczyciel";
     }
-    else if (Model.typ_uzytkownika == 2)
+    else if (Model.typ_uzytkownika == 3)
     {
         Layout = "_LayoutUczen";
     }
@@ -33,13 +33,13 @@
                             <optgroup label="Nauczyciele">
                                 @foreach (var n in Model.odbiorcy_nauczyciele)
                                 {
-                                    <option value="@n.Konto.Id_konta">@n.imie @n.nazwisko</option>
+                                    <option value="@n.KontoId">@n.imie @n.nazwisko</option>
                                 }
                             </optgroup>
                             <optgroup label="Uczniowie">
                                 @foreach (var u in Model.odbiorcy_uczniowie)
                                 {
-                                    <option value="@u.Konto.Id_konta">@u.imie @u.nazwisko</option>
+                                    <option value="@u.KontoId">@u.imie @u.nazwisko</option>
                                 }
                             </optgroup>
                         </select>

@@ -4,18 +4,24 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Dziennik.DAL;
+using Dziennik.Data;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dziennik.Pages
 {
     public class UsersListModel : PageModel
     {
-        public ObservableCollection<Uczen> uczniowie = new ObservableCollection<Uczen>();
-        private MainDatabase mainDatabase = new MainDatabase();
-        public List<Ocena> marks;
-        public ObservableCollection<Ocena> marks2;
+        private readonly ApplicationDbContext _context;
+        public UsersListModel(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        public List<Konto> uczniowie=new List<Konto>();
+        public List<Ocena> marks=new List<Ocena>();
+        public List<Ocena> marks2=new List<Ocena>();
         [BindProperty]
         public int subjectId { get; set; }
         public int classId { get; set; }
@@ -23,16 +29,14 @@ namespace Dziennik.Pages
         {
             subjectId = SubjectId;
             classId = ClassId;
-            uczniowie = mainDatabase.GetUczniowieKlasa(ClassId);
-            marks2 = mainDatabase.GetOcenyAll();
-            foreach (Uczen u in uczniowie)
+            uczniowie= _context.Konto.Include(x=>x.Oceny).Where(x => x.KlasaId == ClassId).ToList();
+            marks2 = _context.Ocena.Include(x=>x.Nauczanie).ToList();
+            foreach (Konto u in uczniowie)
             {
-                marks = new List<Ocena>();
                 foreach(Ocena o in marks2)
                 {
-                    if (o.Przedmiot.Id_przedmiotu == subjectId&&u.Id_ucznia==o.Uczen.Id_ucznia) marks.Add(o);
+                    if (o.Nauczanie.PrzedmiotId == subjectId&&u.KontoId==o.KontoId) marks.Add(o);
                 }
-                u.Ocena = marks;
             }
         }
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Dziennik.DAL;
+using Dziennik.Data;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,6 +13,11 @@ namespace Dziennik.Pages
 {
     public class AddMarkModel : PageModel
     {
+        private readonly ApplicationDbContext _context;
+        public AddMarkModel(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         [BindProperty]
         public Ocena mark { get; set; }
         [BindProperty]
@@ -22,7 +28,6 @@ namespace Dziennik.Pages
         public int class_id { get; set; }
         [BindProperty]
         public int mark_type { get; set; }
-        MainDatabase maindatabase = new MainDatabase();
         public void OnGet(int UczenId, int ClassId, int SubjectId, int type)
         {
             class_id = ClassId;
@@ -35,13 +40,16 @@ namespace Dziennik.Pages
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             var id = Int32.Parse(claim.Value);
-            mark.Uczen.Id_ucznia = uczen_id;
-            mark.Nauczyciel.Id_nauczyciela = id;
-            mark.Przedmiot.Id_przedmiotu = subject_id;
-            mark.czy_koncowa = mark_type;
+            Nauczanie nauczanie = _context.Nauczanie.Where(x => x.KontoId == id && x.KlasaId == class_id && x.PrzedmiotId == subject_id).FirstOrDefault();
+            mark.KontoId = uczen_id;
+            mark.NauczanieId = nauczanie.NauczanieId;
+            mark.koncowa = mark_type;
             mark.data = DateTime.Now;
-            mark.Semestr = null;
-            maindatabase.CreateOcena(mark);
+            Semestr semestr = _context.Semestr.Where(x => x.data_rozpoczecia <= DateTime.Now && x.data_zakonczenia >= DateTime.Now).First();
+            if (semestr != null) mark.SemestrId = semestr.SemestrId;
+            else mark.SemestrId = null;
+            _context.Add(mark);
+            _context.SaveChanges();
             return RedirectToPage("/UsersList", new { ClassId = class_id, SubjectId = subject_id });
         }
     }

@@ -4,44 +4,47 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Dziennik.DAL;
+using Dziennik.Data;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dziennik.Pages
 {
     public class AddObecnoscModel : PageModel
     {
-        public MainDatabase mainDatabase = new MainDatabase();
+        private readonly ApplicationDbContext _context;
+        public AddObecnoscModel(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         [BindProperty]
-        public ObservableCollection<Uczen> uczniowie { get; set; }
+        public List<Konto> uczniowie { get; set; }
         [BindProperty]
         public int lekcja_id { get; set; }
         [BindProperty]
-        public ObservableCollection<Obecnosc> obecnosci { get; set; }
+        public List<Obecnosc> obecnosci { get; set; }
         public void OnGet(int LekcjaId)
         {
-            uczniowie = new ObservableCollection<Uczen>();
+            uczniowie = new List<Konto>();
+            obecnosci = new List<Obecnosc>();
             lekcja_id = LekcjaId;
             DateTime date = DateTime.Now;
-            Lekcja lekcja = mainDatabase.GetLekcja(LekcjaId);
-            uczniowie = mainDatabase.GetUczniowieKlasa(lekcja.Klasa.Id_klasy);
+            Lekcja lekcja = _context.Lekcja.Include(x=>x.Nauczanie).Where(x=>x.LekcjaId==lekcja_id).FirstOrDefault();
+            uczniowie = _context.Konto.Where(x => x.KlasaId == lekcja.Nauczanie.KlasaId).ToList();
             Lekcja lesson;
             if (lekcja.data == Convert.ToDateTime(null))
             {
                 lesson = new Lekcja();
-                lesson.Nauczanie.Id_nauczania = lekcja.Nauczanie.Id_nauczania;
-                lesson.Klasa.Id_klasy = lekcja.Klasa.Id_klasy;
+                lesson.Nauczanie.NauczanieId = lekcja.Nauczanie.NauczanieId;
                 lesson.data = date;
-                mainDatabase.CreateLekcja(lesson);
-                obecnosci = new ObservableCollection<Obecnosc>();
             }
             else
             {
                 lesson = lekcja;
-                obecnosci = mainDatabase.GetObecnosciLekcja(lekcja_id);
+                obecnosci= _context.Obecnosc.Where(x => x.LekcjaId == LekcjaId).ToList();
             }
-            lekcja_id = lesson.Id_lekcji;
         }
 
         public IActionResult OnPost()

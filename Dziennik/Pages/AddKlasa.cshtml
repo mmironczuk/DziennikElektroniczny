@@ -21,10 +21,10 @@
                       <div class="form-group">
                           <label class="control-label col-sm2">Wychowawca:</label>
                           <div class="col-sm-12">
-                              <select asp-for="klasa.Nauczyciel.Id_nauczyciela" class="form-control">
+                              <select asp-for="klasa.KontoId" class="form-control">
                                   @foreach (var n in Model.nauczyciele.ToList())
                                   {
-                                      <option value="@n.Id_nauczyciela">@n.imie @n.nazwisko</option>
+                                      <option value="@n.KontoId">@n.imie @n.nazwisko</option>
                                   }
                               </select>
                           </div>

@@ -8,7 +8,6 @@ using NHibernate.Tool.hbm2ddl;
 using System;
 using Oracle.ManagedDataAccess.Client;
 using FluentNHibernate.Automapping;
-using Dziennik.Mappings;
 using NHibernate.Cfg;
 
 namespace Dziennik

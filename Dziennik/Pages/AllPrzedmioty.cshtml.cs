@@ -7,13 +7,20 @@ using Dziennik.DAL;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.ObjectModel;
+using Dziennik.Data;
 
 namespace Dziennik.Pages
 {
     public class AllPrzedmiotyModel : PageModel
     {
-        MainDatabase mainDatabase = new MainDatabase();
-        public ObservableCollection<Przedmiot> przedmioty = new ObservableCollection<Przedmiot>();
+        private readonly ApplicationDbContext _context;
+        public AllPrzedmiotyModel(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        //MainDatabase mainDatabase = new MainDatabase();
+        //public ObservableCollection<Przedmiot> przedmioty = new ObservableCollection<Przedmiot>();
+        public List<Przedmiot> przedmioty=new List<Przedmiot>();
 
         [BindProperty]
         public Przedmiot newPrzedmiot { get; set; }
@@ -26,22 +33,24 @@ namespace Dziennik.Pages
         {
             newPrzedmiot = new Przedmiot();
 
-            ObservableCollection<Przedmiot> przedmiotyCheck = new ObservableCollection<Przedmiot>();
-            przedmiotyCheck = mainDatabase.GetPrzedmiotyAll();
+            //ObservableCollection<Przedmiot> przedmiotyCheck = new ObservableCollection<Przedmiot>();
+            List<Przedmiot> przedmiotyCheck=new List<Przedmiot>();
+            //przedmiotyCheck = mainDatabase.GetPrzedmiotyAll();
+            przedmiotyCheck = _context.Przedmiot.ToList();
 
             if (gen != null)
             {
-                for (int i = 0; i < przedmiotyCheck.Count; i++)
+                foreach(Przedmiot p in przedmiotyCheck)
                 {
-                    if (gen == przedmiotyCheck[i].dziedzina.ToString()) przedmioty.Add(przedmiotyCheck[i]);
+                    if (gen == p.dziedzina.ToString()) przedmioty.Add(p);
                 }
             }
             else przedmioty = przedmiotyCheck;
 
-            for(int i = 0; i < przedmiotyCheck.Count; i++)
+            foreach(Przedmiot p in przedmiotyCheck)
             {
-                if (genre.Contains(przedmiotyCheck[i].dziedzina)) continue;
-                else genre.Add(przedmiotyCheck[i].dziedzina);
+                if (genre.Contains(p.dziedzina)) continue;
+                else genre.Add(p.dziedzina);
             }
         }
 
@@ -49,7 +58,9 @@ namespace Dziennik.Pages
         {
             if(id == 2)
             {
-                mainDatabase.CreatePrzedmiot(newPrzedmiot);
+                //mainDatabase.CreatePrzedmiot(newPrzedmiot);
+                _context.Add(newPrzedmiot);
+                _context.SaveChanges();
                 return RedirectToPage("/AllPrzedmioty");
             }
             if(id == 1)

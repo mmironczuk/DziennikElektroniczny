@@ -49,7 +49,7 @@
                     <td>@Html.DisplayFor(m => p.nazwa)</td>
                     <td>
 
-                        @foreach (var u in p.Ocena.ToList())
+                        @*@foreach (var u in p.Ocena.ToList())
                         {
                             @if (u.data > Model.currentSemestr.data_zakonczenia || u.data < Model.currentSemestr.data_rozpoczecia)
                             {
@@ -94,7 +94,7 @@
                                     <a asp-page="./DetailsMark" asp-route-id="@u.Id_oceny" class="ocena_przycisk">@Html.DisplayFor(m => u.ocena)</a>
                                 }
                             }
-                        }
+                        }*@
                     </td>
                     <td>
                         @if (koncowa == "") { <p>-</p>}

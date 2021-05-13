@@ -4,21 +4,29 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Dziennik.DAL;
+using Dziennik.Data;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dziennik.Pages
 {
     public class EditClassStudentsModel : PageModel
     {
-        MainDatabase mainDatabase = new MainDatabase();
+        private readonly ApplicationDbContext _context;
+        public EditClassStudentsModel(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        //MainDatabase mainDatabase = new MainDatabase();
         [BindProperty]
-        public ObservableCollection<Uczen> uczniowie { get; set; }
+        public ICollection<Konto> uczniowie { get; set; }
         public void OnGet(int id)
         {
-            uczniowie = new ObservableCollection<Uczen>();
-            uczniowie = mainDatabase.GetUczniowieKlasa(id);
+            //uczniowie = new ObservableCollection<Konto>();
+            //uczniowie = mainDatabase.GetUczniowieKlasa(id);
+            uczniowie= _context.Konto.Include(x=>x.Klasa).Where(x => x.KlasaId == id).ToList();
         }
     }
 }
