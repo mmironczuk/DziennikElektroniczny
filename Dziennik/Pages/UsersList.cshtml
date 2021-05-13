@@ -31,47 +31,51 @@
                 <td>@Html.DisplayFor(m => p.imie)</td>
                 <td>@Html.DisplayFor(m => p.nazwisko)</td>
                 <td>
-                    @foreach (var u in p.Oceny.ToList())
+                    @if (p.Oceny.ToList() != null)
                     {
-                        if (u.koncowa == 2) {
-                            ocena_koncowa = u.wartosc;
-                            id_oceny_koncowej = u.OcenaId;
-                        }
-                        else
+                        @foreach (var u in p.Oceny.ToList())
                         {
-                            ilosc++;
-                            if ((u.wartosc).Contains('+'))
+                            if (u.koncowa == 2)
                             {
-                                if (u.wartosc == "1+") { srednia += 1.5; }
-                                if (u.wartosc == "2+") { srednia += 2.5; }
-                                if (u.wartosc == "3+") { srednia += 3.5; }
-                                if (u.wartosc == "4+") { srednia += 4.5; }
-                                if (u.wartosc == "5+") { srednia += 5.5; }
-                            }
-                            else if ((u.wartosc).Contains('-'))
-                            {
-                                if (u.wartosc == "2-") { srednia += 1.75; }
-                                if (u.wartosc == "3-") { srednia += 2.75; }
-                                if (u.wartosc == "4-") { srednia += 3.75; }
-                                if (u.wartosc == "5-") { srednia += 4.75; }
-                                if (u.wartosc == "6-") { srednia += 5.75; }
-                            }
-                            else { srednia += Convert.ToDouble(u.wartosc); }
-                            if (u.wartosc[0] == '1')
-                            {
-                                <a asp-page="./EditMark" asp-route-id="@u.OcenaId" asp-route-class_Id="@Model.classId" asp-route-subject_Id="@Model.subjectId" asp-route-type="@u.koncowa" class="ocena_przycisk" style="background-color: red">@Html.DisplayFor(m => u.wartosc)</a>
-                            }
-                            else if (u.wartosc[0] == '2')
-                            {
-                                <a asp-page="./EditMark" asp-route-id="@u.OcenaId" asp-route-class_Id="@Model.classId" asp-route-subject_Id="@Model.subjectId" asp-route-type="@u.koncowa" class="ocena_przycisk" style="background-color: #ff5500">@Html.DisplayFor(m => u.wartosc)</a>
-                            }
-                            else if (u.wartosc[0] == '6')
-                            {
-                                <a asp-page="./EditMark" asp-route-id="@u.OcenaId" asp-route-class_Id="@Model.classId" asp-route-subject_Id="@Model.subjectId" asp-route-type="@u.koncowa" class="ocena_przycisk" style="background-color: green;">@Html.DisplayFor(m => u.wartosc)</a>
+                                ocena_koncowa = u.wartosc;
+                                id_oceny_koncowej = u.OcenaId;
                             }
                             else
                             {
-                                <a asp-page="./EditMark" asp-route-id="@u.OcenaId" asp-route-class_Id="@Model.classId" asp-route-subject_Id="@Model.subjectId" asp-route-type="@u.koncowa" class="ocena_przycisk">@Html.DisplayFor(m => u.wartosc)</a>
+                                ilosc++;
+                                if ((u.wartosc).Contains('+'))
+                                {
+                                    if (u.wartosc == "1+") { srednia += 1.5; }
+                                    if (u.wartosc == "2+") { srednia += 2.5; }
+                                    if (u.wartosc == "3+") { srednia += 3.5; }
+                                    if (u.wartosc == "4+") { srednia += 4.5; }
+                                    if (u.wartosc == "5+") { srednia += 5.5; }
+                                }
+                                else if ((u.wartosc).Contains('-'))
+                                {
+                                    if (u.wartosc == "2-") { srednia += 1.75; }
+                                    if (u.wartosc == "3-") { srednia += 2.75; }
+                                    if (u.wartosc == "4-") { srednia += 3.75; }
+                                    if (u.wartosc == "5-") { srednia += 4.75; }
+                                    if (u.wartosc == "6-") { srednia += 5.75; }
+                                }
+                                else { srednia += Convert.ToDouble(u.wartosc); }
+                                if (u.wartosc[0] == '1')
+                                {
+                                    <a asp-page="./EditMark" asp-route-id="@u.OcenaId" asp-route-class_Id="@Model.classId" asp-route-subject_Id="@Model.subjectId" asp-route-type="@u.koncowa" class="ocena_przycisk" style="background-color: red">@Html.DisplayFor(m => u.wartosc)</a>
+                                }
+                                else if (u.wartosc[0] == '2')
+                                {
+                                    <a asp-page="./EditMark" asp-route-id="@u.OcenaId" asp-route-class_Id="@Model.classId" asp-route-subject_Id="@Model.subjectId" asp-route-type="@u.koncowa" class="ocena_przycisk" style="background-color: #ff5500">@Html.DisplayFor(m => u.wartosc)</a>
+                                }
+                                else if (u.wartosc[0] == '6')
+                                {
+                                    <a asp-page="./EditMark" asp-route-id="@u.OcenaId" asp-route-class_Id="@Model.classId" asp-route-subject_Id="@Model.subjectId" asp-route-type="@u.koncowa" class="ocena_przycisk" style="background-color: green;">@Html.DisplayFor(m => u.wartosc)</a>
+                                }
+                                else
+                                {
+                                    <a asp-page="./EditMark" asp-route-id="@u.OcenaId" asp-route-class_Id="@Model.classId" asp-route-subject_Id="@Model.subjectId" asp-route-type="@u.koncowa" class="ocena_przycisk">@Html.DisplayFor(m => u.wartosc)</a>
+                                }
                             }
                         }
                     }

@@ -8,6 +8,7 @@ using Dziennik.Data;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dziennik.Pages
 {
@@ -18,11 +19,9 @@ namespace Dziennik.Pages
         {
             _context = context;
         }
-        //public ObservableCollection<Konto> uczniowie = new ObservableCollection<Konto>();
-        public ICollection<Konto> uczniowie;
-        //private MainDatabase mainDatabase = new MainDatabase();
-        public ICollection<Ocena> marks;
-        public ICollection<Ocena> marks2;
+        public List<Konto> uczniowie=new List<Konto>();
+        public List<Ocena> marks=new List<Ocena>();
+        public List<Ocena> marks2=new List<Ocena>();
         [BindProperty]
         public int subjectId { get; set; }
         public int classId { get; set; }
@@ -30,17 +29,14 @@ namespace Dziennik.Pages
         {
             subjectId = SubjectId;
             classId = ClassId;
-            //uczniowie = mainDatabase.GetUczniowieKlasa(ClassId);
-            uczniowie= _context.Konto.Where(x => x.KlasaId == ClassId).ToList();
-            marks2 = _context.Ocena.ToList();
-            //marks2 = mainDatabase.GetOcenyAll();
+            uczniowie= _context.Konto.Include(x=>x.Oceny).Where(x => x.KlasaId == ClassId).ToList();
+            marks2 = _context.Ocena.Include(x=>x.Nauczanie).ToList();
             foreach (Konto u in uczniowie)
             {
                 foreach(Ocena o in marks2)
                 {
                     if (o.Nauczanie.PrzedmiotId == subjectId&&u.KontoId==o.KontoId) marks.Add(o);
                 }
-                //u.Ocena = marks;
             }
         }
     }

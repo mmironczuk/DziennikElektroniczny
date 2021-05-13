@@ -18,7 +18,6 @@ namespace Dziennik.Pages
         {
             _context = context;
         }
-        //MainDatabase mainDatabase = new MainDatabase();
         [BindProperty]
         public Przedmiot newPrzedmiot { get; set; }
 
@@ -28,14 +27,11 @@ namespace Dziennik.Pages
         public void OnGet(int id)
         {
             newPrzedmiot = new Przedmiot();
-            //newPrzedmiot = mainDatabase.GetPrzedmiot(id);
             newPrzedmiot = _context.Przedmiot.Find(id);
         }
 
         public IActionResult OnPost(int id)
         {
-            //if (id == 1) mainDatabase.UpdatePrzedmiot(newPrzedmiot);
-            //if (id == 2) mainDatabase.DeletePrzedmiot(newPrzedmiot.Id_przedmiotu);
             if(id==1)
             {
                 _context.Update(newPrzedmiot);
@@ -45,7 +41,7 @@ namespace Dziennik.Pages
             {
                 var przedmiot = _context.Przedmiot.Find(newPrzedmiot.PrzedmiotId);
                 _context.Przedmiot.Remove(przedmiot);
-                _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             return RedirectToPage("/AllPrzedmioty");
         }

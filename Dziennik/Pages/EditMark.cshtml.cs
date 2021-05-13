@@ -19,7 +19,6 @@ namespace Dziennik.Pages
         }
         [BindProperty]
         public Ocena mark { get; set; }
-        //public MainDatabase mainDatabase = new MainDatabase();
         [BindProperty]
         public int Class_id { get; set; }
         [BindProperty]
@@ -32,24 +31,23 @@ namespace Dziennik.Pages
             Subject_id = subject_Id;
             mark_type = type;
             mark = new Ocena();
-            //mark = mainDatabase.GetOcena(id);
             mark = _context.Ocena.Find(id);
         }
 
         public IActionResult OnPost(int id)
         {
-            //if (id == 1) mainDatabase.UpdateOcena(mark);
-            //else if(id==2) mainDatabase.DeleteOcena(mark.Id_oceny);
             if(id==1)
             {
-                _context.Update(mark);
+                _context.Attach(mark);
+                _context.Entry(mark).Property(x => x.wartosc).IsModified = true;
+                _context.Entry(mark).Property(x => x.opis).IsModified = true;
                 _context.SaveChanges();
             }
             else if(id==2)
             {
                 var ocena = _context.Ocena.Find(mark.OcenaId);
                 _context.Ocena.Remove(ocena);
-                _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             return RedirectToPage("/UsersList", new {ClassId=Class_id, SubjectId=Subject_id });
         }

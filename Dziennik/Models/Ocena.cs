@@ -14,7 +14,7 @@ namespace Dziennik.Models
         public int KontoId { get; set; }
         public int? NauczanieId { get; set; }
         public int koncowa { get; set; }
-        public int SemestrId { get; set; }
+        public int? SemestrId { get; set; }
         public virtual Semestr Semestr { get; set; }
         public virtual Konto Konto { get; set; }
         public virtual Nauczanie Nauczanie { get; set; }

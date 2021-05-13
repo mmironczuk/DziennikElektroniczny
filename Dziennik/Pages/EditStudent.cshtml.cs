@@ -19,16 +19,12 @@ namespace Dziennik.Pages
         }
         [BindProperty]
         public Konto uczen { get; set; }
-        //MainDatabase mainDatabase = new MainDatabase();
         public void OnGet(int id)
         {
-            //uczen = mainDatabase.GetUczen(id);
             uczen = _context.Konto.Find(id);
         }
         public IActionResult OnPost()
         {
-            //mainDatabase.UpdateStudent(uczen);
-            //_context.Update(uczen);
             _context.Attach(uczen);
             _context.Entry(uczen).Property(p => p.imie).IsModified = true;
             _context.Entry(uczen).Property(p => p.nazwisko).IsModified = true;
