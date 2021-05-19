@@ -9,6 +9,7 @@ using Dziennik.Data;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dziennik.Pages
 {
@@ -20,22 +21,20 @@ namespace Dziennik.Pages
             _context = context;
         }
         [BindProperty]
-        public ICollection<Wydarzenie> wydarzenia { get; set; }
+        public List<Wydarzenie> wydarzenia { get; set; }
         [BindProperty]
         public int typ_uzytkownika { get; set; }
-        //public MainDatabase db = new MainDatabase();
 
         public void OnGet()
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
             var login = claim.Value;
+            wydarzenia = new List<Wydarzenie>();
             Konto konto = new Konto();
-            //konto = db.GetKontoLogin(login);
             konto= _context.Konto.Where(x => x.login == login).FirstOrDefault();
             typ_uzytkownika = konto.typ_uzytkownika;
-            //ObservableCollection<Wydarzenie> wszystkie_wydarzenia = db.GetWydarzeniaAll();
-            ICollection<Wydarzenie> wszystkie_wydarzenia = _context.Wydarzenie.ToList();
+            List<Wydarzenie> wszystkie_wydarzenia = _context.Wydarzenie.Include(x=>x.Nauczania).Include(x=>x.Nauczania.Przedmiot).ToList();
             if (typ_uzytkownika == 3)
             {
                 foreach (Wydarzenie w in wszystkie_wydarzenia)

@@ -24,8 +24,6 @@ namespace Dziennik.Pages
         public ICollection<Konto> uczniowie { get; set; }
         public void OnGet(int id)
         {
-            //uczniowie = new ObservableCollection<Konto>();
-            //uczniowie = mainDatabase.GetUczniowieKlasa(id);
             uczniowie= _context.Konto.Include(x=>x.Klasa).Where(x => x.KlasaId == id).ToList();
         }
     }

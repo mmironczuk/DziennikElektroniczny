@@ -34,10 +34,10 @@ namespace Dziennik.Pages
             Lekcja lekcja = _context.Lekcja.Include(x=>x.Nauczanie).Where(x=>x.LekcjaId==lekcja_id).FirstOrDefault();
             uczniowie = _context.Konto.Where(x => x.KlasaId == lekcja.Nauczanie.KlasaId).ToList();
             Lekcja lesson;
-            if (lekcja.data == Convert.ToDateTime(null))
+            if (lekcja.data == null)
             {
                 lesson = new Lekcja();
-                lesson.Nauczanie.NauczanieId = lekcja.Nauczanie.NauczanieId;
+                lesson.NauczanieId = lekcja.NauczanieId;
                 lesson.data = date;
             }
             else

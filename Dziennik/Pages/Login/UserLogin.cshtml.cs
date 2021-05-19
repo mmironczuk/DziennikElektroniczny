@@ -66,7 +66,8 @@ namespace Dziennik.Pages.Login
         {
             int type = -1;
             type = ValidateUser(login, password);
-            int id = konto.KontoId;
+            int id = 0;
+            if(konto!=null) id = konto.KontoId;
             if (type != -1 && konto.active==1)
             {
                 var claims = new List<Claim>()

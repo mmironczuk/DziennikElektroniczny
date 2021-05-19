@@ -1,9 +1,10 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Dziennik.Migrations
 {
-    public partial class retry2 : Migration
+    public partial class newDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +13,7 @@ namespace Dziennik.Migrations
                 columns: table => new
                 {
                     PrzedmiotId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     nazwa = table.Column<string>(nullable: true),
                     dziedzina = table.Column<string>(nullable: true)
                 },
@@ -26,7 +27,7 @@ namespace Dziennik.Migrations
                 columns: table => new
                 {
                     SemestrId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     data_rozpoczecia = table.Column<DateTime>(nullable: false),
                     data_zakonczenia = table.Column<DateTime>(nullable: false)
                 },
@@ -40,7 +41,7 @@ namespace Dziennik.Migrations
                 columns: table => new
                 {
                     KontoId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     login = table.Column<string>(nullable: true),
                     haslo = table.Column<string>(nullable: true),
                     imie = table.Column<string>(nullable: true),
@@ -62,7 +63,7 @@ namespace Dziennik.Migrations
                 columns: table => new
                 {
                     KlasaId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     nazwa = table.Column<string>(nullable: true),
                     KontoId = table.Column<int>(nullable: false)
                 },
@@ -81,7 +82,7 @@ namespace Dziennik.Migrations
                 columns: table => new
                 {
                     WiadomoscId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     tytul = table.Column<string>(nullable: true),
                     tresc = table.Column<string>(nullable: true),
                     data = table.Column<DateTime>(nullable: false),
@@ -109,7 +110,7 @@ namespace Dziennik.Migrations
                 columns: table => new
                 {
                     NauczanieId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     KlasaId = table.Column<int>(nullable: false),
                     KontoId = table.Column<int>(nullable: false),
                     PrzedmiotId = table.Column<int>(nullable: false)
@@ -142,9 +143,9 @@ namespace Dziennik.Migrations
                 columns: table => new
                 {
                     LekcjaId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     NauczanieId = table.Column<int>(nullable: false),
-                    data = table.Column<DateTime>(nullable: false)
+                    data = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -162,13 +163,14 @@ namespace Dziennik.Migrations
                 columns: table => new
                 {
                     OcenaId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    data = table.Column<DateTime>(nullable: false),
                     wartosc = table.Column<string>(nullable: true),
                     opis = table.Column<string>(nullable: true),
                     KontoId = table.Column<int>(nullable: false),
                     NauczanieId = table.Column<int>(nullable: true),
                     koncowa = table.Column<int>(nullable: false),
-                    SemestrId = table.Column<int>(nullable: false)
+                    SemestrId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -190,15 +192,15 @@ namespace Dziennik.Migrations
                         column: x => x.SemestrId,
                         principalTable: "Semestr",
                         principalColumn: "SemestrId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ogloszenie",
+                name: "Wydarzenie",
                 columns: table => new
                 {
                     WydarzenieId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     NauczanieId = table.Column<int>(nullable: false),
                     nazwa = table.Column<string>(nullable: true),
                     opis = table.Column<string>(nullable: true),
@@ -206,9 +208,9 @@ namespace Dziennik.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ogloszenie", x => x.WydarzenieId);
+                    table.PrimaryKey("PK_Wydarzenie", x => x.WydarzenieId);
                     table.ForeignKey(
-                        name: "FK_Ogloszenie_Nauczanie_NauczanieId",
+                        name: "FK_Wydarzenie_Nauczanie_NauczanieId",
                         column: x => x.NauczanieId,
                         principalTable: "Nauczanie",
                         principalColumn: "NauczanieId",
@@ -220,7 +222,7 @@ namespace Dziennik.Migrations
                 columns: table => new
                 {
                     ObecnoscId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     typ_obecnosci = table.Column<int>(nullable: false),
                     LekcjaId = table.Column<int>(nullable: true),
                     KontoId = table.Column<int>(nullable: false)
@@ -298,11 +300,6 @@ namespace Dziennik.Migrations
                 column: "SemestrId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ogloszenie_NauczanieId",
-                table: "Ogloszenie",
-                column: "NauczanieId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Wiadomosc_NadawcaId",
                 table: "Wiadomosc",
                 column: "NadawcaId");
@@ -311,6 +308,11 @@ namespace Dziennik.Migrations
                 name: "IX_Wiadomosc_OdbiorcaId",
                 table: "Wiadomosc",
                 column: "OdbiorcaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Wydarzenie_NauczanieId",
+                table: "Wydarzenie",
+                column: "NauczanieId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Konto_Klasa_KlasaId",
@@ -333,10 +335,10 @@ namespace Dziennik.Migrations
                 name: "Ocena");
 
             migrationBuilder.DropTable(
-                name: "Ogloszenie");
+                name: "Wiadomosc");
 
             migrationBuilder.DropTable(
-                name: "Wiadomosc");
+                name: "Wydarzenie");
 
             migrationBuilder.DropTable(
                 name: "Lekcja");
