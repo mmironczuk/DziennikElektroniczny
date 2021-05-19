@@ -21,16 +21,14 @@ namespace Dziennik.Pages
         }
         [BindProperty]
         public int typ_uzytkownika { get; set; }
-        //public MainDatabase db = new MainDatabase();
 
         [BindProperty]
         public Konto konto { get; set; }
 
-
         [BindProperty]
-        public ICollection<Wiadomosc> wiadomosci_odebrane { get; set; }
+        public List<Wiadomosc> wiadomosci_odebrane { get; set; }
         [BindProperty]
-        public ICollection<Wiadomosc> wiadomosci_wyslane { get; set; }
+        public List<Wiadomosc> wiadomosci_wyslane { get; set; }
 
         public void OnGet()
         {
@@ -38,16 +36,13 @@ namespace Dziennik.Pages
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
             var login = claim.Value;
             Konto konto = new Konto();
-            //konto = db.GetKontoLogin(login);
             konto= _context.Konto.Where(x => x.login == login).FirstOrDefault();
             typ_uzytkownika = konto.typ_uzytkownika;
-
-            //ICollection<Wiadomosc> wszystkie_wiadomosci = db.GetWiadomosciKonta(konto.Id_konta);
-            ICollection<Wiadomosc> wszystkie_wiadomosci = _context.Wiadomosc.Where(x => x.NadawcaId == konto.KontoId || x.OdbiorcaId == konto.KontoId).ToList();
-            //ObservableCollection<Konto> uczniowie = db.GetUczniowieAll();
-            //ObservableCollection<Konto> nauczyciele = db.GetNauczycielAll();
-            ICollection<Konto> uczniowie= _context.Konto.Where(x => x.typ_uzytkownika == 3).ToList();
-            ICollection<Konto> nauczyciele = _context.Konto.Where(x => x.typ_uzytkownika == 2).ToList();
+            wiadomosci_odebrane = new List<Wiadomosc>();
+            wiadomosci_wyslane = new List<Wiadomosc>();
+            List<Wiadomosc> wszystkie_wiadomosci = _context.Wiadomosc.Where(x => x.NadawcaId == konto.KontoId || x.OdbiorcaId == konto.KontoId).ToList();
+            List<Konto> uczniowie= _context.Konto.Where(x => x.typ_uzytkownika == 3).ToList();
+            List<Konto> nauczyciele = _context.Konto.Where(x => x.typ_uzytkownika == 2).ToList();
             foreach (var wiadomosc in wszystkie_wiadomosci)
             {
                 if (wiadomosc.NadawcaId == konto.KontoId)
@@ -64,10 +59,9 @@ namespace Dziennik.Pages
 
         public IActionResult OnPost(int id)
         {
-            //db.DeleteWiadomosc(id);
             var wiadomosc = _context.Wiadomosc.Find(id);
             _context.Wiadomosc.Remove(wiadomosc);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return Redirect("/ListaWiadomosci");
         }

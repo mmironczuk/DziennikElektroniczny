@@ -34,8 +34,6 @@ namespace Dziennik.Pages
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             var id = Int32.Parse(claim.Value);
             teacher_id = id;
-            //nauczania = mainDatabase.GetNauczaniaNauczyciel(teacher_id);
-            //lekcje = mainDatabase.GetLekcjeDate();
             nauczania= _context.Nauczanie.Include(x=>x.Przedmiot).Include(x=>x.Klasa).Where(x => x.KontoId == id).ToList();
             lekcje= _context.Lekcja.Where(x => x.data == null).ToList();
             foreach (Nauczanie n in nauczania)

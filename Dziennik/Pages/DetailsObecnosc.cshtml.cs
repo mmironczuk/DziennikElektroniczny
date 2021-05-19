@@ -7,6 +7,7 @@ using Dziennik.Data;
 using Dziennik.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dziennik.Pages
 {
@@ -17,12 +18,10 @@ namespace Dziennik.Pages
         {
             _context = context;
         }
-        //public MainDatabase mainDatabase = new MainDatabase();
         public Obecnosc obecnosc;
         public void OnGet(int id)
         {
-            //obecnosc = mainDatabase.GetObecnosc(id);
-            obecnosc = _context.Obecnosc.Find(id);
+            obecnosc = _context.Obecnosc.Include(x=>x.Lekcja).Where(x=>x.ObecnoscId==id).FirstOrDefault();
         }
     }
 }

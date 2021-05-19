@@ -45,7 +45,7 @@ namespace Dziennik.Pages
             mark.NauczanieId = nauczanie.NauczanieId;
             mark.koncowa = mark_type;
             mark.data = DateTime.Now;
-            Semestr semestr = _context.Semestr.Where(x => x.data_rozpoczecia <= DateTime.Now && x.data_zakonczenia >= DateTime.Now).First();
+            Semestr semestr = _context.Semestr.Where(x => x.data_rozpoczecia <= DateTime.Now && x.data_zakonczenia >= DateTime.Now).FirstOrDefault();
             if (semestr != null) mark.SemestrId = semestr.SemestrId;
             else mark.SemestrId = null;
             _context.Add(mark);

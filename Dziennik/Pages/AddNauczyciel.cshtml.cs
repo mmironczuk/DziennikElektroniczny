@@ -22,7 +22,6 @@ namespace Dziennik.Pages
         }
         [BindProperty]
         public Konto konto { get; set; }
-        //public MainDatabase mainDatabase = new MainDatabase();
         public static string MD5Hash(string text)
         {
             byte[] hash = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(text));

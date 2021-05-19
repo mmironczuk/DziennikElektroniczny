@@ -47,13 +47,10 @@ namespace Dziennik.Pages
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
             var login = claim.Value;
             Konto konto = new Konto();
-            //konto = db.GetKontoLogin(login);
+
             konto= _context.Konto.Where(x => x.login == login).FirstOrDefault();
             typ_uzytkownika = konto.typ_uzytkownika;
-            //d_konta = konto.Id_konta;
-
-            //odbiorcy_uczniowie = db.GetUczniowieAll();
-            //odbiorcy_nauczyciele = db.GetNauczycielAll();
+            id_konta = konto.KontoId;
             odbiorcy_uczniowie= _context.Konto.Where(x => x.typ_uzytkownika == 3).ToList();
             odbiorcy_nauczyciele= _context.Konto.Where(x => x.typ_uzytkownika == 2).ToList();
             imie = konto.imie;
@@ -66,7 +63,6 @@ namespace Dziennik.Pages
             wiadomosc.NadawcaId = id_konta;
             wiadomosc.data = DateTime.Now;
 
-            //db.CreateWiadomosc(wiadomosc);
             _context.Add(wiadomosc);
             _context.SaveChanges();
 
