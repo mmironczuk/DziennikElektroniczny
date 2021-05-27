@@ -13,6 +13,7 @@ namespace SeleniumTests
         {
             driver = new ChromeDriver();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://dziennikprojekt.herokuapp.com/");
         }
 
@@ -31,7 +32,16 @@ namespace SeleniumTests
 
             StringAssert.AreEqualIgnoringCase("admin", logedAs, "Incorrect login");
             Assert.IsNotNull(driver.FindElement(By.XPath("//div[@id='navbarSupportedContent']//a[contains(@href, '/AdminPage')]")));
+        }
 
+        [Test]
+        public void TryLoginWithoutLoginAndPass()
+        {
+            IWebElement Btn_Submit = driver.FindElement(By.XPath("//*[contains(@class, 'btn-primary')]"));
+
+            Btn_Submit.Click();
+
+            Assert.IsEmpty(driver.FindElements(By.XPath("//div[@id='navbarSupportedContent']")));
         }
 
         [TearDown]
@@ -40,5 +50,7 @@ namespace SeleniumTests
             driver.Quit();
             driver.Dispose();
         }
+
+
     }
 }
