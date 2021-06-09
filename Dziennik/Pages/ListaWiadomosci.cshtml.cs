@@ -29,8 +29,10 @@ namespace Dziennik.Pages
         public List<Wiadomosc> wiadomosci_odebrane { get; set; }
         [BindProperty]
         public List<Wiadomosc> wiadomosci_wyslane { get; set; }
+        [BindProperty]
+        public string toSearch { get; set; }
 
-        public void OnGet()
+        public void OnGet(string toSearch)
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
@@ -43,6 +45,13 @@ namespace Dziennik.Pages
             List<Wiadomosc> wszystkie_wiadomosci = _context.Wiadomosc.Where(x => x.NadawcaId == konto.KontoId || x.OdbiorcaId == konto.KontoId).ToList();
             List<Konto> uczniowie= _context.Konto.Where(x => x.typ_uzytkownika == 3).ToList();
             List<Konto> nauczyciele = _context.Konto.Where(x => x.typ_uzytkownika == 2).ToList();
+
+            if(toSearch != null)
+            {
+                for (int i = wszystkie_wiadomosci.Count - 1; i >= 0; i--) 
+                    if (!wszystkie_wiadomosci[i].tresc.Contains(toSearch) && !wszystkie_wiadomosci[i].tytul.Contains(toSearch)) wszystkie_wiadomosci.RemoveAt(i);
+            }
+
             foreach (var wiadomosc in wszystkie_wiadomosci)
             {
                 if (wiadomosc.NadawcaId == konto.KontoId)
@@ -59,11 +68,11 @@ namespace Dziennik.Pages
 
         public IActionResult OnPost(int id)
         {
+            if (id == -1) return RedirectToPage("/ListaWiadomosci", new { toSearch });
             var wiadomosc = _context.Wiadomosc.Find(id);
             _context.Wiadomosc.Remove(wiadomosc);
             _context.SaveChanges();
-
-            return Redirect("/ListaWiadomosci");
+            return RedirectToPage("/ListaWiadomosci");
         }
     }
 }

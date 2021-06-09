@@ -12,6 +12,21 @@
     }
 }
 
+    <div class="card" id="filtr">
+        <form method="post">
+            <tr>
+                <td class="col-10">
+                    <label>Filtruj </label>
+                    <label>Treść wiadomości: </label>
+                    <input type="text" asp-for="@Model.toSearch" />
+                </td>
+                <td class="col-1">
+                    <button asp-route-id="-1" class="btn btn btn-primary">Filtruj</button>
+                </td>
+            </tr>
+        </form>
+    </div>
+
     <div class="card" style="background: transparent !important; text-align: center; border: none !important;">
         <h1>Skrzynka wiadomości</h1>
         @if (Model.wiadomosci_odebrane.Count != 0)
