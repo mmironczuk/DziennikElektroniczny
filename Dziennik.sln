@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dziennik", "Dziennik\Dziennik.csproj", "{212334B3-DD75-488B-9832-9F6322130768}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Krawczun_Testy", "Krawczun_Testy\Krawczun_Testy.csproj", "{FB7CEDC4-92E0-4691-B7F5-3FA5DCD36F13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Krawczun_Testy", "Krawczun_Testy\Krawczun_Testy.csproj", "{FB7CEDC4-92E0-4691-B7F5-3FA5DCD36F13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestyTS", "TestyTS\TestyTS.csproj", "{9F196973-FD9C-42BB-B8D9-6AD43921A658}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{FB7CEDC4-92E0-4691-B7F5-3FA5DCD36F13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB7CEDC4-92E0-4691-B7F5-3FA5DCD36F13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB7CEDC4-92E0-4691-B7F5-3FA5DCD36F13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F196973-FD9C-42BB-B8D9-6AD43921A658}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F196973-FD9C-42BB-B8D9-6AD43921A658}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F196973-FD9C-42BB-B8D9-6AD43921A658}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F196973-FD9C-42BB-B8D9-6AD43921A658}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
